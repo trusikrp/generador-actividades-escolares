@@ -2,363 +2,523 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Generador de Actividades Escolares</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',Arial,sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh}
-.lc{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
-.lb{background:#fff;padding:40px 36px;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.35);width:100%;max-width:400px;text-align:center}
-.lb .ico{font-size:52px;margin-bottom:14px}
-.lb h1{color:#5c35a0;margin-bottom:6px;font-size:23px}
-.lb .sub{color:#888;font-size:13px;margin-bottom:28px}
-.fi{position:relative;margin-bottom:14px}
-.fi input{width:100%;padding:13px 44px 13px 14px;border:2px solid #e0e0e0;border-radius:10px;font-size:15px;outline:none;font-family:inherit;transition:border .3s}
-.fi input:focus{border-color:#667eea}
-.ey{position:absolute;right:13px;top:50%;transform:translateY(-50%);cursor:pointer;color:#aaa;font-size:19px;line-height:1;user-select:none}
-.ey:hover{color:#667eea}
-.btnl{width:100%;padding:14px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;transition:transform .2s}
-.btnl:hover{transform:scale(1.02)}
-.er{color:#e74c3c;font-size:13px;margin:8px 0 4px;display:none;padding:8px;background:#ffeaea;border-radius:6px}
+
+/* LOGIN */
+#login-screen{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+.login-box{background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.35);width:100%;max-width:400px;padding:40px 36px;text-align:center}
+.login-box .ico{font-size:52px;margin-bottom:14px}
+.login-box h1{color:#5c35a0;margin-bottom:6px;font-size:23px}
+.login-box .sub{color:#888;font-size:13px;margin-bottom:28px}
+.field{position:relative;margin-bottom:16px}
+.field input{width:100%;padding:13px 44px 13px 14px;border:2px solid #e0e0e0;border-radius:10px;font-size:15px;outline:none;font-family:inherit;transition:border-color .2s}
+.field input:focus{border-color:#667eea}
+.field .toggle-pw{position:absolute;right:13px;top:50%;transform:translateY(-50%);cursor:pointer;color:#aaa;font-size:19px;line-height:1;user-select:none;background:none;border:none;padding:4px}
+.field .toggle-pw:hover{color:#667eea}
+.login-btn{width:100%;padding:14px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s;margin-top:4px}
+.login-btn:hover{transform:scale(1.02);box-shadow:0 6px 20px rgba(102,126,234,.5)}
+.error-msg{color:#e74c3c;font-size:13px;margin:8px 0 4px;padding:8px;background:#ffeaea;border-radius:6px;display:none}
 .hint{margin-top:18px;font-size:11px;color:#bbb;line-height:1.8}
-#app{display:none;background:#f5f6fa;min-height:100vh}
-.tb{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:15px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-.tb h1{font-size:17px}
-.bo{background:rgba(255,255,255,.2);color:#fff;border:none;padding:7px 15px;border-radius:8px;cursor:pointer;font-size:13px}
-.mn{max-width:1100px;margin:0 auto;padding:22px 16px}
-.cd{background:#fff;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.07)}
-.cd h2{color:#5c35a0;margin-bottom:14px;font-size:17px}
-textarea{width:100%;min-height:145px;padding:13px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;resize:vertical;outline:none;font-family:inherit}
+
+/* APP */
+#app-screen{display:none;background:#f5f6fa;min-height:100vh}
+.topbar{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:15px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.topbar h1{font-size:17px}
+.logout-btn{background:rgba(255,255,255,.2);color:#fff;border:none;padding:7px 15px;border-radius:8px;cursor:pointer;font-size:13px}
+.main{max-width:1100px;margin:0 auto;padding:22px 16px}
+
+/* CARDS */
+.card{background:#fff;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.07)}
+.card h2{font-size:15px;color:#5c35a0;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+
+/* TABS */
+.tabs{display:flex;gap:8px;margin-bottom:12px}
+.tab-btn{padding:8px 18px;border:2px solid #667eea;background:transparent;border-radius:8px;cursor:pointer;font-size:13px;color:#667eea;font-weight:600;transition:all .2s}
+.tab-btn.active{background:#667eea;color:#fff}
+textarea{width:100%;padding:13px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;outline:none;font-family:inherit;resize:vertical;transition:border-color .2s}
 textarea:focus{border-color:#667eea}
-.tabs{display:flex;gap:5px;margin-bottom:13px;flex-wrap:wrap}
-.tab{padding:7px 15px;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;font-size:13px;color:#666;background:#fff}
-.tab.on{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border-color:transparent}
-.fu{border:2px dashed #c5b3e8;border-radius:10px;padding:22px;text-align:center;cursor:pointer;margin-top:8px;transition:all .3s}
-.fu:hover{border-color:#667eea;background:#f8f5ff}
-.ag{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:13px}
-.ac{border:2px solid #e0e0e0;border-radius:12px;padding:15px;cursor:pointer;position:relative;transition:all .2s}
-.ac.on{border-color:#667eea;background:#f8f5ff}
-.ac h3{font-size:14px;color:#333;margin-bottom:4px}
-.ac p{font-size:12px;color:#888}
-.ck{position:absolute;top:10px;right:10px;width:22px;height:22px;border-radius:50%;border:2px solid #ccc;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold}
-.ac.on .ck{background:#667eea;border-color:#667eea;color:#fff}
-.df{display:flex;gap:5px;margin-top:9px;flex-wrap:wrap}
-.db{padding:4px 10px;border:2px solid #e0e0e0;border-radius:6px;cursor:pointer;font-size:11px;background:#fff}
-.db.on{background:#667eea;color:#fff;border-color:#667eea}
-.fg{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.sf{width:100%;padding:9px;border:2px solid #e0e0e0;border-radius:8px;outline:none;font-size:13px;margin-bottom:4px}
-.sf:focus{border-color:#667eea}
-.lb2{font-size:12px;color:#666;display:block;margin-bottom:3px;margin-top:8px}
-.bg{width:100%;padding:15px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:12px;font-size:17px;font-weight:700;cursor:pointer;margin-top:8px;transition:transform .2s}
-.bg:hover{transform:scale(1.01)}
-.bg:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.pr{display:none;text-align:center;padding:18px}
-.sp{width:38px;height:38px;border:4px solid #e0e0e0;border-top-color:#667eea;border-radius:50%;animation:sp .8s linear infinite;margin:0 auto 12px}
-@keyframes sp{to{transform:rotate(360deg)}}
-#ps{display:none}
-.pa{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
-.bp{padding:11px 20px;background:#27ae60;color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:14px;font-weight:700}
-.bn{padding:11px 20px;background:#e74c3c;color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:14px;font-weight:700}
-#dp{background:#fff;padding:36px;border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,.1);font-family:'Times New Roman',serif}
-.dh{text-align:center;border-bottom:3px double #333;padding-bottom:13px;margin-bottom:16px}
-.dh h1{font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#2c3e50}
-.dh h2{font-size:14px;color:#555;margin-top:4px}
-.sf2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:16px;padding:13px;border:1px solid #ddd;border-radius:5px;background:#f9f9f9}
-.sf2 .row{border-bottom:1px solid #333;padding:6px 0;font-size:13px}
-.sf2 .row small{color:#666;font-size:11px;display:block;margin-bottom:2px}
-.as{margin-bottom:30px;page-break-inside:avoid}
-.at{font-size:14px;font-weight:700;color:#2c3e50;margin-bottom:9px;padding:7px 10px;background:#ecf0f1;border-left:4px solid #667eea;border-radius:3px}
-.wg{display:inline-grid;gap:1px;margin:8px 0;border:2px solid #333;padding:3px;background:#fff}
-.wg span{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:monospace;border:1px solid #e0e0e0}
-.wl{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
-.wl span{background:#ecf0f1;padding:3px 10px;border-radius:4px;font-size:13px;font-weight:700}
-.fb{margin:8px 0;font-size:13px;line-height:2.2}
-.mc{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:9px 0}
-.mi{padding:7px 10px;border:2px solid #667eea;border-radius:7px;font-size:13px;background:#f8f5ff;margin-bottom:6px}
-.qi{margin:10px 0}
-.qi p{font-size:13px;font-weight:700;color:#2c3e50;margin-bottom:5px}
-.al{border-bottom:1px solid #ccc;height:26px;margin-bottom:3px}
-.bco{margin-top:11px;padding:9px;background:#f9f9f9;border:1px solid #ddd;border-radius:5px;font-size:12px}
-@media print{body{background:#fff!important}.tb,.pa,#setup{display:none!important}#ps{display:block!important}#dp{box-shadow:none;padding:18px}.wg span{border:1px solid #999!important}}
-@media(max-width:600px){.fg{grid-template-columns:1fr}.sf2{grid-template-columns:1fr}}
+.file-upload-area{border:2px dashed #c0c0e0;border-radius:10px;padding:30px;text-align:center;cursor:pointer;transition:all .2s;color:#888}
+.file-upload-area:hover{border-color:#667eea;color:#667eea;background:#f0f0ff}
+.file-upload-area input{display:none}
+
+/* ACTIVITIES */
+.activities-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.act-item{border:2px solid #e0e0e0;border-radius:10px;padding:14px;transition:all .2s;cursor:pointer}
+.act-item.selected{border-color:#667eea;background:#f0f0ff}
+.act-item label{display:flex;align-items:center;gap:10px;cursor:pointer;font-weight:600;font-size:14px;color:#444}
+.act-item input[type=checkbox]{width:18px;height:18px;accent-color:#667eea;cursor:pointer}
+.act-item .diff-row{margin-top:10px;display:flex;align-items:center;gap:8px;font-size:12px;color:#666}
+.act-item select{flex:1;padding:5px 8px;border:1px solid #c0c0e0;border-radius:6px;font-size:12px;outline:none;font-family:inherit}
+
+/* SCHOOL FIELDS */
+.fields-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field-group{display:flex;flex-direction:column;gap:4px}
+.field-group label{font-size:12px;color:#666;font-weight:600}
+.field-group input{padding:9px 12px;border:2px solid #e0e0e0;border-radius:8px;font-size:13px;outline:none;font-family:inherit;transition:border-color .2s}
+.field-group input:focus{border-color:#667eea}
+
+/* GENERATE BUTTON */
+.gen-btn{width:100%;padding:16px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:12px;font-size:17px;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s;margin-top:4px}
+.gen-btn:hover{transform:scale(1.01);box-shadow:0 8px 24px rgba(102,126,234,.5)}
+
+/* PREVIEW */
+#preview-section{display:none;background:#fff;border-radius:14px;padding:28px;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.07)}
+.preview-actions{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.preview-actions button{padding:10px 22px;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;transition:all .2s}
+.print-btn{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff}
+.new-btn{background:#f0f0ff;color:#667eea;border:2px solid #667eea}
+
+/* DOCUMENT OUTPUT */
+.doc-output{font-family:'Times New Roman',serif;max-width:780px;margin:0 auto;padding:20px}
+.doc-header-box{border:2px solid #333;padding:16px 20px;margin-bottom:20px;border-radius:4px}
+.doc-school{font-size:14px;text-align:center;margin-bottom:4px;font-weight:bold}
+.doc-info{display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;font-size:13px;margin-top:8px}
+.doc-info div{border-bottom:1px solid #ccc;padding:3px 0}
+.doc-title{text-align:center;font-size:18px;font-weight:bold;margin:20px 0 16px}
+.activity-block{margin-bottom:28px}
+.activity-title{font-size:15px;font-weight:bold;border-left:4px solid #667eea;padding-left:10px;margin-bottom:12px;color:#333}
+.activity-instructions{font-size:13px;color:#555;margin-bottom:10px;font-style:italic}
+.word-grid{display:inline-grid;gap:2px;border:2px solid #333;padding:4px;background:#fff}
+.word-cell{width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:bold;border:1px solid #ddd;font-family:'Courier New',monospace}
+.wordlist{margin-top:12px;font-size:13px}
+.wordlist span{display:inline-block;background:#f0f0ff;border:1px solid #c0c0e0;padding:3px 10px;border-radius:4px;margin:2px;font-weight:bold}
+.fill-item{margin-bottom:10px;font-size:14px;line-height:1.8}
+.fill-blank{display:inline-block;border-bottom:2px solid #333;min-width:80px;margin:0 4px}
+.word-bank{margin-top:12px;padding:10px;background:#f9f9ff;border:1px solid #d0d0ff;border-radius:6px;font-size:13px}
+.match-grid{display:grid;grid-template-columns:1fr 60px 1fr;gap:8px;align-items:center;font-size:13px;max-width:600px}
+.match-left{padding:8px 12px;background:#f0f0ff;border-radius:6px;border:1px solid #c0c0e0}
+.match-right{padding:8px 12px;background:#fff0f0;border-radius:6px;border:1px solid #e0c0c0}
+.match-line{border-top:1px dashed #999;width:100%}
+.question-item{margin-bottom:14px;font-size:14px}
+.question-text{font-weight:bold;margin-bottom:4px}
+.answer-line{border-bottom:1px solid #ccc;margin-bottom:4px;height:22px}
+
+@media print {
+  #app-screen .topbar, .preview-actions, #setup-section, .main > *:not(#preview-section) { display:none!important }
+  #preview-section { display:block!important; box-shadow:none; padding:0 }
+  body { background:white }
+}
 </style>
 </head>
 <body>
-<div class="lc" id="lsec">
-<div class="lb">
-<div class="ico">&#128272;</div>
-<h1>Generador de Actividades</h1>
-<p class="sub">Nivel Secundario &mdash; Herramienta Docente</p>
-<div class="fi"><input type="text" id="uid" placeholder="Usuario" autocomplete="off"></div>
-<div class="fi">
-<input type="password" id="pwd" placeholder="Contrase&ntilde;a">
-<span class="ey" id="eyeB" title="Ver contrase&ntilde;a">&#128065;</span>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="ico">🔐</div>
+    <h1>Generador de Actividades</h1>
+    <p class="sub">Nivel Secundario — Herramienta Docente</p>
+    <div class="field">
+      <input type="text" id="input-user" placeholder="Usuario" autocomplete="username">
+    </div>
+    <div class="field">
+      <input type="password" id="input-pass" placeholder="Contraseña" autocomplete="current-password">
+      <button type="button" class="toggle-pw" id="toggle-eye" title="Mostrar/ocultar contraseña">👁</button>
+    </div>
+    <div class="error-msg" id="error-msg">Usuario o contraseña incorrectos</div>
+    <button type="button" class="login-btn" id="btn-login">🚀 Ingresar</button>
+    <div class="hint">
+      admin / escuela2024<br>
+      profesor / clase2024<br>
+      docente / actividades123
+    </div>
+  </div>
 </div>
-<div class="er" id="erMsg"></div>
-<button class="btnl" id="btnLogin">&#128640; Ingresar</button>
-<div class="hint">
-<strong>Usuarios disponibles:</strong><br>
-admin &nbsp;/&nbsp; escuela2024<br>
-profesor &nbsp;/&nbsp; clase2024<br>
-docente &nbsp;/&nbsp; actividades123
+
+<!-- APP -->
+<div id="app-screen">
+  <div class="topbar">
+    <h1>📚 Generador de Actividades Escolares — Nivel Secundario</h1>
+    <button type="button" id="btn-logout" class="logout-btn">🚪 Salir</button>
+  </div>
+
+  <div class="main">
+    <div id="setup-section">
+
+      <!-- TEXTO FUENTE -->
+      <div class="card">
+        <h2>📝 Contenido Fuente</h2>
+        <div class="tabs">
+          <button type="button" class="tab-btn active" id="tab-text-btn">✏️ Pegar Texto</button>
+          <button type="button" class="tab-btn" id="tab-file-btn">📎 Subir Archivo</button>
+        </div>
+        <div id="tab-text-panel">
+          <textarea id="source-text" rows="7" placeholder="Pegá aquí el texto del tema que querés usar para generar las actividades..."></textarea>
+        </div>
+        <div id="tab-file-panel" style="display:none">
+          <div class="file-upload-area" id="file-drop-area">
+            <input type="file" id="file-input" accept=".txt,.pdf,.doc,.docx">
+            <div style="font-size:40px;margin-bottom:8px">📂</div>
+            <div style="font-weight:600;margin-bottom:4px">Hacé clic o arrastrá tu archivo aquí</div>
+            <div style="font-size:12px">Formatos: TXT, PDF, DOC, DOCX</div>
+          </div>
+          <div id="file-name-display" style="margin-top:8px;font-size:13px;color:#667eea;display:none"></div>
+        </div>
+      </div>
+
+      <!-- ACTIVIDADES -->
+      <div class="card">
+        <h2>🎯 Seleccioná las Actividades</h2>
+        <div class="activities-grid">
+          <div class="act-item" id="act-item-sopa">
+            <label><input type="checkbox" id="chk-sopa"> 🔤 Sopa de Letras</label>
+            <div class="diff-row">Dificultad: <select id="diff-sopa"><option value="facil">Fácil</option><option value="medio" selected>Medio</option><option value="dificil">Difícil</option></select></div>
+          </div>
+          <div class="act-item" id="act-item-completar">
+            <label><input type="checkbox" id="chk-completar"> ✏️ Completar la Frase</label>
+            <div class="diff-row">Dificultad: <select id="diff-completar"><option value="facil">Fácil</option><option value="medio" selected>Medio</option><option value="dificil">Difícil</option></select></div>
+          </div>
+          <div class="act-item" id="act-item-unir">
+            <label><input type="checkbox" id="chk-unir"> 🔗 Unir con Flechas</label>
+            <div class="diff-row">Dificultad: <select id="diff-unir"><option value="facil">Fácil</option><option value="medio" selected>Medio</option><option value="dificil">Difícil</option></select></div>
+          </div>
+          <div class="act-item" id="act-item-preguntas">
+            <label><input type="checkbox" id="chk-preguntas"> ❓ Responder Consignas</label>
+            <div class="diff-row">Dificultad: <select id="diff-preguntas"><option value="facil">Fácil</option><option value="medio" selected>Medio</option><option value="dificil">Difícil</option></select></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DATOS DEL ESTABLECIMIENTO -->
+      <div class="card">
+        <h2>🏫 Datos del Establecimiento</h2>
+        <div class="fields-grid">
+          <div class="field-group"><label>Nombre de la Institución</label><input type="text" id="f-institucion" placeholder="Ej: Escuela N° 5"></div>
+          <div class="field-group"><label>N° de Escuela</label><input type="text" id="f-escuela" placeholder="Ej: 5"></div>
+          <div class="field-group"><label>Materia / Área</label><input type="text" id="f-materia" placeholder="Ej: Biología"></div>
+          <div class="field-group"><label>Título de la Actividad</label><input type="text" id="f-titulo" placeholder="Ej: La Célula"></div>
+        </div>
+      </div>
+
+      <!-- GENERAR -->
+      <button type="button" class="gen-btn" id="btn-generate">⚡ GENERAR ACTIVIDADES</button>
+    </div>
+
+    <!-- PREVIEW -->
+    <div id="preview-section">
+      <div class="preview-actions">
+        <button type="button" class="print-btn preview-actions" id="btn-print">🖨 Imprimir / Guardar PDF</button>
+        <button type="button" class="new-btn" id="btn-new">🔄 Nueva Actividad</button>
+      </div>
+      <div class="doc-output" id="doc-output"></div>
+    </div>
+
+  </div>
 </div>
-</div>
-</div>
-<div id="app">
-<div class="tb">
-<h1>&#128218; Generador de Actividades Escolares &mdash; Nivel Secundario</h1>
-<button class="bo" id="btnLogout">&#128682; Salir</button>
-</div>
-<div class="mn" id="setup">
-<div class="cd">
-<h2>&#128196; Fuente de Contenido</h2>
-<div class="tabs">
-<div class="tab on" id="tabTxt">&#128221; Pegar Texto</div>
-<div class="tab" id="tabFile">&#128206; Subir Archivo (PDF/Word)</div>
-</div>
-<div id="ptxt"><textarea id="txin" placeholder="Peg&#225; aqu&#237; el texto del tema. Cuanto m&#225;s completo, mejores actividades se generar&#225;n..."></textarea></div>
-<div id="pfil" style="display:none">
-<div class="fu" id="fuBtn">
-<p style="font-size:28px">&#128194;</p>
-<p style="color:#5c35a0;font-weight:700;margin:6px 0">Clic para seleccionar archivo</p>
-<p style="font-size:11px;color:#888">PDF, .doc, .docx</p>
-<input type="file" id="finp" accept=".pdf,.doc,.docx" style="display:none">
-</div>
-<div id="fn" style="margin-top:9px;color:#27ae60;font-weight:700"></div>
-</div>
-</div>
-<div class="cd">
-<h2>&#127919; Actividades y Dificultad</h2>
-<p style="font-size:12px;color:#888;margin-bottom:13px">Eleg&#237; una, varias o todas. Cada una tiene su propia dificultad independiente.</p>
-<div class="ag">
-<div class="ac on" id="c-s" data-act="s">
-<div class="ck" id="k-s">&#10003;</div>
-<h3>&#128292; Sopa de Letras</h3><p>Palabras clave ocultas en la grilla</p>
-<div class="df">
-<div class="db on" data-act="s" data-diff="f">F&#225;cil</div>
-<div class="db" data-act="s" data-diff="m">Medio</div>
-<div class="db" data-act="s" data-diff="d">Dif&#237;cil</div>
-</div>
-</div>
-<div class="ac on" id="c-c" data-act="c">
-<div class="ck" id="k-c">&#10003;</div>
-<h3>&#9999; Completar la Frase</h3><p>Completar con la/s palabra/s faltante/s</p>
-<div class="df">
-<div class="db" data-act="c" data-diff="f">F&#225;cil</div>
-<div class="db on" data-act="c" data-diff="m">Medio</div>
-<div class="db" data-act="c" data-diff="d">Dif&#237;cil</div>
-</div>
-</div>
-<div class="ac on" id="c-u" data-act="u">
-<div class="ck" id="k-u">&#10003;</div>
-<h3>&#8596; Unir con Flechas</h3><p>Relacionar conceptos con definiciones</p>
-<div class="df">
-<div class="db on" data-act="u" data-diff="f">F&#225;cil</div>
-<div class="db" data-act="u" data-diff="m">Medio</div>
-<div class="db" data-act="u" data-diff="d">Dif&#237;cil</div>
-</div>
-</div>
-<div class="ac on" id="c-q" data-act="q">
-<div class="ck" id="k-q">&#10003;</div>
-<h3>&#10067; Responder Consignas</h3><p>Preguntas de an&#225;lisis y reflexi&#243;n</p>
-<div class="df">
-<div class="db" data-act="q" data-diff="f">F&#225;cil</div>
-<div class="db on" data-act="q" data-diff="m">Medio</div>
-<div class="db" data-act="q" data-diff="d">Dif&#237;cil</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cd">
-<h2>&#127963; Encabezado del Documento</h2>
-<div class="fg">
-<div><label class="lb2">Nombre de la Instituci&#243;n</label><input class="sf" id="sn" placeholder="Ej: Escuela Secundaria N&#176; 5"></div>
-<div><label class="lb2">N&#250;mero de Escuela</label><input class="sf" id="snum" placeholder="Ej: 25"></div>
-<div><label class="lb2">Materia / Asignatura</label><input class="sf" id="sb" placeholder="Ej: Historia, Biolog&#237;a..."></div>
-<div><label class="lb2">T&#237;tulo de la Actividad</label><input class="sf" id="at" placeholder="Ej: Gu&#237;a - Unidad 2"></div>
-</div>
-</div>
-<button class="bg" id="gbtn">&#9889; GENERAR ACTIVIDADES</button>
-<div class="pr" id="pr"><div class="sp"></div><p style="color:#667eea;font-weight:700">Generando actividades...</p></div>
-</div>
-<div id="ps" class="mn" style="padding-top:18px">
-<div class="pa">
-<button class="bp" id="btnPrint">&#128424; Imprimir / PDF</button>
-<button class="bn" id="btnNew">&#128260; Nueva Actividad</button>
-</div>
-<div id="dp"></div>
-</div>
-</div>
+
 <script>
 (function(){
-var U={"admin":"escuela2024","profesor":"clase2024","docente":"actividades123"};
-var A={s:1,c:1,u:1,q:1};
-var D={s:"f",c:"m",u:"f",q:"m"};
-var ft="";
+  // ===== USUARIOS =====
+  var USERS = {admin:'escuela2024', profesor:'clase2024', docente:'actividades123'};
 
-function dL(){
-  var u=document.getElementById("uid").value.trim();
-  var p=document.getElementById("pwd").value;
-  var e=document.getElementById("erMsg");
-  if(!u||!p){e.textContent="Completá usuario y contraseña";e.style.display="block";return;}
-  if(U[u]&&U[u]===p){
-    e.style.display="none";
-    document.getElementById("lsec").style.display="none";
-    document.getElementById("app").style.display="block";
-  }else{
-    e.textContent="❌ Usuario o contraseña incorrectos";
-    e.style.display="block";
-    document.getElementById("pwd").value="";
-    document.getElementById("pwd").focus();
+  // ===== LOGIN =====
+  var btnLogin   = document.getElementById('btn-login');
+  var btnLogout  = document.getElementById('btn-logout');
+  var toggleEye  = document.getElementById('toggle-eye');
+  var inputUser  = document.getElementById('input-user');
+  var inputPass  = document.getElementById('input-pass');
+  var errorMsg   = document.getElementById('error-msg');
+  var loginScr   = document.getElementById('login-screen');
+  var appScr     = document.getElementById('app-screen');
+
+  function doLogin() {
+    var u = inputUser.value.trim();
+    var p = inputPass.value.trim();
+    errorMsg.style.display = 'none';
+    if (USERS[u] && USERS[u] === p) {
+      loginScr.style.display = 'none';
+      appScr.style.display = 'block';
+    } else {
+      errorMsg.style.display = 'block';
+      inputPass.value = '';
+      inputPass.focus();
+    }
   }
-}
 
-document.getElementById("btnLogin").addEventListener("click",dL);
-document.getElementById("pwd").addEventListener("keydown",function(e){if(e.key==="Enter")dL();});
+  btnLogin.addEventListener('click', doLogin);
+  inputPass.addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
+  inputUser.addEventListener('keydown', function(e){ if(e.key==='Enter') inputPass.focus(); });
 
-document.getElementById("eyeB").addEventListener("click",function(){
-  var i=document.getElementById("pwd");
-  if(i.type==="password"){i.type="text";this.innerHTML="👁️";}
-  else{i.type="password";this.innerHTML="👁";}
-});
-
-document.getElementById("btnLogout").addEventListener("click",function(){
-  document.getElementById("app").style.display="none";
-  document.getElementById("lsec").style.display="flex";
-  document.getElementById("uid").value="";
-  var p=document.getElementById("pwd");p.value="";p.type="password";
-  document.getElementById("eyeB").innerHTML="👁";
-});
-
-document.getElementById("tabTxt").addEventListener("click",function(){
-  document.querySelectorAll(".tab").forEach(function(x){x.className="tab";});
-  this.className="tab on";
-  document.getElementById("ptxt").style.display="block";
-  document.getElementById("pfil").style.display="none";
-});
-document.getElementById("tabFile").addEventListener("click",function(){
-  document.querySelectorAll(".tab").forEach(function(x){x.className="tab";});
-  this.className="tab on";
-  document.getElementById("ptxt").style.display="none";
-  document.getElementById("pfil").style.display="block";
-});
-document.getElementById("fuBtn").addEventListener("click",function(){document.getElementById("finp").click();});
-document.getElementById("finp").addEventListener("change",function(){
-  var f=this.files[0];if(!f)return;
-  document.getElementById("fn").innerHTML="📄 <b>"+f.name+"</b> ✅";
-  ft="Archivo: "+f.name;
-});
-
-document.querySelectorAll(".ac").forEach(function(card){
-  card.addEventListener("click",function(ev){
-    if(ev.target.classList.contains("db"))return;
-    var k=this.dataset.act;
-    A[k]=A[k]?0:1;
-    this.classList.toggle("on");
-    document.getElementById("k-"+k).textContent=A[k]?"✓":"";
-  });
-});
-document.querySelectorAll(".db").forEach(function(btn){
-  btn.addEventListener("click",function(ev){
-    ev.stopPropagation();
-    var k=this.dataset.act,d=this.dataset.diff;
-    D[k]=d;
-    this.closest(".ac").querySelectorAll(".db").forEach(function(b){b.className="db";});
-    this.className="db on";
-  });
-});
-
-document.getElementById("gbtn").addEventListener("click",gn);
-document.getElementById("btnPrint").addEventListener("click",function(){window.print();});
-document.getElementById("btnNew").addEventListener("click",rs);
-
-function kw(t){
-  var sw=["de","la","el","en","y","a","que","los","las","un","una","con","por","para","del","al","se","su","es","lo","mas","pero","como","si","este","esta","no","son","hay","sus","fue","ser","han","ha","me","te","nos","eso","esto","tambien","entre","cuando","donde","muy","bien","cada","solo","ya","sin","todo","hacia","desde","sobre","bajo","ante","durante"];
-  var ws=t.toLowerCase().match(/[a-záéíóúñü]{5,}/g)||[];
-  var f={};ws.forEach(function(w){if(sw.indexOf(w)===-1)f[w]=(f[w]||0)+1;});
-  return Object.keys(f).sort(function(a,b){return f[b]-f[a];}).slice(0,60).map(function(w){return w.toUpperCase();});
-}
-function ss(t){return(t.match(/[^.!?
-]+[.!?]/g)||[]).filter(function(s){return s.trim().split(" ").length>7;});}
-function gWS(wo,d){
-  var cnt=d==="f"?8:d==="m"?12:16,sz=d==="f"?12:d==="m"?15:18;
-  var dirs=d==="f"?[[1,0],[0,1]]:d==="m"?[[1,0],[0,1],[1,1]]:[[1,0],[0,1],[1,1],[1,-1],[-1,0],[0,-1]];
-  var sel=wo.slice(0,cnt).filter(function(w){return w.length<=sz-2;});
-  var g=[];for(var i=0;i<sz;i++){g.push([]);for(var j=0;j<sz;j++)g[i].push("");}
-  var pl=[],al="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  sel.forEach(function(w){
-    var tr=0,ok=0;
-    while(tr<300&&!ok){
-      var dr=dirs[Math.floor(Math.random()*dirs.length)],r=Math.floor(Math.random()*sz),c=Math.floor(Math.random()*sz),fit=1;
-      for(var i=0;i<w.length;i++){var nr=r+dr[0]*i,nc=c+dr[1]*i;if(nr<0||nr>=sz||nc<0||nc>=sz||(g[nr][nc]!==""&&g[nr][nc]!==w[i])){fit=0;break;}}
-      if(fit){for(var i=0;i<w.length;i++)g[r+dr[0]*i][c+dr[1]*i]=w[i];pl.push(w);ok=1;}tr++;
+  toggleEye.addEventListener('click', function(){
+    if(inputPass.type === 'password'){
+      inputPass.type = 'text';
+      toggleEye.textContent = '🙈';
+    } else {
+      inputPass.type = 'password';
+      toggleEye.textContent = '👁';
     }
   });
-  for(var r=0;r<sz;r++)for(var c=0;c<sz;c++)if(!g[r][c])g[r][c]=al[Math.floor(Math.random()*al.length)];
-  return{g:g,w:pl,sz:sz};
-}
-function gFB(t,d){
-  var sn=ss(t),cnt=d==="f"?5:d==="m"?8:10,nb=d==="f"?1:d==="m"?2:3,res=[];
-  sn.slice(0,cnt).forEach(function(s){
-    var ws=s.trim().split(" "),idx=[],tr=0;
-    while(idx.length<nb&&tr<200){var i=Math.floor(Math.random()*(ws.length-2))+1,w=ws[i].replace(/[^a-zá-ü]/gi,"");if(idx.indexOf(i)===-1&&w.length>3)idx.push(i);tr++;}
-    var ans=[],mk=ws.map(function(w,i){if(idx.indexOf(i)!==-1){ans.push(w);return"___________";}return w;}).join(" ");
-    if(ans.length>0)res.push({s:mk,a:ans});
+
+  btnLogout.addEventListener('click', function(){
+    appScr.style.display = 'none';
+    loginScr.style.display = 'flex';
+    inputUser.value = '';
+    inputPass.value = '';
+    inputPass.type = 'password';
+    toggleEye.textContent = '👁';
   });
-  return res;
-}
-function gMA(t,d){
-  var k=kw(t),sn=ss(t),cnt=d==="f"?5:d==="m"?7:10,pairs=[];
-  k.slice(0,cnt*2).forEach(function(w){
-    if(pairs.length>=cnt)return;
-    var r=sn.find(function(s){return s.toUpperCase().indexOf(w)!==-1;});
-    if(r){var def=r.replace(new RegExp(w,"gi"),"___").trim();if(def.length>90)def=def.substring(0,90)+"...";pairs.push({t:w,d:def});}
+
+  // ===== TABS =====
+  document.getElementById('tab-text-btn').addEventListener('click', function(){
+    document.getElementById('tab-text-panel').style.display = 'block';
+    document.getElementById('tab-file-panel').style.display = 'none';
+    this.classList.add('active');
+    document.getElementById('tab-file-btn').classList.remove('active');
   });
-  var ri=pairs.map(function(p){return p.d;}).sort(function(){return Math.random()-.5;});
-  return{left:pairs.map(function(p){return p.t;}),right:ri};
-}
-function gQS(t,d){
-  var k=kw(t).slice(0,20),cnt=d==="f"?4:d==="m"?6:8,lns=d==="f"?2:d==="m"?3:4;
-  var tp={
-    f:["¿Qué es ?","¿Qué significa ?","¿Cuál es la función de ?","¿Dónde aparece ?"],
-    m:["Explicá qué es .","¿Por qué es importante ?","Describí las características de .","¿Cuál es la relación entre y el tema?"],
-    d:["Analizá críticamente .","¿Qué consecuencias tiene ?","Elaborá un argumento sobre .","¿Cómo se relaciona con la actualidad?"]
-  };
-  var tl=tp[d],qs=[];
-  for(var i=0;i<cnt&&i<k.length;i++)qs.push({q:tl[i%tl.length].replace("",k[i]),l:lns});
-  return qs;
-}
-function bD(){
-  var txt=document.getElementById("txin").value.trim()||ft;
-  var sn=document.getElementById("sn").value||"Escuela Secundaria";
-  var snum=document.getElementById("snum").value||"";
-  var sb=document.getElementById("sb").value||"Actividades";
-  var at=document.getElementById("at").value||"Guía de Actividades";
-  var dt=new Date().toLocaleDateString("es-AR");
-  var n=1,dl={f:"Fácil",m:"Medio",d:"Difícil"};
-  var h='<div class="dh"><h1>'+sn+(snum?" N° "+snum:"")+"</h1><h2>"+sb+" — "+at+'</h2><p style="font-size:12px;color:#666;margin-top:4px">Fecha: '+dt+"</p></div>";
-  h+='<div class="sf2"><div class="row"><small>Apellido y Nombre:</small>_________________________________________</div><div class="row"><small>Curso y División:</small>_________________________________________</div><div class="row"><small>N° de Escuela:</small>_________________________________________</div><div class="row"><small>Fecha de Entrega:</small>_________________________________________</div></div>';
-  if(A.s){var ws=gWS(kw(txt),D.s);h+='<div class="as"><div class="at">Actividad '+n+'. &#128292; Sopa de Letras <small style="font-weight:normal;font-size:11px">('+dl[D.s]+')</small></div><p style="font-size:12px;margin-bottom:9px">Encontrá las siguientes palabras en la sopa de letras:</p><div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start"><div class="wg" style="grid-template-columns:repeat('+ws.sz+',24px)">';ws.g.forEach(function(row){row.forEach(function(c){h+="<span>"+c+"</span>";});});h+='</div><div><p style="font-weight:700;font-size:12px;margin-bottom:7px">Palabras:</p><div class="wl">';ws.w.forEach(function(w){h+="<span>"+w+"</span>";});h+="</div></div></div></div>";n++;}
-  if(A.c){var fb=gFB(txt,D.c);h+='<div class="as"><div class="at">Actividad '+n+'. &#9999; Completar la Frase <small style="font-weight:normal;font-size:11px">('+dl[D.c]+')</small></div><p style="font-size:12px;margin-bottom:9px">Completá las oraciones con la/s palabra/s del banco:</p>';fb.forEach(function(it,i){h+='<div class="fb"><b>'+(i+1)+". </b>"+it.s+"</div>";});var bk=[];fb.forEach(function(f){f.a.forEach(function(a){bk.push(a);});});bk.sort(function(){return Math.random()-.5;});h+='<div class="bco"><b>&#128230; Banco de palabras: </b>'+bk.join(" — ")+"</div></div>";n++;}
-  if(A.u){var ma=gMA(txt,D.u);h+='<div class="as"><div class="at">Actividad '+n+'. &#8596; Unir con Flechas <small style="font-weight:normal;font-size:11px">('+dl[D.u]+')</small></div><p style="font-size:12px;margin-bottom:9px">Uní la Columna A con la Columna B:</p><div class="mc"><div><div style="text-align:center;background:#667eea;color:#fff;padding:6px;border-radius:5px;margin-bottom:8px;font-weight:700">COLUMNA A</div>';ma.left.forEach(function(t,i){h+='<div class="mi"><b>'+(i+1)+". </b>"+t+"</div>";});h+='</div><div><div style="text-align:center;background:#764ba2;color:#fff;padding:6px;border-radius:5px;margin-bottom:8px;font-weight:700">COLUMNA B</div>';var lt=["a","b","c","d","e","f","g","h","i","j"];ma.right.forEach(function(dd,i){h+='<div class="mi"><b>'+lt[i]+". </b>"+dd+"</div>";});h+="</div></div></div>";n++;}
-  if(A.q){var qs=gQS(txt,D.q);h+='<div class="as"><div class="at">Actividad '+n+'. &#10067; Responder Consignas <small style="font-weight:normal;font-size:11px">('+dl[D.q]+')</small></div><p style="font-size:12px;margin-bottom:9px">Respondé las preguntas:</p>';qs.forEach(function(q,i){h+='<div class="qi"><p>'+(i+1)+". "+q.q+"</p><div>";for(var l=0;l<q.l;l++)h+='<div class="al"></div>';h+="</div></div>";});h+="</div>";}
-  return h;
-}
-function gn(){
-  var txt=document.getElementById("txin").value.trim()||ft;
-  if(!txt||txt.length<50){alert("Ingresá un texto con al menos 50 caracteres.");return;}
-  if(!A.s&&!A.c&&!A.u&&!A.q){alert("Selecioná al menos una actividad.");return;}
-  document.getElementById("gbtn").disabled=true;
-  document.getElementById("pr").style.display="block";
-  setTimeout(function(){
-    try{document.getElementById("dp").innerHTML=bD();document.getElementById("setup").style.display="none";document.getElementById("ps").style.display="block";window.scrollTo(0,0);}
-    catch(e){alert("Error: "+e.message);}
-    document.getElementById("gbtn").disabled=false;
-    document.getElementById("pr").style.display="none";
-  },700);
-}
-function rs(){document.getElementById("ps").style.display="none";document.getElementById("setup").style.display="block";document.getElementById("txin").value="";document.getElementById("fn").innerHTML="";ft="";window.scrollTo(0,0);}
+  document.getElementById('tab-file-btn').addEventListener('click', function(){
+    document.getElementById('tab-file-panel').style.display = 'block';
+    document.getElementById('tab-text-panel').style.display = 'none';
+    this.classList.add('active');
+    document.getElementById('tab-text-btn').classList.remove('active');
+  });
+
+  // ===== ACTIVIDAD CHECKBOXES =====
+  ['sopa','completar','unir','preguntas'].forEach(function(id){
+    var chk = document.getElementById('chk-'+id);
+    var item = document.getElementById('act-item-'+id);
+    chk.addEventListener('change', function(){
+      if(chk.checked) item.classList.add('selected');
+      else item.classList.remove('selected');
+    });
+    item.addEventListener('click', function(e){
+      if(e.target !== chk && e.target.tagName !== 'SELECT' && e.target.tagName !== 'OPTION'){
+        chk.checked = !chk.checked;
+        if(chk.checked) item.classList.add('selected');
+        else item.classList.remove('selected');
+      }
+    });
+  });
+
+  // ===== FILE UPLOAD =====
+  var fileInput = document.getElementById('file-input');
+  var dropArea  = document.getElementById('file-drop-area');
+  var fileNameD = document.getElementById('file-name-display');
+
+  dropArea.addEventListener('click', function(){ fileInput.click(); });
+  fileInput.addEventListener('change', function(){
+    if(fileInput.files[0]){
+      var f = fileInput.files[0];
+      fileNameD.textContent = '📄 ' + f.name;
+      fileNameD.style.display = 'block';
+      if(f.type === 'text/plain'){
+        var reader = new FileReader();
+        reader.onload = function(e){ document.getElementById('source-text').value = e.target.result; };
+        reader.readAsText(f);
+        document.getElementById('tab-text-btn').click();
+      }
+    }
+  });
+
+  // ===== UTILS =====
+  function extractWords(text) {
+    var words = text.match(/\b[a-záéíóúüñA-ZÁÉÍÓÚÜÑ]{4,}\b/g) || [];
+    var unique = [], seen = {};
+    words.forEach(function(w){
+      var up = w.toUpperCase();
+      if(!seen[up]){ seen[up]=1; unique.push(up); }
+    });
+    return unique;
+  }
+
+  function extractSentences(text) {
+    return text.split(/[.!?]+/).map(function(s){ return s.trim(); }).filter(function(s){ return s.split(' ').length >= 5; });
+  }
+
+  function shuffle(arr) {
+    var a = arr.slice();
+    for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; }
+    return a;
+  }
+
+  function pick(arr, n) { return shuffle(arr).slice(0, n); }
+
+  // ===== SOPA DE LETRAS =====
+  function buildSopa(text, diff) {
+    var words = pick(extractWords(text), diff==='facil'?6:diff==='medio'?10:14);
+    if(!words.length) words = ['ACTIVIDAD','ESCUELA','APRENDIZAJE','CONOCIMIENTO','CIENCIA'];
+    var size = diff==='facil'?10:diff==='medio'?14:18;
+    var grid = [], i, j;
+    for(i=0;i<size;i++){ grid[i]=[]; for(j=0;j<size;j++) grid[i][j]=''; }
+    var placed = [];
+    var LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var dirs = [[0,1],[1,0],[1,1],[0,-1],[-1,0],[-1,-1],[1,-1],[-1,1]];
+    var usedDirs = diff==='facil'?[[0,1],[1,0]]:diff==='medio'?[[0,1],[1,0],[1,1],[0,-1]]:dirs;
+
+    words.forEach(function(word){
+      var tries = 0, ok = false;
+      while(tries < 100 && !ok){
+        tries++;
+        var dir = usedDirs[Math.floor(Math.random()*usedDirs.length)];
+        var r = Math.floor(Math.random()*size);
+        var c = Math.floor(Math.random()*size);
+        var fits = true;
+        for(var k=0;k<word.length;k++){
+          var nr=r+dir[0]*k, nc=c+dir[1]*k;
+          if(nr<0||nr>=size||nc<0||nc>=size){ fits=false; break; }
+          if(grid[nr][nc]&&grid[nr][nc]!==word[k]){ fits=false; break; }
+        }
+        if(fits){
+          for(var k=0;k<word.length;k++) grid[r+dir[0]*k][c+dir[1]*k]=word[k];
+          placed.push(word); ok=true;
+        }
+      }
+    });
+    for(i=0;i<size;i++) for(j=0;j<size;j++) if(!grid[i][j]) grid[i][j]=LETTERS[Math.floor(Math.random()*26)];
+
+    var html = '<div class="word-grid" style="grid-template-columns:repeat('+size+',28px)">';
+    for(i=0;i<size;i++) for(j=0;j<size;j++) html+='<div class="word-cell">'+grid[i][j]+'</div>';
+    html += '</div>';
+    html += '<div class="wordlist">Palabras a encontrar: ';
+    placed.forEach(function(w){ html+='<span>'+w+'</span>'; });
+    html += '</div>';
+    return html;
+  }
+
+  // ===== COMPLETAR LA FRASE =====
+  function buildCompletar(text, diff) {
+    var sentences = pick(extractSentences(text), diff==='facil'?4:diff==='medio'?6:8);
+    if(!sentences.length) return '<p>No se encontraron oraciones suficientes en el texto.</p>';
+    var bank = [], html = '';
+    var blanksCount = diff==='facil'?1:diff==='medio'?2:3;
+
+    sentences.forEach(function(sent, idx){
+      var words = sent.split(' ');
+      var longWords = words.map(function(w,i){ return {w:w,i:i}; }).filter(function(o){ return o.w.length>4; });
+      var toBlank = pick(longWords, blanksCount);
+      var modified = words.slice();
+      toBlank.forEach(function(o){
+        bank.push(o.w.replace(/[^a-záéíóúüñA-ZÁÉÍÓÚÜÑ]/g,''));
+        modified[o.i] = '<span class="fill-blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+      });
+      html += '<div class="fill-item">'+(idx+1)+'. '+modified.join(' ')+'</div>';
+    });
+
+    html += '<div class="word-bank"><strong>Banco de palabras:</strong> '+shuffle(bank).map(function(w){ return '<span style="margin:0 6px;font-weight:600">'+w+'</span>'; }).join(' / ')+'</div>';
+    return html;
+  }
+
+  // ===== UNIR CON FLECHAS =====
+  function buildUnir(text, diff) {
+    var sentences = pick(extractSentences(text), diff==='facil'?4:diff==='medio'?6:8);
+    if(sentences.length < 2) return '<p>No se encontraron suficientes oraciones en el texto.</p>';
+    var pairs = sentences.map(function(s){
+      var mid = Math.floor(s.length * (0.4 + Math.random()*0.2));
+      return { left: s.substring(0,mid).trim()+'...', right: '...'+s.substring(mid).trim() };
+    });
+    var rights = shuffle(pairs.map(function(p){ return p.right; }));
+    var html = '<div class="match-grid">';
+    pairs.forEach(function(p, i){
+      html += '<div class="match-left">'+(i+1)+'. '+p.left+'</div>';
+      html += '<div class="match-line"></div>';
+      html += '<div class="match-right">'+String.fromCharCode(65+i)+'. '+rights[i]+'</div>';
+    });
+    html += '</div>';
+    html += '<p style="font-size:12px;color:#888;margin-top:8px">Anotá la letra que corresponde a cada número.</p>';
+    return html;
+  }
+
+  // ===== RESPONDER CONSIGNAS =====
+  function buildPreguntas(text, diff) {
+    var count = diff==='facil'?3:diff==='medio'?5:7;
+    var sentences = extractSentences(text);
+    var lines = diff==='facil'?2:diff==='medio'?3:4;
+    var templates = [
+      '¿Cuál es la idea principal del siguiente fragmento: "',
+      '¿Qué relación existe entre los conceptos mencionados en: "',
+      'Explicá con tus propias palabras: "',
+      '¿Por qué es importante lo expuesto en: "',
+      'Describí brevemente: "',
+      '¿Qué consecuencias tiene lo planteado en: "',
+      'Analizá críticamente: "'
+    ];
+    var html = '';
+    pick(sentences, count).forEach(function(sent, idx){
+      var tmpl = templates[idx % templates.length];
+      html += '<div class="question-item"><div class="question-text">'+(idx+1)+'. '+tmpl+sent.substring(0,80)+'..."</div>';
+      for(var l=0;l<lines;l++) html += '<div class="answer-line"></div>';
+      html += '</div>';
+    });
+    if(!html) html = '<p>No se encontraron oraciones suficientes. Por favor ingresá más texto.</p>';
+    return html;
+  }
+
+  // ===== GENERAR =====
+  document.getElementById('btn-generate').addEventListener('click', function(){
+    var text = document.getElementById('source-text').value.trim();
+    if(!text || text.length < 50){
+      alert('Por favor ingresá un texto más largo (mínimo 50 caracteres) para generar las actividades.');
+      return;
+    }
+    var selected = [];
+    if(document.getElementById('chk-sopa').checked) selected.push('sopa');
+    if(document.getElementById('chk-completar').checked) selected.push('completar');
+    if(document.getElementById('chk-unir').checked) selected.push('unir');
+    if(document.getElementById('chk-preguntas').checked) selected.push('preguntas');
+    if(!selected.length){
+      alert('Seleccioná al menos una actividad.');
+      return;
+    }
+
+    var institucion = document.getElementById('f-institucion').value || 'Institución Educativa';
+    var escuela     = document.getElementById('f-escuela').value || '—';
+    var materia     = document.getElementById('f-materia').value || '—';
+    var titulo      = document.getElementById('f-titulo').value || 'Actividades';
+
+    var actNum = 1;
+    var html = '<div class="doc-output">';
+
+    // Header
+    html += '<div class="doc-header-box">';
+    html += '<div class="doc-school">'+institucion+' — N° '+escuela+'</div>';
+    html += '<div class="doc-info">';
+    html += '<div>Apellido y Nombre: _________________________</div>';
+    html += '<div>Materia: '+materia+'</div>';
+    html += '<div>Curso y División: _____________</div>';
+    html += '<div>Fecha de Entrega: _____________</div>';
+    html += '</div></div>';
+    html += '<div class="doc-title">'+titulo+'</div>';
+
+    var actNames = {
+      sopa: { name:'Sopa de Letras', icon:'🔤', instr:'Encontrá las palabras en la sopa de letras.' },
+      completar: { name:'Completar la Frase', icon:'✏️', instr:'Completá las frases con la palabra correcta del banco.' },
+      unir: { name:'Unir con Flechas', icon:'🔗', instr:'Uní cada comienzo de la columna izquierda con su continuación en la columna derecha.' },
+      preguntas: { name:'Responder Consignas', icon:'❓', instr:'Respondé las siguientes consignas en el espacio dado.' }
+    };
+
+    selected.forEach(function(id){
+      var diff = document.getElementById('diff-'+id).value;
+      var meta = actNames[id];
+      var diffLabel = diff==='facil'?'Fácil':diff==='medio'?'Medio':'Difícil';
+      html += '<div class="activity-block">';
+      html += '<div class="activity-title">Actividad '+actNum+': '+meta.icon+' '+meta.name+' — Nivel '+diffLabel+'</div>';
+      html += '<div class="activity-instructions">'+meta.instr+'</div>';
+      if(id==='sopa') html += buildSopa(text, diff);
+      else if(id==='completar') html += buildCompletar(text, diff);
+      else if(id==='unir') html += buildUnir(text, diff);
+      else if(id==='preguntas') html += buildPreguntas(text, diff);
+      html += '</div>';
+      actNum++;
+    });
+
+    html += '</div>';
+
+    document.getElementById('doc-output').innerHTML = html;
+    document.getElementById('setup-section').style.display = 'none';
+    document.getElementById('preview-section').style.display = 'block';
+    window.scrollTo(0,0);
+  });
+
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  document.getElementById('btn-new').addEventListener('click', function(){
+    document.getElementById('preview-section').style.display = 'none';
+    document.getElementById('setup-section').style.display = 'block';
+  });
+
 })();
 </script>
 </body>
-</html>
+              </html>
