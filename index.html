@@ -7,8 +7,6 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',Arial,sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh}
-
-/* LOGIN */
 #login-screen{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
 .login-box{background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.35);width:100%;max-width:400px;padding:40px 36px;text-align:center}
 .login-box .ico{font-size:52px;margin-bottom:14px}
@@ -23,21 +21,14 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:linear-gradient(135deg,#
 .login-btn:hover{transform:scale(1.02);box-shadow:0 6px 20px rgba(102,126,234,.5)}
 .error-msg{color:#e74c3c;font-size:13px;margin:8px 0 4px;padding:8px;background:#ffeaea;border-radius:6px;display:none}
 .hint{margin-top:18px;font-size:11px;color:#bbb;line-height:1.8}
-
-/* APP */
 #app-screen{display:none;background:#f5f6fa;min-height:100vh}
 .topbar{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:15px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .topbar h1{font-size:17px}
 .topbar-btns{display:flex;gap:8px;align-items:center}
-.logout-btn{background:rgba(255,255,255,.2);color:#fff;border:none;padding:7px 15px;border-radius:8px;cursor:pointer;font-size:13px}
-.archive-btn{background:rgba(255,255,255,.2);color:#fff;border:none;padding:7px 15px;border-radius:8px;cursor:pointer;font-size:13px}
+.logout-btn,.archive-btn{background:rgba(255,255,255,.2);color:#fff;border:none;padding:7px 15px;border-radius:8px;cursor:pointer;font-size:13px}
 .main{max-width:1100px;margin:0 auto;padding:22px 16px}
-
-/* CARDS */
 .card{background:#fff;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.07)}
 .card h2{font-size:15px;color:#5c35a0;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-
-/* TABS */
 .tabs{display:flex;gap:8px;margin-bottom:12px}
 .tab-btn{padding:8px 18px;border:2px solid #667eea;background:transparent;border-radius:8px;cursor:pointer;font-size:13px;color:#667eea;font-weight:600;transition:all .2s}
 .tab-btn.active{background:#667eea;color:#fff}
@@ -46,8 +37,6 @@ textarea:focus{border-color:#667eea}
 .file-upload-area{border:2px dashed #c0c0e0;border-radius:10px;padding:30px;text-align:center;cursor:pointer;transition:all .2s;color:#888}
 .file-upload-area:hover{border-color:#667eea;color:#667eea;background:#f0f0ff}
 .file-upload-area input{display:none}
-
-/* ACTIVITIES */
 .activities-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
 .act-item{border:2px solid #e0e0e0;border-radius:10px;padding:14px;transition:all .2s;cursor:pointer}
 .act-item.selected{border-color:#667eea;background:#f0f0ff}
@@ -55,26 +44,18 @@ textarea:focus{border-color:#667eea}
 .act-item input[type=checkbox]{width:18px;height:18px;accent-color:#667eea;cursor:pointer}
 .act-item .diff-row{margin-top:10px;display:flex;align-items:center;gap:8px;font-size:12px;color:#666}
 .act-item select{flex:1;padding:5px 8px;border:1px solid #c0c0e0;border-radius:6px;font-size:12px;outline:none;font-family:inherit}
-
-/* SCHOOL FIELDS */
 .fields-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .field-group{display:flex;flex-direction:column;gap:4px}
 .field-group label{font-size:12px;color:#666;font-weight:600}
 .field-group input{padding:9px 12px;border:2px solid #e0e0e0;border-radius:8px;font-size:13px;outline:none;font-family:inherit;transition:border-color .2s}
 .field-group input:focus{border-color:#667eea}
-
-/* GENERATE BUTTON */
 .gen-btn{width:100%;padding:16px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:12px;font-size:17px;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s;margin-top:4px}
 .gen-btn:hover{transform:scale(1.01);box-shadow:0 8px 24px rgba(102,126,234,.5)}
-
-/* PREVIEW */
 #preview-section{display:none;background:#fff;border-radius:14px;padding:28px;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.07)}
 .preview-actions{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
 .preview-actions button{padding:10px 22px;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;transition:all .2s}
 .print-btn{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff}
 .new-btn{background:#f0f0ff;color:#667eea;border:2px solid #667eea}
-
-/* ARCHIVE PANEL */
 #archive-section{display:none;background:#fff;border-radius:14px;padding:28px;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.07)}
 .archive-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
 .archive-header h2{font-size:17px;color:#5c35a0}
@@ -89,8 +70,6 @@ textarea:focus{border-color:#667eea}
 .arc-view-btn{background:#667eea;color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600}
 .arc-del-btn{background:#ffeaea;color:#e74c3c;border:1px solid #e74c3c;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600}
 .archive-empty{text-align:center;padding:40px;color:#aaa;font-size:15px}
-
-/* DOCUMENT OUTPUT */
 .doc-output{font-family:'Times New Roman',serif;max-width:780px;margin:0 auto;padding:20px}
 .doc-header-box{border:2px solid #333;padding:16px 20px;margin-bottom:20px;border-radius:4px}
 .doc-school{font-size:14px;text-align:center;margin-bottom:4px;font-weight:bold}
@@ -114,8 +93,6 @@ textarea:focus{border-color:#667eea}
 .question-item{margin-bottom:14px;font-size:14px}
 .question-text{font-weight:bold;margin-bottom:4px}
 .answer-line{border-bottom:1px solid #ccc;margin-bottom:4px;height:22px}
-
-/* CRUCIGRAMA */
 .crossword-container{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start}
 .crossword-grid{display:inline-grid;gap:1px;background:#333;border:2px solid #333}
 .cw-cell{width:30px;height:30px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold;font-family:'Courier New',monospace;position:relative;border:1px solid #aaa}
@@ -126,760 +103,411 @@ textarea:focus{border-color:#667eea}
 .cw-clues h4{font-size:13px;font-weight:bold;margin-bottom:6px;color:#333;border-bottom:1px solid #ccc;padding-bottom:4px}
 .cw-clue-item{font-size:12px;margin-bottom:4px;line-height:1.5}
 .cw-clue-item strong{color:#333}
-
-/* PRINT */
-@media print {
-  #app-screen .topbar, .preview-actions, #setup-section, #archive-section, .main > *:not(#preview-section) { display:none!important }
-  #preview-section { display:block!important; box-shadow:none; padding:0 }
-  body { background:white }
-  .print-page { page-break-after: always; }
-  .print-page:last-child { page-break-after: avoid; }
-  .page-number { display:block!important; }
-}
 .page-number{display:none;text-align:right;font-size:10px;color:#999;margin-top:8px;font-family:'Times New Roman',serif}
+@media print{
+  #app-screen .topbar,.preview-actions,#setup-section,#archive-section,.main>*:not(#preview-section){display:none!important}
+  #preview-section{display:block!important;box-shadow:none;padding:0}
+  body{background:white}
+  .print-page{page-break-after:always}
+  .print-page:last-child{page-break-after:avoid}
+  .page-number{display:block!important}
+}
 </style>
 </head>
 <body>
-<!-- LOGIN -->
 <div id="login-screen">
 <div class="login-box">
-<div class="ico">🔐</div>
+<div class="ico">&#x1F510;</div>
 <h1>Generador de Actividades</h1>
-<p class="sub">Nivel Secundario — Herramienta Docente</p>
+<p class="sub">Nivel Secundario &#x2014; Herramienta Docente</p>
+<div class="field"><input type="text" id="input-user" placeholder="Usuario" autocomplete="username"></div>
 <div class="field">
-<input type="text" id="input-user" placeholder="Usuario" autocomplete="username">
+<input type="password" id="input-pass" placeholder="Contrase&#xF1;a" autocomplete="current-password">
+<button type="button" class="toggle-pw" id="toggle-eye" title="Mostrar/ocultar contrase&#xF1;a">&#x1F441;</button>
 </div>
-<div class="field">
-<input type="password" id="input-pass" placeholder="Contraseña" autocomplete="current-password">
-<button type="button" class="toggle-pw" id="toggle-eye" title="Mostrar/ocultar contraseña">👁</button>
-</div>
-<div class="error-msg" id="error-msg">Usuario o contraseña incorrectos</div>
-<button type="button" class="login-btn" id="btn-login">🚀 Ingresar</button>
-<div class="hint">
-admin / escuela2024<br>
-profesor / clase2024<br>
-docente / actividades123
+<div class="error-msg" id="error-msg">Usuario o contrase&#xF1;a incorrectos</div>
+<button type="button" class="login-btn" id="btn-login">&#x1F680; Ingresar</button>
+<div class="hint">admin / escuela2024<br>profesor / clase2024<br>docente / actividades123</div>
 </div>
 </div>
-</div>
-
-<!-- APP -->
 <div id="app-screen">
 <div class="topbar">
-<h1>📚 Generador de Actividades Escolares — Nivel Secundario</h1>
+<h1>&#x1F4DA; Generador de Actividades Escolares &#x2014; Nivel Secundario</h1>
 <div class="topbar-btns">
-<button type="button" id="btn-archive" class="archive-btn">🗂 Archivo</button>
-<button type="button" id="btn-logout" class="logout-btn">🚪 Salir</button>
+<button type="button" id="btn-archive" class="archive-btn">&#x1F5C2; Archivo</button>
+<button type="button" id="btn-logout" class="logout-btn">&#x1F6AA; Salir</button>
 </div>
 </div>
-
 <div class="main">
-<!-- ARCHIVO -->
 <div id="archive-section">
 <div class="archive-header">
-<h2>🗂 Actividades Archivadas</h2>
-<button type="button" class="archive-close-btn" id="btn-close-archive">✕ Cerrar</button>
+<h2>&#x1F5C2; Actividades Archivadas</h2>
+<button type="button" class="archive-close-btn" id="btn-close-archive">&#x2715; Cerrar</button>
 </div>
 <div id="archive-list" class="archive-list"></div>
 </div>
-
 <div id="setup-section">
-
-<!-- TEXTO FUENTE -->
 <div class="card">
-<h2>📝 Contenido Fuente</h2>
+<h2>&#x1F4DD; Contenido Fuente</h2>
 <div class="tabs">
-<button type="button" class="tab-btn active" id="tab-text-btn">✏️ Pegar Texto</button>
-<button type="button" class="tab-btn" id="tab-file-btn">📎 Subir Archivo</button>
+<button type="button" class="tab-btn active" id="tab-text-btn">&#x270F;&#xFE0F; Pegar Texto</button>
+<button type="button" class="tab-btn" id="tab-file-btn">&#x1F4CE; Subir Archivo</button>
 </div>
 <div id="tab-text-panel">
-<textarea id="source-text" rows="7" placeholder="Pegá aquí el texto del tema que querés usar para generar las actividades..."></textarea>
+<textarea id="source-text" rows="7" placeholder="Peg&#xE1; aqu&#xED; el texto del tema que quer&#xE9;s usar para generar las actividades..."></textarea>
 </div>
 <div id="tab-file-panel" style="display:none">
 <div class="file-upload-area" id="file-drop-area">
 <input type="file" id="file-input" accept=".txt,.pdf,.doc,.docx">
-<div style="font-size:40px;margin-bottom:8px">📂</div>
-<div style="font-weight:600;margin-bottom:4px">Hacé clic o arrastrá tu archivo aquí</div>
+<div style="font-size:40px;margin-bottom:8px">&#x1F4C2;</div>
+<div style="font-weight:600;margin-bottom:4px">Hac&#xE9; clic o arrastr&#xE1; tu archivo aqu&#xED;</div>
 <div style="font-size:12px">Formatos: TXT, PDF, DOC, DOCX</div>
 </div>
 <div id="file-name-display" style="margin-top:8px;font-size:13px;color:#667eea;display:none"></div>
 </div>
 </div>
-
-<!-- ACTIVIDADES -->
 <div class="card">
-<h2>🎯 Seleccioná las Actividades</h2>
+<h2>&#x1F3AF; Selecci&#xF3;n de Actividades</h2>
 <div class="activities-grid">
-<div class="act-item" id="act-item-sopa">
-<label><input type="checkbox" id="chk-sopa"> 🔤 Sopa de Letras</label>
-<div class="diff-row">Dificultad: <select id="diff-sopa"><option value="facil">Fácil</option><option value="medio" selected>Medio</option><option value="dificil">Difícil</option></select></div>
-</div>
-<div class="act-item" id="act-item-completar">
-<label><input type="checkbox" id="chk-completar"> ✏️ Completar la Frase</label>
-<div class="diff-row">Dificultad: <select id="diff-completar"><option value="facil">Fácil</option><option value="medio" selected>Medio</option><option value="dificil">Difícil</option></select></div>
-</div>
-<div class="act-item" id="act-item-unir">
-<label><input type="checkbox" id="chk-unir"> 🔗 Unir con Flechas</label>
-<div class="diff-row">Dificultad: <select id="diff-unir"><option value="facil">Fácil</option><option value="medio" selected>Medio</option><option value="dificil">Difícil</option></select></div>
-</div>
-<div class="act-item" id="act-item-preguntas">
-<label><input type="checkbox" id="chk-preguntas"> ❓ Responder Consignas</label>
-<div class="diff-row">Dificultad: <select id="diff-preguntas"><option value="facil">Fácil</option><option value="medio" selected>Medio</option><option value="dificil">Difícil</option></select></div>
-</div>
-<div class="act-item" id="act-item-crucigrama">
-<label><input type="checkbox" id="chk-crucigrama"> 🔲 Crucigrama</label>
-<div class="diff-row">Dificultad: <select id="diff-crucigrama"><option value="facil">Fácil</option><option value="medio" selected>Medio</option><option value="dificil">Difícil</option></select></div>
+<div class="act-item" id="act-item-sopa"><label><input type="checkbox" id="chk-sopa"> &#x1F524; Sopa de Letras</label><div class="diff-row">Dificultad: <select id="diff-sopa"><option value="facil">F&#xE1;cil</option><option value="medio" selected>Medio</option><option value="dificil">Dif&#xED;cil</option></select></div></div>
+<div class="act-item" id="act-item-completar"><label><input type="checkbox" id="chk-completar"> &#x270F;&#xFE0F; Completar la Frase</label><div class="diff-row">Dificultad: <select id="diff-completar"><option value="facil">F&#xE1;cil</option><option value="medio" selected>Medio</option><option value="dificil">Dif&#xED;cil</option></select></div></div>
+<div class="act-item" id="act-item-unir"><label><input type="checkbox" id="chk-unir"> &#x1F517; Unir con Flechas</label><div class="diff-row">Dificultad: <select id="diff-unir"><option value="facil">F&#xE1;cil</option><option value="medio" selected>Medio</option><option value="dificil">Dif&#xED;cil</option></select></div></div>
+<div class="act-item" id="act-item-preguntas"><label><input type="checkbox" id="chk-preguntas"> &#x2753; Responder Consignas</label><div class="diff-row">Dificultad: <select id="diff-preguntas"><option value="facil">F&#xE1;cil</option><option value="medio" selected>Medio</option><option value="dificil">Dif&#xED;cil</option></select></div></div>
+<div class="act-item" id="act-item-crucigrama"><label><input type="checkbox" id="chk-crucigrama"> &#x1F532; Crucigrama</label><div class="diff-row">Dificultad: <select id="diff-crucigrama"><option value="facil">F&#xE1;cil</option><option value="medio" selected>Medio</option><option value="dificil">Dif&#xED;cil</option></select></div></div>
 </div>
 </div>
-</div>
-
-<!-- DATOS DEL ESTABLECIMIENTO -->
 <div class="card">
-<h2>🏫 Datos del Establecimiento</h2>
+<h2>&#x1F3EB; Datos del Establecimiento</h2>
 <div class="fields-grid">
-<div class="field-group"><label>Nombre de la Institución</label><input type="text" id="f-institucion" placeholder="Ej: Escuela N° 5"></div>
-<div class="field-group"><label>N° de Escuela</label><input type="text" id="f-escuela" placeholder="Ej: 5"></div>
-<div class="field-group"><label>Materia / Área</label><input type="text" id="f-materia" placeholder="Ej: Biología"></div>
-<div class="field-group"><label>Título de la Actividad</label><input type="text" id="f-titulo" placeholder="Ej: La Célula"></div>
+<div class="field-group"><label>Nombre de la Instituci&#xF3;n</label><input type="text" id="f-institucion" placeholder="Ej: Escuela N&#xB0; 5"></div>
+<div class="field-group"><label>N&#xB0; de Escuela</label><input type="text" id="f-escuela" placeholder="Ej: 5"></div>
+<div class="field-group"><label>Materia / &#xC1;rea</label><input type="text" id="f-materia" placeholder="Ej: Biolog&#xED;a"></div>
+<div class="field-group"><label>T&#xED;tulo de la Actividad</label><input type="text" id="f-titulo" placeholder="Ej: La C&#xE9;lula"></div>
 </div>
 </div>
-
-<!-- GENERAR -->
-<button type="button" class="gen-btn" id="btn-generate">⚡ GENERAR ACTIVIDADES</button>
+<button type="button" class="gen-btn" id="btn-generate">&#x26A1; GENERAR ACTIVIDADES</button>
 </div>
-
-<!-- PREVIEW -->
 <div id="preview-section">
 <div class="preview-actions">
-<button type="button" class="print-btn preview-actions" id="btn-print">🖨 Imprimir / Guardar PDF</button>
-<button type="button" class="new-btn" id="btn-new">🔄 Nueva Actividad</button>
+<button type="button" class="print-btn" id="btn-print">&#x1F5A8; Imprimir / Guardar PDF</button>
+<button type="button" class="new-btn" id="btn-new">&#x1F504; Nueva Actividad</button>
 </div>
 <div class="doc-output" id="doc-output"></div>
 </div>
-
 </div>
-</div>
-<script>
+</div><script>
 (function(){
-// ===== USUARIOS =====
-var USERS = {admin:'escuela2024', profesor:'clase2024', docente:'actividades123'};
+var USERS={admin:'escuela2024',profesor:'clase2024',docente:'actividades123'};
+var ARCHIVE_KEY='gae_archive';
+function getArchive(){try{return JSON.parse(localStorage.getItem(ARCHIVE_KEY)||'[]');}catch(e){return[];}}
+function saveArchive(arr){localStorage.setItem(ARCHIVE_KEY,JSON.stringify(arr));}
+function addToArchive(item){var arr=getArchive();arr.unshift(item);if(arr.length>50)arr=arr.slice(0,50);saveArchive(arr);}
+function deleteFromArchive(id){saveArchive(getArchive().filter(function(x){return x.id!==id;}));}
+function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
-// ===== ARCHIVO (localStorage) =====
-var ARCHIVE_KEY = 'gae_archive';
-function getArchive() {
-  try { return JSON.parse(localStorage.getItem(ARCHIVE_KEY) || '[]'); } catch(e){ return []; }
-}
-function saveArchive(arr) {
-  localStorage.setItem(ARCHIVE_KEY, JSON.stringify(arr));
-}
-function addToArchive(item) {
-  var arr = getArchive();
-  arr.unshift(item);
-  if(arr.length > 50) arr = arr.slice(0,50);
-  saveArchive(arr);
-}
-function deleteFromArchive(id) {
-  var arr = getArchive().filter(function(x){ return x.id !== id; });
-  saveArchive(arr);
-}
+var btnLogin=document.getElementById('btn-login');
+var btnLogout=document.getElementById('btn-logout');
+var toggleEye=document.getElementById('toggle-eye');
+var inputUser=document.getElementById('input-user');
+var inputPass=document.getElementById('input-pass');
+var errorMsg=document.getElementById('error-msg');
+var loginScr=document.getElementById('login-screen');
+var appScr=document.getElementById('app-screen');
 
-// ===== LOGIN =====
-var btnLogin = document.getElementById('btn-login');
-var btnLogout = document.getElementById('btn-logout');
-var toggleEye = document.getElementById('toggle-eye');
-var inputUser = document.getElementById('input-user');
-var inputPass = document.getElementById('input-pass');
-var errorMsg = document.getElementById('error-msg');
-var loginScr = document.getElementById('login-screen');
-var appScr = document.getElementById('app-screen');
-
-function doLogin() {
-  var u = inputUser.value.trim();
-  var p = inputPass.value.trim();
-  errorMsg.style.display = 'none';
-  if (USERS[u] && USERS[u] === p) {
-    loginScr.style.display = 'none';
-    appScr.style.display = 'block';
-  } else {
-    errorMsg.style.display = 'block';
-    inputPass.value = '';
-    inputPass.focus();
-  }
+function doLogin(){
+  var u=inputUser.value.trim(),p=inputPass.value.trim();
+  errorMsg.style.display='none';
+  if(USERS[u]&&USERS[u]===p){loginScr.style.display='none';appScr.style.display='block';}
+  else{errorMsg.style.display='block';inputPass.value='';inputPass.focus();}
 }
-
-btnLogin.addEventListener('click', doLogin);
-inputPass.addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
-inputUser.addEventListener('keydown', function(e){ if(e.key==='Enter') inputPass.focus(); });
-
-toggleEye.addEventListener('click', function(){
-  if(inputPass.type === 'password'){
-    inputPass.type = 'text';
-    toggleEye.textContent = '🙈';
-  } else {
-    inputPass.type = 'password';
-    toggleEye.textContent = '👁';
-  }
+btnLogin.addEventListener('click',doLogin);
+inputPass.addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+inputUser.addEventListener('keydown',function(e){if(e.key==='Enter')inputPass.focus();});
+toggleEye.addEventListener('click',function(){
+  if(inputPass.type==='password'){inputPass.type='text';toggleEye.textContent='X';}
+  else{inputPass.type='password';toggleEye.textContent='O';}
+});
+btnLogout.addEventListener('click',function(){
+  appScr.style.display='none';loginScr.style.display='flex';
+  inputUser.value='';inputPass.value='';inputPass.type='password';toggleEye.textContent='O';
 });
 
-btnLogout.addEventListener('click', function(){
-  appScr.style.display = 'none';
-  loginScr.style.display = 'flex';
-  inputUser.value = '';
-  inputPass.value = '';
-  inputPass.type = 'password';
-  toggleEye.textContent = '👁';
-});
+var btnArchive=document.getElementById('btn-archive');
+var btnCloseArchive=document.getElementById('btn-close-archive');
+var archiveSection=document.getElementById('archive-section');
+var setupSection=document.getElementById('setup-section');
+var previewSection=document.getElementById('preview-section');
 
-// ===== ARCHIVO UI =====
-var btnArchive = document.getElementById('btn-archive');
-var btnCloseArchive = document.getElementById('btn-close-archive');
-var archiveSection = document.getElementById('archive-section');
-var setupSection = document.getElementById('setup-section');
-var previewSection = document.getElementById('preview-section');
+btnArchive.addEventListener('click',function(){renderArchive();archiveSection.style.display='block';setupSection.style.display='none';previewSection.style.display='none';});
+btnCloseArchive.addEventListener('click',function(){archiveSection.style.display='none';setupSection.style.display='block';});
 
-btnArchive.addEventListener('click', function(){
-  renderArchive();
-  archiveSection.style.display = 'block';
-  setupSection.style.display = 'none';
-  previewSection.style.display = 'none';
-});
-btnCloseArchive.addEventListener('click', function(){
-  archiveSection.style.display = 'none';
-  setupSection.style.display = 'block';
-});
-
-function renderArchive() {
-  var arr = getArchive();
-  var listEl = document.getElementById('archive-list');
-  if(!arr.length){
-    listEl.innerHTML = '<div class="archive-empty">📭 No hay actividades archivadas aún.</div>';
-    return;
-  }
-  listEl.innerHTML = arr.map(function(item){
-    return '<div class="archive-item" id="arcitem-'+item.id+'">' +
-      '<div class="archive-item-info">' +
-        '<div class="arc-title">'+escHtml(item.titulo)+'</div>' +
-        '<div class="arc-meta">'+escHtml(item.materia)+' | '+escHtml(item.fecha)+'</div>' +
-      '</div>' +
-      '<div class="archive-item-btns">' +
-        '<button class="arc-view-btn" onclick="viewArchiveItem(''+item.id+'')">👁 Ver</button>' +
-        '<button class="arc-del-btn" onclick="deleteArchiveItem(''+item.id+'')">🗑</button>' +
-      '</div>' +
-    '</div>';
-  }).join('');
+function renderArchive(){
+  var arr=getArchive();
+  var listEl=document.getElementById('archive-list');
+  if(!arr.length){listEl.innerHTML='<div class="archive-empty">No hay actividades archivadas aun.</div>';return;}
+  listEl.innerHTML='';
+  arr.forEach(function(item){
+    var div=document.createElement('div');
+    div.className='archive-item';
+    div.innerHTML='<div class="archive-item-info"><div class="arc-title">'+escHtml(item.titulo)+'</div><div class="arc-meta">'+escHtml(item.materia)+' | '+escHtml(item.fecha)+'</div></div><div class="archive-item-btns"><button class="arc-view-btn">Ver</button><button class="arc-del-btn">Borrar</button></div>';
+    div.querySelector('.arc-view-btn').addEventListener('click',function(){
+      document.getElementById('doc-output').innerHTML=item.html;
+      archiveSection.style.display='none';
+      previewSection.style.display='block';
+    });
+    div.querySelector('.arc-del-btn').addEventListener('click',function(){
+      if(confirm('Eliminar esta actividad del archivo?')){deleteFromArchive(item.id);renderArchive();}
+    });
+    listEl.appendChild(div);
+  });
 }
 
-window.viewArchiveItem = function(id) {
-  var arr = getArchive();
-  var item = arr.find(function(x){ return x.id===id; });
-  if(!item) return;
-  document.getElementById('doc-output').innerHTML = item.html;
-  archiveSection.style.display = 'none';
-  previewSection.style.display = 'block';
-};
-window.deleteArchiveItem = function(id) {
-  if(!confirm('¿Eliminar esta actividad del archivo?')) return;
-  deleteFromArchive(id);
-  renderArchive();
-};
-
-function escHtml(str){
-  return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-// ===== TABS =====
-document.getElementById('tab-text-btn').addEventListener('click', function(){
-  document.getElementById('tab-text-panel').style.display = 'block';
-  document.getElementById('tab-file-panel').style.display = 'none';
-  this.classList.add('active');
-  document.getElementById('tab-file-btn').classList.remove('active');
+document.getElementById('tab-text-btn').addEventListener('click',function(){
+  document.getElementById('tab-text-panel').style.display='block';
+  document.getElementById('tab-file-panel').style.display='none';
+  this.classList.add('active');document.getElementById('tab-file-btn').classList.remove('active');
 });
-document.getElementById('tab-file-btn').addEventListener('click', function(){
-  document.getElementById('tab-file-panel').style.display = 'block';
-  document.getElementById('tab-text-panel').style.display = 'none';
-  this.classList.add('active');
-  document.getElementById('tab-text-btn').classList.remove('active');
+document.getElementById('tab-file-btn').addEventListener('click',function(){
+  document.getElementById('tab-file-panel').style.display='block';
+  document.getElementById('tab-text-panel').style.display='none';
+  this.classList.add('active');document.getElementById('tab-text-btn').classList.remove('active');
 });
 
-// ===== ACTIVIDAD CHECKBOXES =====
 ['sopa','completar','unir','preguntas','crucigrama'].forEach(function(id){
-  var chk = document.getElementById('chk-'+id);
-  var item = document.getElementById('act-item-'+id);
-  chk.addEventListener('change', function(){
-    if(chk.checked) item.classList.add('selected');
-    else item.classList.remove('selected');
-  });
-  item.addEventListener('click', function(e){
-    if(e.target !== chk && e.target.tagName !== 'SELECT' && e.target.tagName !== 'OPTION'){
-      chk.checked = !chk.checked;
-      if(chk.checked) item.classList.add('selected');
-      else item.classList.remove('selected');
+  var chk=document.getElementById('chk-'+id);
+  var item=document.getElementById('act-item-'+id);
+  chk.addEventListener('change',function(){if(chk.checked)item.classList.add('selected');else item.classList.remove('selected');});
+  item.addEventListener('click',function(e){
+    if(e.target!==chk&&e.target.tagName!=='SELECT'&&e.target.tagName!=='OPTION'){
+      chk.checked=!chk.checked;
+      if(chk.checked)item.classList.add('selected');else item.classList.remove('selected');
     }
   });
 });
 
-// ===== FILE UPLOAD =====
-var fileInput = document.getElementById('file-input');
-var dropArea = document.getElementById('file-drop-area');
-var fileNameD = document.getElementById('file-name-display');
-
-dropArea.addEventListener('click', function(){ fileInput.click(); });
-fileInput.addEventListener('change', function(){
+var fileInput=document.getElementById('file-input');
+var dropArea=document.getElementById('file-drop-area');
+var fileNameD=document.getElementById('file-name-display');
+dropArea.addEventListener('click',function(){fileInput.click();});
+fileInput.addEventListener('change',function(){
   if(fileInput.files[0]){
-    var f = fileInput.files[0];
-    fileNameD.textContent = '📄 ' + f.name;
-    fileNameD.style.display = 'block';
-    if(f.type === 'text/plain'){
-      var reader = new FileReader();
-      reader.onload = function(e){ document.getElementById('source-text').value = e.target.result; };
-      reader.readAsText(f);
-      document.getElementById('tab-text-btn').click();
-    }
+    var f=fileInput.files[0];
+    fileNameD.textContent='Archivo: '+f.name;fileNameD.style.display='block';
+    if(f.type==='text/plain'){var reader=new FileReader();reader.onload=function(e){document.getElementById('source-text').value=e.target.result;};reader.readAsText(f);document.getElementById('tab-text-btn').click();}
   }
 });
 
-// ===== UTILS =====
-function extractWords(text) {
-  var words = text.match(/\b[a-záéíóúüñA-ZÁÉÍÓÚÜÑ]{4,}\b/g) || [];
-  var unique = [], seen = {};
-  words.forEach(function(w){
-    var up = w.toUpperCase();
-    if(!seen[up]){ seen[up]=1; unique.push(up); }
-  });
+function extractWords(text){
+  var words=text.match(/[a-záéíóúüA-ZÁÉÍÓÚÜñÑ]{4,}/g)||[];
+  var unique=[],seen={};
+  words.forEach(function(w){var up=w.toUpperCase();if(!seen[up]){seen[up]=1;unique.push(up);}});
   return unique;
 }
-
-function extractSentences(text) {
-  return text.split(/[.!?]+/).map(function(s){ return s.trim(); }).filter(function(s){ return s.split(' ').length >= 5; });
+function extractSentences(text){
+  return text.split(/[.!?]+/).map(function(s){return s.trim();}).filter(function(s){return s.split(' ').length>=5;});
 }
-
-function shuffle(arr) {
-  var a = arr.slice();
-  for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; }
-  return a;
-}
-
-function pick(arr, n) { return shuffle(arr).slice(0, n); }
-// ===== SOPA DE LETRAS =====
-function buildSopa(text, diff) {
-  var words = pick(extractWords(text), diff==='facil'?6:diff==='medio'?10:14);
-  if(!words.length) words = ['ACTIVIDAD','ESCUELA','APRENDIZAJE','CONOCIMIENTO','CIENCIA'];
-  var size = diff==='facil'?10:diff==='medio'?14:18;
-  var grid = [], i, j;
-  for(i=0;i<size;i++){ grid[i]=[]; for(j=0;j<size;j++) grid[i][j]=''; }
-  var placed = [];
-  var LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  var dirs = [[0,1],[1,0],[1,1],[0,-1],[-1,0],[-1,-1],[1,-1],[-1,1]];
-  var usedDirs = diff==='facil'?[[0,1],[1,0]]:diff==='medio'?[[0,1],[1,0],[1,1],[0,-1]]:dirs;
-
+function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function pick(arr,n){return shuffle(arr).slice(0,n);}
+function buildSopa(text,diff){
+  var words=pick(extractWords(text),diff==='facil'?6:diff==='medio'?10:14);
+  if(!words.length)words=['ACTIVIDAD','ESCUELA','APRENDIZAJE','CONOCIMIENTO','CIENCIA'];
+  var size=diff==='facil'?10:diff==='medio'?14:18;
+  var grid=[],i,j;
+  for(i=0;i<size;i++){grid[i]=[];for(j=0;j<size;j++)grid[i][j]='';}
+  var placed=[],LETTERS='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var dirs=[[0,1],[1,0],[1,1],[0,-1],[-1,0],[-1,-1],[1,-1],[-1,1]];
+  var usedDirs=diff==='facil'?[[0,1],[1,0]]:diff==='medio'?[[0,1],[1,0],[1,1],[0,-1]]:dirs;
   words.forEach(function(word){
-    var tries = 0, ok = false;
-    while(tries < 100 && !ok){
-      tries++;
-      var dir = usedDirs[Math.floor(Math.random()*usedDirs.length)];
-      var r = Math.floor(Math.random()*size);
-      var c = Math.floor(Math.random()*size);
-      var fits = true;
-      for(var k=0;k<word.length;k++){
-        var nr=r+dir[0]*k, nc=c+dir[1]*k;
-        if(nr<0||nr>=size||nc<0||nc>=size){ fits=false; break; }
-        if(grid[nr][nc]&&grid[nr][nc]!==word[k]){ fits=false; break; }
-      }
-      if(fits){
-        for(var k=0;k<word.length;k++) grid[r+dir[0]*k][c+dir[1]*k]=word[k];
-        placed.push(word); ok=true;
-      }
+    var tries=0,ok=false;
+    while(tries<100&&!ok){tries++;var dir=usedDirs[Math.floor(Math.random()*usedDirs.length)];var r=Math.floor(Math.random()*size);var c=Math.floor(Math.random()*size);var fits=true;
+      for(var k=0;k<word.length;k++){var nr=r+dir[0]*k,nc=c+dir[1]*k;if(nr<0||nr>=size||nc<0||nc>=size){fits=false;break;}if(grid[nr][nc]&&grid[nr][nc]!==word[k]){fits=false;break;}}
+      if(fits){for(var k=0;k<word.length;k++)grid[r+dir[0]*k][c+dir[1]*k]=word[k];placed.push(word);ok=true;}
     }
   });
-  for(i=0;i<size;i++) for(j=0;j<size;j++) if(!grid[i][j]) grid[i][j]=LETTERS[Math.floor(Math.random()*26)];
+  for(i=0;i<size;i++)for(j=0;j<size;j++)if(!grid[i][j])grid[i][j]=LETTERS[Math.floor(Math.random()*26)];
+  var html='<div class="word-grid" style="grid-template-columns:repeat('+size+',28px)">';
+  for(i=0;i<size;i++)for(j=0;j<size;j++)html+='<div class="word-cell">'+grid[i][j]+'</div>';
+  html+='</div><div class="wordlist">Palabras: ';
+  placed.forEach(function(w){html+='<span>'+w+'</span>';});
+  return html+'</div>';
+}
 
-  var html = '<div class="word-grid" style="grid-template-columns:repeat('+size+',28px)">';
-  for(i=0;i<size;i++) for(j=0;j<size;j++) html+='<div class="word-cell">'+grid[i][j]+'</div>';
-  html += '</div>';
-  html += '<div class="wordlist">Palabras a encontrar: ';
-  placed.forEach(function(w){ html+='<span>'+w+'</span>'; });
-  html += '</div>';
+function buildCompletar(text,diff){
+  var sentences=pick(extractSentences(text),diff==='facil'?4:diff==='medio'?6:8);
+  if(!sentences.length)return '<p>No se encontraron oraciones suficientes.</p>';
+  var bank=[],html='',blanksCount=diff==='facil'?1:diff==='medio'?2:3;
+  sentences.forEach(function(sent,idx){
+    var words=sent.split(' ');
+    var longWords=words.map(function(w,i){return{w:w,i:i};}).filter(function(o){return o.w.length>4;});
+    var toBlank=pick(longWords,blanksCount);
+    var modified=words.slice();
+    toBlank.forEach(function(o){bank.push(o.w.replace(/[^a-záéíóúüA-ZÁÉÍÓÚÜñÑ]/g,''));modified[o.i]='<span class="fill-blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';});
+    html+='<div class="fill-item">'+(idx+1)+'. '+modified.join(' ')+'</div>';
+  });
+  html+='<div class="word-bank"><strong>Banco de palabras:</strong> '+shuffle(bank).map(function(w){return'<span style="margin:0 6px;font-weight:600">'+w+'</span>';}).join(' / ')+'</div>';
   return html;
 }
 
-// ===== COMPLETAR LA FRASE =====
-function buildCompletar(text, diff) {
-  var sentences = pick(extractSentences(text), diff==='facil'?4:diff==='medio'?6:8);
-  if(!sentences.length) return '<p>No se encontraron oraciones suficientes en el texto.</p>';
-  var bank = [], html = '';
-  var blanksCount = diff==='facil'?1:diff==='medio'?2:3;
-
-  sentences.forEach(function(sent, idx){
-    var words = sent.split(' ');
-    var longWords = words.map(function(w,i){ return {w:w,i:i}; }).filter(function(o){ return o.w.length>4; });
-    var toBlank = pick(longWords, blanksCount);
-    var modified = words.slice();
-    toBlank.forEach(function(o){
-      bank.push(o.w.replace(/[^a-záéíóúüñA-ZÁÉÍÓÚÜÑ]/g,''));
-      modified[o.i] = '<span class="fill-blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
-    });
-    html += '<div class="fill-item">'+(idx+1)+'. '+modified.join(' ')+'</div>';
-  });
-
-  html += '<div class="word-bank"><strong>Banco de palabras:</strong> '+shuffle(bank).map(function(w){ return '<span style="margin:0 6px;font-weight:600">'+w+'</span>'; }).join(' / ')+'</div>';
-  return html;
+function buildUnir(text,diff){
+  var sentences=pick(extractSentences(text),diff==='facil'?4:diff==='medio'?6:8);
+  if(sentences.length<2)return '<p>No se encontraron suficientes oraciones.</p>';
+  var pairs=sentences.map(function(s){var mid=Math.floor(s.length*(0.4+Math.random()*0.2));return{left:s.substring(0,mid).trim()+'...',right:'...'+s.substring(mid).trim()};});
+  var rights=shuffle(pairs.map(function(p){return p.right;}));
+  var html='<div class="match-grid">';
+  pairs.forEach(function(p,i){html+='<div class="match-left">'+(i+1)+'. '+p.left+'</div><div class="match-line"></div><div class="match-right">'+String.fromCharCode(65+i)+'. '+rights[i]+'</div>';});
+  return html+'</div><p style="font-size:12px;color:#888;margin-top:8px">Anot&#xE1; la letra que corresponde a cada n&#xFA;mero.</p>';
 }
 
-// ===== UNIR CON FLECHAS =====
-function buildUnir(text, diff) {
-  var sentences = pick(extractSentences(text), diff==='facil'?4:diff==='medio'?6:8);
-  if(sentences.length < 2) return '<p>No se encontraron suficientes oraciones en el texto.</p>';
-  var pairs = sentences.map(function(s){
-    var mid = Math.floor(s.length * (0.4 + Math.random()*0.2));
-    return { left: s.substring(0,mid).trim()+'...', right: '...'+s.substring(mid).trim() };
+function buildPreguntas(text,diff){
+  var count=diff==='facil'?3:diff==='medio'?5:7;
+  var sentences=extractSentences(text);
+  var lines=diff==='facil'?2:diff==='medio'?3:4;
+  var templates=['Cual es la idea principal de: "','Que relacion existe en: "','Explica con tus palabras: "','Por que es importante: "','Describe brevemente: "','Que consecuencias tiene: "','Analiza: "'];
+  var html='';
+  pick(sentences,count).forEach(function(sent,idx){
+    html+='<div class="question-item"><div class="question-text">'+(idx+1)+'. '+templates[idx%templates.length]+sent.substring(0,80)+'..."</div>';
+    for(var l=0;l<lines;l++)html+='<div class="answer-line"></div>';
+    html+='</div>';
   });
-  var rights = shuffle(pairs.map(function(p){ return p.right; }));
-  var html = '<div class="match-grid">';
-  pairs.forEach(function(p, i){
-    html += '<div class="match-left">'+(i+1)+'. '+p.left+'</div>';
-    html += '<div class="match-line"></div>';
-    html += '<div class="match-right">'+String.fromCharCode(65+i)+'. '+rights[i]+'</div>';
-  });
-  html += '</div>';
-  html += '<p style="font-size:12px;color:#888;margin-top:8px">Anotá la letra que corresponde a cada número.</p>';
-  return html;
+  return html||'<p>No se encontraron oraciones suficientes.</p>';
 }
-
-// ===== RESPONDER CONSIGNAS =====
-function buildPreguntas(text, diff) {
-  var count = diff==='facil'?3:diff==='medio'?5:7;
-  var sentences = extractSentences(text);
-  var lines = diff==='facil'?2:diff==='medio'?3:4;
-  var templates = [
-    '¿Cuál es la idea principal del siguiente fragmento: "',
-    '¿Qué relación existe entre los conceptos mencionados en: "',
-    'Explicá con tus propias palabras: "',
-    '¿Por qué es importante lo expuesto en: "',
-    'Describí brevemente: "',
-    '¿Qué consecuencias tiene lo planteado en: "',
-    'Analizá críticamente: "'
-  ];
-  var html = '';
-  pick(sentences, count).forEach(function(sent, idx){
-    var tmpl = templates[idx % templates.length];
-    html += '<div class="question-item"><div class="question-text">'+(idx+1)+'. '+tmpl+sent.substring(0,80)+'..."</div>';
-    for(var l=0;l<lines;l++) html += '<div class="answer-line"></div>';
-    html += '</div>';
-  });
-  if(!html) html = '<p>No se encontraron oraciones suficientes. Por favor ingresá más texto.</p>';
-  return html;
-}
-// ===== CRUCIGRAMA =====
-function buildCrucigrama(text, diff) {
-  var count = diff==='facil'?5:diff==='medio'?8:12;
-  var rawWords = extractWords(text);
-  var maxLen = diff==='facil'?8:diff==='medio'?10:12;
-  var minLen = 3;
-  var wordPool = rawWords.filter(function(w){ return w.length>=minLen && w.length<=maxLen; });
-  if(wordPool.length < 3) wordPool = ['ESCUELA','CIENCIA','HISTORIA','GEOGRAFIA','ARTE','CULTURA','NACION','ESTADO','PODER','SOCIAL','CLASE','TEORIA'];
-  var words = pick(wordPool, count);
-  
-  // Build crossword grid
-  var GRID_SIZE = diff==='facil'?12:diff==='medio'?16:20;
-  var grid = [];
-  var i, j;
-  for(i=0;i<GRID_SIZE;i++){ grid[i]=[]; for(j=0;j<GRID_SIZE;j++) grid[i][j]={char:'',num:0,blocked:true}; }
-  
-  var placed = []; // {word, row, col, dir:'H'|'V', num}
-  var clueNum = 1;
-  
-  // Place first word horizontally in the middle
-  var firstWord = words[0];
-  var startRow = Math.floor(GRID_SIZE/2);
-  var startCol = Math.floor((GRID_SIZE - firstWord.length)/2);
-  for(var k=0;k<firstWord.length;k++){
-    grid[startRow][startCol+k].char = firstWord[k];
-    grid[startRow][startCol+k].blocked = false;
-  }
-  grid[startRow][startCol].num = clueNum;
-  placed.push({word:firstWord, row:startRow, col:startCol, dir:'H', num:clueNum});
-  clueNum++;
-  
-  // Try to place remaining words intersecting
+function buildCrucigrama(text,diff){
+  var count=diff==='facil'?5:diff==='medio'?8:12;
+  var rawWords=extractWords(text);
+  var maxLen=diff==='facil'?8:diff==='medio'?10:12;
+  var wordPool=rawWords.filter(function(w){return w.length>=3&&w.length<=maxLen;});
+  if(wordPool.length<3)wordPool=['ESCUELA','CIENCIA','HISTORIA','CULTURA','NACION','ESTADO','PODER','SOCIAL','CLASE','TEORIA'];
+  var words=pick(wordPool,count);
+  var GS=diff==='facil'?12:diff==='medio'?16:20;
+  var grid=[];
+  for(var i=0;i<GS;i++){grid[i]=[];for(var j=0;j<GS;j++)grid[i][j]={char:'',num:0,blocked:true};}
+  var placed=[],clueNum=1;
+  var fw=words[0];
+  var sr=Math.floor(GS/2),sc=Math.floor((GS-fw.length)/2);
+  for(var k=0;k<fw.length;k++){grid[sr][sc+k].char=fw[k];grid[sr][sc+k].blocked=false;}
+  grid[sr][sc].num=clueNum;
+  placed.push({word:fw,row:sr,col:sc,dir:'H',num:clueNum});clueNum++;
   for(var wi=1;wi<words.length;wi++){
-    var word = words[wi];
-    var bestPlacement = null;
-    
-    for(var pi=0;pi<placed.length;pi++){
-      var p = placed[pi];
-      var pWord = p.word;
-      
-      // Try each letter in placed word as intersection
-      for(var pl=0;pl<pWord.length;pl++){
-        var sharedChar = pWord[pl];
-        
-        // Find letters in new word that match
-        for(var wl=0;wl<word.length;wl++){
-          if(word[wl]!==sharedChar) continue;
-          
-          var newDir = p.dir==='H'?'V':'H';
-          var nr, nc;
-          
-          if(p.dir==='H'){
-            // placed is horizontal, new word vertical
-            nc = p.col + pl;
-            nr = p.row - wl;
-          } else {
-            // placed is vertical, new word horizontal
-            nr = p.row + pl;
-            nc = p.col - wl;
-          }
-          
-          // Check bounds
-          if(nr<0||nc<0) continue;
-          var endR = newDir==='V'?nr+word.length-1:nr;
-          var endC = newDir==='H'?nc+word.length-1:nc;
-          if(endR>=GRID_SIZE||endC>=GRID_SIZE) continue;
-          
-          // Check conflicts
-          var ok = true;
-          for(var ck=0;ck<word.length;ck++){
-            var cr = newDir==='V'?nr+ck:nr;
-            var cc = newDir==='H'?nc+ck:nc;
-            var cell = grid[cr][cc];
-            if(!cell.blocked && cell.char && cell.char!==word[ck]){ ok=false; break; }
-            // Check adjacency (avoid parallel words touching)
+    var word=words[wi];
+    var bp=null;
+    for(var pi=0;pi<placed.length&&!bp;pi++){
+      var p=placed[pi];
+      for(var pl=0;pl<p.word.length&&!bp;pl++){
+        var sc2=p.word[pl];
+        for(var wl=0;wl<word.length&&!bp;wl++){
+          if(word[wl]!==sc2)continue;
+          var nd=p.dir==='H'?'V':'H';
+          var nr,nc;
+          if(p.dir==='H'){nc=p.col+pl;nr=p.row-wl;}else{nr=p.row+pl;nc=p.col-wl;}
+          if(nr<0||nc<0)continue;
+          var er=nd==='V'?nr+word.length-1:nr,ec=nd==='H'?nc+word.length-1:nc;
+          if(er>=GS||ec>=GS)continue;
+          var ok=true;
+          for(var ck=0;ck<word.length&&ok;ck++){
+            var cr=nd==='V'?nr+ck:nr,cc=nd==='H'?nc+ck:nc;
+            var cell=grid[cr][cc];
+            if(!cell.blocked&&cell.char&&cell.char!==word[ck]){ok=false;break;}
             if(cell.blocked){
-              // Check that cells perpendicular don't conflict
-              if(newDir==='H'){
-                if(cr>0 && !grid[cr-1][cc].blocked && grid[cr-1][cc].char) { ok=false; break; }
-                if(cr<GRID_SIZE-1 && !grid[cr+1][cc].blocked && grid[cr+1][cc].char) { ok=false; break; }
-              } else {
-                if(cc>0 && !grid[cr][cc-1].blocked && grid[cr][cc-1].char) { ok=false; break; }
-                if(cc<GRID_SIZE-1 && !grid[cr][cc+1].blocked && grid[cr][cc+1].char) { ok=false; break; }
-              }
+              if(nd==='H'){if(cr>0&&!grid[cr-1][cc].blocked&&grid[cr-1][cc].char){ok=false;break;}if(cr<GS-1&&!grid[cr+1][cc].blocked&&grid[cr+1][cc].char){ok=false;break;}}
+              else{if(cc>0&&!grid[cr][cc-1].blocked&&grid[cr][cc-1].char){ok=false;break;}if(cc<GS-1&&!grid[cr][cc+1].blocked&&grid[cr][cc+1].char){ok=false;break;}}
             }
           }
-          // Check cells before and after word
-          if(ok) {
-            var br = newDir==='V'?nr-1:nr, bc = newDir==='H'?nc-1:nc;
-            if(br>=0 && bc>=0 && !grid[br][bc].blocked) ok=false;
-            var ar = newDir==='V'?nr+word.length:nr, ac = newDir==='H'?nc+word.length:nc;
-            if(ar<GRID_SIZE && ac<GRID_SIZE && !grid[ar][ac].blocked) ok=false;
-          }
-          
-          if(ok){
-            bestPlacement = {word:word, row:nr, col:nc, dir:newDir};
-            break;
-          }
+          if(ok){var br=nd==='V'?nr-1:nr,bc=nd==='H'?nc-1:nc;if(br>=0&&bc>=0&&!grid[br][bc].blocked)ok=false;}
+          if(ok){var ar=nd==='V'?nr+word.length:nr,ac=nd==='H'?nc+word.length:nc;if(ar<GS&&ac<GS&&!grid[ar][ac].blocked)ok=false;}
+          if(ok)bp={word:word,row:nr,col:nc,dir:nd};
         }
-        if(bestPlacement) break;
-      }
-      if(bestPlacement) break;
-    }
-    
-    if(bestPlacement){
-      var bp = bestPlacement;
-      for(var k=0;k<bp.word.length;k++){
-        var r2 = bp.dir==='V'?bp.row+k:bp.row;
-        var c2 = bp.dir==='H'?bp.col+k:bp.col;
-        grid[r2][c2].char = bp.word[k];
-        grid[r2][c2].blocked = false;
-      }
-      grid[bp.row][bp.col].num = clueNum;
-      placed.push({word:bp.word, row:bp.row, col:bp.col, dir:bp.dir, num:clueNum});
-      clueNum++;
-    }
-  }
-  
-  // Find used rows/cols and trim grid
-  var minR=GRID_SIZE,maxR=0,minC=GRID_SIZE,maxC=0;
-  for(var i=0;i<GRID_SIZE;i++) for(var j=0;j<GRID_SIZE;j++){
-    if(!grid[i][j].blocked){ if(i<minR)minR=i; if(i>maxR)maxR=i; if(j<minC)minC=j; if(j>maxC)maxC=j; }
-  }
-  // Add 1 cell padding
-  minR=Math.max(0,minR-1); maxR=Math.min(GRID_SIZE-1,maxR+1);
-  minC=Math.max(0,minC-1); maxC=Math.min(GRID_SIZE-1,maxC+1);
-  
-  var cols = maxC - minC + 1;
-  
-  var html = '<div class="crossword-container">';
-  html += '<div class="crossword-grid" style="grid-template-columns:repeat('+cols+',30px)">';
-  for(var r=minR;r<=maxR;r++){
-    for(var c=minC;c<=maxC;c++){
-      var cell = grid[r][c];
-      if(cell.blocked){
-        html += '<div class="cw-cell blocked"></div>';
-      } else {
-        html += '<div class="cw-cell empty">';
-        if(cell.num) html += '<span class="cw-number">'+cell.num+'</span>';
-        html += '</div>';
       }
     }
+    if(bp){
+      for(var k=0;k<bp.word.length;k++){var r2=bp.dir==='V'?bp.row+k:bp.row,c2=bp.dir==='H'?bp.col+k:bp.col;grid[r2][c2].char=bp.word[k];grid[r2][c2].blocked=false;}
+      grid[bp.row][bp.col].num=clueNum;
+      placed.push({word:bp.word,row:bp.row,col:bp.col,dir:bp.dir,num:clueNum});clueNum++;
+    }
   }
-  html += '</div>';
-  
-  // Clues
-  var horiz = placed.filter(function(p){ return p.dir==='H'; }).sort(function(a,b){return a.num-b.num;});
-  var vert = placed.filter(function(p){ return p.dir==='V'; }).sort(function(a,b){return a.num-b.num;});
-  
-  // Generate clues from text sentences
-  var sentences = extractSentences(text);
-  function getClue(word, idx) {
-    var hint = sentences.find(function(s){ return s.toUpperCase().indexOf(word)!==-1; });
-    if(hint) return 'Relacionado con: "'+hint.substring(0,60)+'..."';
-    return '('+word.length+' letras) Palabra del tema estudiado';
-  }
-  
-  html += '<div class="cw-clues">';
-  if(horiz.length){
-    html += '<h4>HORIZONTALES</h4>';
-    horiz.forEach(function(p,i){
-      html += '<div class="cw-clue-item"><strong>'+p.num+'.</strong> '+getClue(p.word,i)+'</div>';
-    });
-  }
-  if(vert.length){
-    html += '<h4 style="margin-top:10px">VERTICALES</h4>';
-    vert.forEach(function(p,i){
-      html += '<div class="cw-clue-item"><strong>'+p.num+'.</strong> '+getClue(p.word,i)+'</div>';
-    });
-  }
-  html += '</div></div>';
-  return html;
+  var minR=GS,maxR=0,minC=GS,maxC=0;
+  for(var i=0;i<GS;i++)for(var j=0;j<GS;j++){if(!grid[i][j].blocked){if(i<minR)minR=i;if(i>maxR)maxR=i;if(j<minC)minC=j;if(j>maxC)maxC=j;}}
+  minR=Math.max(0,minR-1);maxR=Math.min(GS-1,maxR+1);minC=Math.max(0,minC-1);maxC=Math.min(GS-1,maxC+1);
+  var cols=maxC-minC+1;
+  var html='<div class="crossword-container"><div class="crossword-grid" style="grid-template-columns:repeat('+cols+',30px)">';
+  for(var r=minR;r<=maxR;r++){for(var c=minC;c<=maxC;c++){var cell=grid[r][c];if(cell.blocked){html+='<div class="cw-cell blocked"></div>';}else{html+='<div class="cw-cell empty">'+(cell.num?'<span class="cw-number">'+cell.num+'</span>':'')+'</div>';}}}
+  html+='</div><div class="cw-clues">';
+  var horiz=placed.filter(function(p){return p.dir==='H';}).sort(function(a,b){return a.num-b.num;});
+  var vert=placed.filter(function(p){return p.dir==='V';}).sort(function(a,b){return a.num-b.num;});
+  var sentences=extractSentences(text);
+  function getClue(word){var hint=sentences.find(function(s){return s.toUpperCase().indexOf(word)!==-1;});return hint?'Relacionado con: "'+hint.substring(0,55)+'..."':'('+word.length+' letras) Palabra clave del tema';}
+  if(horiz.length){html+='<h4>HORIZONTALES</h4>';horiz.forEach(function(p){html+='<div class="cw-clue-item"><strong>'+p.num+'.</strong> '+getClue(p.word)+'</div>';});}
+  if(vert.length){html+='<h4 style="margin-top:10px">VERTICALES</h4>';vert.forEach(function(p){html+='<div class="cw-clue-item"><strong>'+p.num+'.</strong> '+getClue(p.word)+'</div>';});}
+  return html+'</div></div>';
 }
-// ===== GENERAR =====
-document.getElementById('btn-generate').addEventListener('click', function(){
-  var text = document.getElementById('source-text').value.trim();
-  if(!text || text.length < 50){
-    alert('Por favor ingresá un texto más largo (mínimo 50 caracteres) para generar las actividades.');
-    return;
-  }
-  var selected = [];
-  if(document.getElementById('chk-sopa').checked) selected.push('sopa');
-  if(document.getElementById('chk-completar').checked) selected.push('completar');
-  if(document.getElementById('chk-unir').checked) selected.push('unir');
-  if(document.getElementById('chk-preguntas').checked) selected.push('preguntas');
-  if(document.getElementById('chk-crucigrama').checked) selected.push('crucigrama');
-  if(!selected.length){
-    alert('Seleccioná al menos una actividad.');
-    return;
-  }
-
-  var institucion = document.getElementById('f-institucion').value || 'Institución Educativa';
-  var escuela = document.getElementById('f-escuela').value || '—';
-  var materia = document.getElementById('f-materia').value || '—';
-  var titulo = document.getElementById('f-titulo').value || 'Actividades';
-
-  var actNames = {
-    sopa:       { name:'Sopa de Letras',    icon:'🔤', instr:'Encontrá las palabras en la sopa de letras.' },
-    completar:  { name:'Completar la Frase',icon:'✏️', instr:'Completá las frases con la palabra correcta del banco.' },
-    unir:       { name:'Unir con Flechas',  icon:'🔗', instr:'Uní cada comienzo de la columna izquierda con su continuación en la columna derecha.' },
-    preguntas:  { name:'Responder Consignas',icon:'❓', instr:'Respondé las siguientes consignas en el espacio dado.' },
-    crucigrama: { name:'Crucigrama',        icon:'🔲', instr:'Completá el crucigrama con las palabras del tema. Usá las pistas para encontrar cada palabra.' }
+document.getElementById('btn-generate').addEventListener('click',function(){
+  var text=document.getElementById('source-text').value.trim();
+  if(!text||text.length<50){alert('Por favor ingresá un texto más largo (mínimo 50 caracteres).');return;}
+  var selected=[];
+  if(document.getElementById('chk-sopa').checked)selected.push('sopa');
+  if(document.getElementById('chk-completar').checked)selected.push('completar');
+  if(document.getElementById('chk-unir').checked)selected.push('unir');
+  if(document.getElementById('chk-preguntas').checked)selected.push('preguntas');
+  if(document.getElementById('chk-crucigrama').checked)selected.push('crucigrama');
+  if(!selected.length){alert('Seleccióná al menos una actividad.');return;}
+  var inst=document.getElementById('f-institucion').value||'Institución Educativa';
+  var esc=document.getElementById('f-escuela').value||'—';
+  var mat=document.getElementById('f-materia').value||'—';
+  var tit=document.getElementById('f-titulo').value||'Actividades';
+  var actNames={
+    sopa:{name:'Sopa de Letras',icon:'',instr:'Encontrá las palabras en la sopa de letras.'},
+    completar:{name:'Completar la Frase',icon:'',instr:'Completá las frases con la palabra correcta del banco.'},
+    unir:{name:'Unir con Flechas',icon:'',instr:'Uní cada comienzo de la columna izquierda con su continuación en la derecha.'},
+    preguntas:{name:'Responder Consignas',icon:'',instr:'Respondé las siguientes consignas en el espacio dado.'},
+    crucigrama:{name:'Crucigrama',icon:'',instr:'Completá el crucigrama con las palabras del tema. Usá las pistas para encontrar cada palabra.'}
   };
-
-  // Build header HTML (used on first page)
-  var headerHtml = '<div class="doc-header-box">' +
-    '<div class="doc-school">'+escHtml(institucion)+' — N° '+escHtml(escuela)+'</div>' +
-    '<div class="doc-info">' +
-    '<div>Apellido y Nombre: _________________________</div>' +
-    '<div>Materia: '+escHtml(materia)+'</div>' +
-    '<div>Curso y División: _____________</div>' +
-    '<div>Fecha de Entrega: _____________</div>' +
-    '</div></div>' +
-    '<div class="doc-title">'+escHtml(titulo)+'</div>';
-
-  // Build each activity HTML separately
-  var activities = [];
-  var actNum = 1;
+  var headerHtml='<div class="doc-header-box"><div class="doc-school">'+escHtml(inst)+' — N° '+escHtml(esc)+'</div><div class="doc-info"><div>Apellido y Nombre: _________________________</div><div>Materia: '+escHtml(mat)+'</div><div>Curso y División: _____________</div><div>Fecha de Entrega: _____________</div></div></div><div class="doc-title">'+escHtml(tit)+'</div>';
+  var activities=[];
+  var actNum=1;
   selected.forEach(function(id){
-    var diff = document.getElementById('diff-'+id).value;
-    var meta = actNames[id];
-    var diffLabel = diff==='facil'?'Fácil':diff==='medio'?'Medio':'Difícil';
-    var content = '';
-    if(id==='sopa') content = buildSopa(text, diff);
-    else if(id==='completar') content = buildCompletar(text, diff);
-    else if(id==='unir') content = buildUnir(text, diff);
-    else if(id==='preguntas') content = buildPreguntas(text, diff);
-    else if(id==='crucigrama') content = buildCrucigrama(text, diff);
-    
-    activities.push({
-      num: actNum,
-      html: '<div class="activity-block">' +
-        '<div class="activity-title">Actividad '+actNum+': '+meta.icon+' '+meta.name+' — Nivel '+diffLabel+'</div>' +
-        '<div class="activity-instructions">'+meta.instr+'</div>' +
-        content + '</div>',
-      isBig: (id==='crucigrama' || id==='sopa')
-    });
+    var diff=document.getElementById('diff-'+id).value;
+    var meta=actNames[id];
+    var diffLabel=diff==='facil'?'Fácil':diff==='medio'?'Medio':'Difícil';
+    var content='';
+    if(id==='sopa')content=buildSopa(text,diff);
+    else if(id==='completar')content=buildCompletar(text,diff);
+    else if(id==='unir')content=buildUnir(text,diff);
+    else if(id==='preguntas')content=buildPreguntas(text,diff);
+    else if(id==='crucigrama')content=buildCrucigrama(text,diff);
+    activities.push({num:actNum,html:'<div class="activity-block"><div class="activity-title">Actividad '+actNum+': '+meta.name+' — Nivel '+diffLabel+'</div><div class="activity-instructions">'+meta.instr+'</div>'+content+'</div>',isBig:(id==='crucigrama'||id==='sopa')});
     actNum++;
   });
-
-  // Group activities into pages: big activities get their own page, small ones share 2 per page
-  var pages = [];
-  var i = 0;
-  while(i < activities.length){
-    if(activities[i].isBig){
-      pages.push([activities[i]]);
-      i++;
-    } else if(i+1 < activities.length && !activities[i+1].isBig){
-      pages.push([activities[i], activities[i+1]]);
-      i+=2;
-    } else {
-      pages.push([activities[i]]);
-      i++;
-    }
+  var pages=[];
+  var i=0;
+  while(i<activities.length){
+    if(activities[i].isBig){pages.push([activities[i]]);i++;}
+    else if(i+1<activities.length&&!activities[i+1].isBig){pages.push([activities[i],activities[i+1]]);i+=2;}
+    else{pages.push([activities[i]]);i++;}
   }
-
-  var totalPages = pages.length;
-  var fullHtml = '<div class="doc-output">';
-
-  pages.forEach(function(pageActs, pageIdx){
-    var isLast = pageIdx === pages.length - 1;
-    fullHtml += '<div class="print-page"' + (isLast ? '' : '') + '>';
-    
-    // Show header on first page only
-    if(pageIdx === 0){
-      fullHtml += headerHtml;
-      fullHtml += '<div style="text-align:center;font-size:16px;font-weight:bold;margin:16px 0 14px;font-family:Times New Roman,serif">Actividades</div>';
+  var totalPages=pages.length;
+  var fullHtml='<div class="doc-output">';
+  pages.forEach(function(pageActs,pageIdx){
+    fullHtml+='<div class="print-page">';
+    if(pageIdx===0){
+      fullHtml+=headerHtml+'<div style="text-align:center;font-size:16px;font-weight:bold;margin:16px 0 14px;font-family:Times New Roman,serif">Actividades</div>';
     } else {
-      // Continuation header (simplified)
-      fullHtml += '<div class="doc-header-box" style="padding:8px 20px;">' +
-        '<div class="doc-school" style="font-size:12px">'+escHtml(institucion)+' — '+escHtml(titulo)+'</div>' +
-        '<div style="font-size:12px;display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;margin-top:6px">' +
-        '<div style="border-bottom:1px solid #ccc;padding:2px 0">Apellido y Nombre: ___________________</div>' +
-        '<div style="border-bottom:1px solid #ccc;padding:2px 0">Materia: '+escHtml(materia)+'</div>' +
-        '</div></div>';
+      fullHtml+='<div class="doc-header-box" style="padding:8px 20px;"><div class="doc-school" style="font-size:12px">'+escHtml(inst)+' — '+escHtml(tit)+'</div><div style="font-size:12px;display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;margin-top:6px"><div style="border-bottom:1px solid #ccc;padding:2px 0">Apellido y Nombre: ___________________</div><div style="border-bottom:1px solid #ccc;padding:2px 0">Materia: '+escHtml(mat)+'</div></div></div>';
     }
-    
-    pageActs.forEach(function(act){
-      fullHtml += act.html;
-    });
-    
-    fullHtml += '<div class="page-number">Página '+(pageIdx+1)+' de '+totalPages+'</div>';
-    fullHtml += '</div>';
+    pageActs.forEach(function(act){fullHtml+=act.html;});
+    fullHtml+='<div class="page-number">Página '+(pageIdx+1)+' de '+totalPages+'</div>';
+    fullHtml+='</div>';
   });
-
-  fullHtml += '</div>';
-
-  document.getElementById('doc-output').innerHTML = fullHtml;
-  document.getElementById('setup-section').style.display = 'none';
-  document.getElementById('preview-section').style.display = 'block';
+  fullHtml+='</div>';
+  document.getElementById('doc-output').innerHTML=fullHtml;
+  setupSection.style.display='none';
+  previewSection.style.display='block';
   window.scrollTo(0,0);
-
-  // Save to archive
-  var now = new Date();
-  var dateStr = now.toLocaleDateString('es-AR') + ' ' + now.toLocaleTimeString('es-AR', {hour:'2-digit',minute:'2-digit'});
-  addToArchive({
-    id: Date.now().toString(),
-    titulo: titulo,
-    materia: materia,
-    fecha: dateStr,
-    html: fullHtml
-  });
+  var now=new Date();
+  addToArchive({id:Date.now().toString(),titulo:tit,materia:mat,fecha:now.toLocaleDateString('es-AR')+' '+now.toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'}),html:fullHtml});
 });
 
-document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
-document.getElementById('btn-new').addEventListener('click', function(){
-  document.getElementById('preview-section').style.display = 'none';
-  document.getElementById('setup-section').style.display = 'block';
-});
-
+document.getElementById('btn-print').addEventListener('click',function(){window.print();});
+document.getElementById('btn-new').addEventListener('click',function(){previewSection.style.display='none';setupSection.style.display='block';});
 })();
 </script>
 </body>
-         </html>
+  </html>
