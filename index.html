@@ -89,119 +89,113 @@ textarea:focus{border-color:#667eea}
 <div class="ico">&#128272;</div>
 <h1>Generador de Actividades</h1>
 <p class="sub">Nivel Secundario &mdash; Herramienta Docente</p>
+<div class="fi"><input type="text" id="uid" placeholder="Usuario" autocomplete="off"></div>
 <div class="fi">
-  <input type="text" id="uid" placeholder="Usuario" autocomplete="off">
-</div>
-<div class="fi">
-  <input type="password" id="pwd" placeholder="Contrase&ntilde;a" onkeydown="if(event.key==='Enter')dL()">
-  <span class="ey" id="eyeB" onclick="tE()" title="Ver contrase&ntilde;a">&#128065;</span>
+<input type="password" id="pwd" placeholder="Contrase&ntilde;a">
+<span class="ey" id="eyeB" title="Ver contrase&ntilde;a">&#128065;</span>
 </div>
 <div class="er" id="erMsg"></div>
-<button class="btnl" onclick="dL()">&#128640; Ingresar</button>
+<button class="btnl" id="btnLogin">&#128640; Ingresar</button>
 <div class="hint">
-  <strong>Usuarios disponibles:</strong><br>
-  admin &nbsp;/&nbsp; escuela2024<br>
-  profesor &nbsp;/&nbsp; clase2024<br>
-  docente &nbsp;/&nbsp; actividades123
+<strong>Usuarios disponibles:</strong><br>
+admin &nbsp;/&nbsp; escuela2024<br>
+profesor &nbsp;/&nbsp; clase2024<br>
+docente &nbsp;/&nbsp; actividades123
 </div>
 </div>
 </div>
 <div id="app">
 <div class="tb">
 <h1>&#128218; Generador de Actividades Escolares &mdash; Nivel Secundario</h1>
-<button class="bo" onclick="dLo()">&#128682; Salir</button>
+<button class="bo" id="btnLogout">&#128682; Salir</button>
 </div>
 <div class="mn" id="setup">
 <div class="cd">
 <h2>&#128196; Fuente de Contenido</h2>
 <div class="tabs">
-  <div class="tab on" onclick="sT('t',this)">&#128221; Pegar Texto</div>
-  <div class="tab" onclick="sT('f',this)">&#128206; Subir Archivo (PDF/Word)</div>
+<div class="tab on" id="tabTxt">&#128221; Pegar Texto</div>
+<div class="tab" id="tabFile">&#128206; Subir Archivo (PDF/Word)</div>
 </div>
-<div id="ptxt">
-  <textarea id="txin" placeholder="Peg&#225; aqu&#237; el texto del tema. Cuanto m&#225;s completo, mejores actividades se generar&#225;n..."></textarea>
-</div>
+<div id="ptxt"><textarea id="txin" placeholder="Peg&#225; aqu&#237; el texto del tema. Cuanto m&#225;s completo, mejores actividades se generar&#225;n..."></textarea></div>
 <div id="pfil" style="display:none">
-  <div class="fu" onclick="document.getElementById('finp').click()">
-    <p style="font-size:28px">&#128194;</p>
-    <p style="color:#5c35a0;font-weight:700;margin:6px 0">Clic para seleccionar archivo</p>
-    <p style="font-size:11px;color:#888">PDF, .doc, .docx</p>
-    <input type="file" id="finp" accept=".pdf,.doc,.docx" style="display:none" onchange="hF(this)">
-  </div>
-  <div id="fn" style="margin-top:9px;color:#27ae60;font-weight:700"></div>
+<div class="fu" id="fuBtn">
+<p style="font-size:28px">&#128194;</p>
+<p style="color:#5c35a0;font-weight:700;margin:6px 0">Clic para seleccionar archivo</p>
+<p style="font-size:11px;color:#888">PDF, .doc, .docx</p>
+<input type="file" id="finp" accept=".pdf,.doc,.docx" style="display:none">
+</div>
+<div id="fn" style="margin-top:9px;color:#27ae60;font-weight:700"></div>
 </div>
 </div>
 <div class="cd">
 <h2>&#127919; Actividades y Dificultad</h2>
 <p style="font-size:12px;color:#888;margin-bottom:13px">Eleg&#237; una, varias o todas. Cada una tiene su propia dificultad independiente.</p>
 <div class="ag">
-  <div class="ac on" id="c-s" onclick="tA(event,'s')">
-    <div class="ck" id="k-s">&#10003;</div>
-    <h3>&#128292; Sopa de Letras</h3>
-    <p>Palabras clave ocultas en la grilla</p>
-    <div class="df">
-      <div class="db on" onclick="sD(event,'s','f')">F&#225;cil</div>
-      <div class="db" onclick="sD(event,'s','m')">Medio</div>
-      <div class="db" onclick="sD(event,'s','d')">Dif&#237;cil</div>
-    </div>
-  </div>
-  <div class="ac on" id="c-c" onclick="tA(event,'c')">
-    <div class="ck" id="k-c">&#10003;</div>
-    <h3>&#9999; Completar la Frase</h3>
-    <p>Completar con la/s palabra/s faltante/s</p>
-    <div class="df">
-      <div class="db" onclick="sD(event,'c','f')">F&#225;cil</div>
-      <div class="db on" onclick="sD(event,'c','m')">Medio</div>
-      <div class="db" onclick="sD(event,'c','d')">Dif&#237;cil</div>
-    </div>
-  </div>
-  <div class="ac on" id="c-u" onclick="tA(event,'u')">
-    <div class="ck" id="k-u">&#10003;</div>
-    <h3>&#8596; Unir con Flechas</h3>
-    <p>Relacionar conceptos con definiciones</p>
-    <div class="df">
-      <div class="db on" onclick="sD(event,'u','f')">F&#225;cil</div>
-      <div class="db" onclick="sD(event,'u','m')">Medio</div>
-      <div class="db" onclick="sD(event,'u','d')">Dif&#237;cil</div>
-    </div>
-  </div>
-  <div class="ac on" id="c-q" onclick="tA(event,'q')">
-    <div class="ck" id="k-q">&#10003;</div>
-    <h3>&#10067; Responder Consignas</h3>
-    <p>Preguntas de an&#225;lisis y reflexi&#243;n</p>
-    <div class="df">
-      <div class="db" onclick="sD(event,'q','f')">F&#225;cil</div>
-      <div class="db on" onclick="sD(event,'q','m')">Medio</div>
-      <div class="db" onclick="sD(event,'q','d')">Dif&#237;cil</div>
-    </div>
-  </div>
+<div class="ac on" id="c-s" data-act="s">
+<div class="ck" id="k-s">&#10003;</div>
+<h3>&#128292; Sopa de Letras</h3><p>Palabras clave ocultas en la grilla</p>
+<div class="df">
+<div class="db on" data-act="s" data-diff="f">F&#225;cil</div>
+<div class="db" data-act="s" data-diff="m">Medio</div>
+<div class="db" data-act="s" data-diff="d">Dif&#237;cil</div>
+</div>
+</div>
+<div class="ac on" id="c-c" data-act="c">
+<div class="ck" id="k-c">&#10003;</div>
+<h3>&#9999; Completar la Frase</h3><p>Completar con la/s palabra/s faltante/s</p>
+<div class="df">
+<div class="db" data-act="c" data-diff="f">F&#225;cil</div>
+<div class="db on" data-act="c" data-diff="m">Medio</div>
+<div class="db" data-act="c" data-diff="d">Dif&#237;cil</div>
+</div>
+</div>
+<div class="ac on" id="c-u" data-act="u">
+<div class="ck" id="k-u">&#10003;</div>
+<h3>&#8596; Unir con Flechas</h3><p>Relacionar conceptos con definiciones</p>
+<div class="df">
+<div class="db on" data-act="u" data-diff="f">F&#225;cil</div>
+<div class="db" data-act="u" data-diff="m">Medio</div>
+<div class="db" data-act="u" data-diff="d">Dif&#237;cil</div>
+</div>
+</div>
+<div class="ac on" id="c-q" data-act="q">
+<div class="ck" id="k-q">&#10003;</div>
+<h3>&#10067; Responder Consignas</h3><p>Preguntas de an&#225;lisis y reflexi&#243;n</p>
+<div class="df">
+<div class="db" data-act="q" data-diff="f">F&#225;cil</div>
+<div class="db on" data-act="q" data-diff="m">Medio</div>
+<div class="db" data-act="q" data-diff="d">Dif&#237;cil</div>
+</div>
+</div>
 </div>
 </div>
 <div class="cd">
 <h2>&#127963; Encabezado del Documento</h2>
 <div class="fg">
-  <div><label class="lb2">Nombre de la Instituci&#243;n</label><input class="sf" id="sn" placeholder="Ej: Escuela Secundaria N&#176; 5"></div>
-  <div><label class="lb2">N&#250;mero de Escuela</label><input class="sf" id="snum" placeholder="Ej: 25"></div>
-  <div><label class="lb2">Materia / Asignatura</label><input class="sf" id="sb" placeholder="Ej: Historia, Biolog&#237;a..."></div>
-  <div><label class="lb2">T&#237;tulo de la Actividad</label><input class="sf" id="at" placeholder="Ej: Gu&#237;a - Unidad 2"></div>
+<div><label class="lb2">Nombre de la Instituci&#243;n</label><input class="sf" id="sn" placeholder="Ej: Escuela Secundaria N&#176; 5"></div>
+<div><label class="lb2">N&#250;mero de Escuela</label><input class="sf" id="snum" placeholder="Ej: 25"></div>
+<div><label class="lb2">Materia / Asignatura</label><input class="sf" id="sb" placeholder="Ej: Historia, Biolog&#237;a..."></div>
+<div><label class="lb2">T&#237;tulo de la Actividad</label><input class="sf" id="at" placeholder="Ej: Gu&#237;a - Unidad 2"></div>
 </div>
 </div>
-<button class="bg" onclick="gn()" id="gbtn">&#9889; GENERAR ACTIVIDADES</button>
+<button class="bg" id="gbtn">&#9889; GENERAR ACTIVIDADES</button>
 <div class="pr" id="pr"><div class="sp"></div><p style="color:#667eea;font-weight:700">Generando actividades...</p></div>
 </div>
 <div id="ps" class="mn" style="padding-top:18px">
 <div class="pa">
-  <button class="bp" onclick="window.print()">&#128424; Imprimir / Exportar PDF</button>
-  <button class="bn" onclick="rs()">&#128260; Nueva Actividad</button>
+<button class="bp" id="btnPrint">&#128424; Imprimir / PDF</button>
+<button class="bn" id="btnNew">&#128260; Nueva Actividad</button>
 </div>
 <div id="dp"></div>
 </div>
 </div>
 <script>
+(function(){
 var U={"admin":"escuela2024","profesor":"clase2024","docente":"actividades123"};
 var A={s:1,c:1,u:1,q:1};
 var D={s:"f",c:"m",u:"f",q:"m"};
 var ft="";
+
 function dL(){
   var u=document.getElementById("uid").value.trim();
   var p=document.getElementById("pwd").value;
@@ -218,36 +212,66 @@ function dL(){
     document.getElementById("pwd").focus();
   }
 }
-function tE(){
-  var i=document.getElementById("pwd"),b=document.getElementById("eyeB");
-  if(i.type==="password"){i.type="text";b.innerHTML="👁️";}
-  else{i.type="password";b.innerHTML="👁";}
-}
-function dLo(){
+
+document.getElementById("btnLogin").addEventListener("click",dL);
+document.getElementById("pwd").addEventListener("keydown",function(e){if(e.key==="Enter")dL();});
+
+document.getElementById("eyeB").addEventListener("click",function(){
+  var i=document.getElementById("pwd");
+  if(i.type==="password"){i.type="text";this.innerHTML="👁️";}
+  else{i.type="password";this.innerHTML="👁";}
+});
+
+document.getElementById("btnLogout").addEventListener("click",function(){
   document.getElementById("app").style.display="none";
   document.getElementById("lsec").style.display="flex";
   document.getElementById("uid").value="";
   var p=document.getElementById("pwd");p.value="";p.type="password";
   document.getElementById("eyeB").innerHTML="👁";
-}
-function sT(t,el){
+});
+
+document.getElementById("tabTxt").addEventListener("click",function(){
   document.querySelectorAll(".tab").forEach(function(x){x.className="tab";});
-  el.className="tab on";
-  document.getElementById("ptxt").style.display=t==="t"?"block":"none";
-  document.getElementById("pfil").style.display=t==="f"?"block":"none";
-}
-function hF(i){var f=i.files[0];if(!f)return;document.getElementById("fn").innerHTML="📄 <b>"+f.name+"</b> ✅";ft="Archivo: "+f.name;}
-function tA(ev,k){
-  if(ev.target.classList.contains("db"))return;
-  A[k]=A[k]?0:1;
-  document.getElementById("c-"+k).classList.toggle("on");
-  document.getElementById("k-"+k).textContent=A[k]?"✓":"";
-}
-function sD(ev,k,d){
-  ev.stopPropagation();D[k]=d;
-  ev.target.closest(".ac").querySelectorAll(".db").forEach(function(b){b.className="db";});
-  ev.target.className="db on";
-}
+  this.className="tab on";
+  document.getElementById("ptxt").style.display="block";
+  document.getElementById("pfil").style.display="none";
+});
+document.getElementById("tabFile").addEventListener("click",function(){
+  document.querySelectorAll(".tab").forEach(function(x){x.className="tab";});
+  this.className="tab on";
+  document.getElementById("ptxt").style.display="none";
+  document.getElementById("pfil").style.display="block";
+});
+document.getElementById("fuBtn").addEventListener("click",function(){document.getElementById("finp").click();});
+document.getElementById("finp").addEventListener("change",function(){
+  var f=this.files[0];if(!f)return;
+  document.getElementById("fn").innerHTML="📄 <b>"+f.name+"</b> ✅";
+  ft="Archivo: "+f.name;
+});
+
+document.querySelectorAll(".ac").forEach(function(card){
+  card.addEventListener("click",function(ev){
+    if(ev.target.classList.contains("db"))return;
+    var k=this.dataset.act;
+    A[k]=A[k]?0:1;
+    this.classList.toggle("on");
+    document.getElementById("k-"+k).textContent=A[k]?"✓":"";
+  });
+});
+document.querySelectorAll(".db").forEach(function(btn){
+  btn.addEventListener("click",function(ev){
+    ev.stopPropagation();
+    var k=this.dataset.act,d=this.dataset.diff;
+    D[k]=d;
+    this.closest(".ac").querySelectorAll(".db").forEach(function(b){b.className="db";});
+    this.className="db on";
+  });
+});
+
+document.getElementById("gbtn").addEventListener("click",gn);
+document.getElementById("btnPrint").addEventListener("click",function(){window.print();});
+document.getElementById("btnNew").addEventListener("click",rs);
+
 function kw(t){
   var sw=["de","la","el","en","y","a","que","los","las","un","una","con","por","para","del","al","se","su","es","lo","mas","pero","como","si","este","esta","no","son","hay","sus","fue","ser","han","ha","me","te","nos","eso","esto","tambien","entre","cuando","donde","muy","bien","cada","solo","ya","sin","todo","hacia","desde","sobre","bajo","ante","durante"];
   var ws=t.toLowerCase().match(/[a-záéíóúñü]{5,}/g)||[];
@@ -296,9 +320,9 @@ function gMA(t,d){
 function gQS(t,d){
   var k=kw(t).slice(0,20),cnt=d==="f"?4:d==="m"?6:8,lns=d==="f"?2:d==="m"?3:4;
   var tp={
-    f:["¿Qué es ?","¿Qué significa ?","¿Cuál es la función de ?","¿Dónde aparece ?","¿Qué importancia tiene ?"],
-    m:["Explicá con tus palabras qué es .","¿Por qué es importante ?","Describí las características de .","¿Cuál es la relación entre y el tema?","Mencioná tres aspectos de ."],
-    d:["Analizá críticamente .","¿Qué consecuencias tiene ?","Elaborá un argumento sobre .","¿Cómo se relaciona con la actualidad?","Compará con otro concepto del tema."]
+    f:["¿Qué es ?","¿Qué significa ?","¿Cuál es la función de ?","¿Dónde aparece ?"],
+    m:["Explicá qué es .","¿Por qué es importante ?","Describí las características de .","¿Cuál es la relación entre y el tema?"],
+    d:["Analizá críticamente .","¿Qué consecuencias tiene ?","Elaborá un argumento sobre .","¿Cómo se relaciona con la actualidad?"]
   };
   var tl=tp[d],qs=[];
   for(var i=0;i<cnt&&i<k.length;i++)qs.push({q:tl[i%tl.length].replace("",k[i]),l:lns});
@@ -317,7 +341,7 @@ function bD(){
   if(A.s){var ws=gWS(kw(txt),D.s);h+='<div class="as"><div class="at">Actividad '+n+'. &#128292; Sopa de Letras <small style="font-weight:normal;font-size:11px">('+dl[D.s]+')</small></div><p style="font-size:12px;margin-bottom:9px">Encontrá las siguientes palabras en la sopa de letras:</p><div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start"><div class="wg" style="grid-template-columns:repeat('+ws.sz+',24px)">';ws.g.forEach(function(row){row.forEach(function(c){h+="<span>"+c+"</span>";});});h+='</div><div><p style="font-weight:700;font-size:12px;margin-bottom:7px">Palabras:</p><div class="wl">';ws.w.forEach(function(w){h+="<span>"+w+"</span>";});h+="</div></div></div></div>";n++;}
   if(A.c){var fb=gFB(txt,D.c);h+='<div class="as"><div class="at">Actividad '+n+'. &#9999; Completar la Frase <small style="font-weight:normal;font-size:11px">('+dl[D.c]+')</small></div><p style="font-size:12px;margin-bottom:9px">Completá las oraciones con la/s palabra/s del banco:</p>';fb.forEach(function(it,i){h+='<div class="fb"><b>'+(i+1)+". </b>"+it.s+"</div>";});var bk=[];fb.forEach(function(f){f.a.forEach(function(a){bk.push(a);});});bk.sort(function(){return Math.random()-.5;});h+='<div class="bco"><b>&#128230; Banco de palabras: </b>'+bk.join(" — ")+"</div></div>";n++;}
   if(A.u){var ma=gMA(txt,D.u);h+='<div class="as"><div class="at">Actividad '+n+'. &#8596; Unir con Flechas <small style="font-weight:normal;font-size:11px">('+dl[D.u]+')</small></div><p style="font-size:12px;margin-bottom:9px">Uní la Columna A con la Columna B:</p><div class="mc"><div><div style="text-align:center;background:#667eea;color:#fff;padding:6px;border-radius:5px;margin-bottom:8px;font-weight:700">COLUMNA A</div>';ma.left.forEach(function(t,i){h+='<div class="mi"><b>'+(i+1)+". </b>"+t+"</div>";});h+='</div><div><div style="text-align:center;background:#764ba2;color:#fff;padding:6px;border-radius:5px;margin-bottom:8px;font-weight:700">COLUMNA B</div>';var lt=["a","b","c","d","e","f","g","h","i","j"];ma.right.forEach(function(dd,i){h+='<div class="mi"><b>'+lt[i]+". </b>"+dd+"</div>";});h+="</div></div></div>";n++;}
-  if(A.q){var qs=gQS(txt,D.q);h+='<div class="as"><div class="at">Actividad '+n+'. &#10067; Responder Consignas <small style="font-weight:normal;font-size:11px">('+dl[D.q]+')</small></div><p style="font-size:12px;margin-bottom:9px">Respondé las preguntas en el espacio indicado:</p>';qs.forEach(function(q,i){h+='<div class="qi"><p>'+(i+1)+". "+q.q+"</p><div>";for(var l=0;l<q.l;l++)h+='<div class="al"></div>';h+="</div></div>";});h+="</div>";}
+  if(A.q){var qs=gQS(txt,D.q);h+='<div class="as"><div class="at">Actividad '+n+'. &#10067; Responder Consignas <small style="font-weight:normal;font-size:11px">('+dl[D.q]+')</small></div><p style="font-size:12px;margin-bottom:9px">Respondé las preguntas:</p>';qs.forEach(function(q,i){h+='<div class="qi"><p>'+(i+1)+". "+q.q+"</p><div>";for(var l=0;l<q.l;l++)h+='<div class="al"></div>';h+="</div></div>";});h+="</div>";}
   return h;
 }
 function gn(){
@@ -334,6 +358,7 @@ function gn(){
   },700);
 }
 function rs(){document.getElementById("ps").style.display="none";document.getElementById("setup").style.display="block";document.getElementById("txin").value="";document.getElementById("fn").innerHTML="";ft="";window.scrollTo(0,0);}
+})();
 </script>
 </body>
 </html>
