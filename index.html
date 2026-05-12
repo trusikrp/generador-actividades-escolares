@@ -106,6 +106,23 @@ textarea:focus{border-color:#667eea}
 .cw-clues h4{font-size:13px;font-weight:bold;margin-bottom:6px;color:#333;border-bottom:1px solid #ccc;padding-bottom:4px}
 .cw-clue-item{font-size:12px;margin-bottom:4px;line-height:1.5}
 .cw-clue-item strong{color:#333}
+.cw-how-to{margin-bottom:10px;padding:10px 14px;background:#fffbe6;border:1px solid #ffe082;border-radius:8px;font-size:12px;color:#555;font-family:'Segoe UI',Arial,sans-serif}
+.cw-how-to strong{display:block;margin-bottom:5px;color:#333;font-size:13px}
+.cw-how-to ol{margin-left:18px}
+.cw-how-to ol li{margin-bottom:2px;line-height:1.5}
+.cw-ref-section{margin-top:12px;padding:10px 14px;background:#f9f9ff;border:1px solid #d0d0ff;border-radius:8px;font-size:13px;font-family:'Segoe UI',Arial,sans-serif}
+.cw-ref-title{font-weight:bold;color:#5c35a0;margin-bottom:6px;font-size:13px}
+.cw-ref-item{margin-bottom:3px;font-size:13px}
+.cw-refs-config{margin-top:10px;padding:10px 12px;background:#f0f0ff;border:1px solid #c0c0e0;border-radius:8px;font-size:12px}
+.cw-refs-config>label{font-weight:600;color:#5c35a0;display:block;margin-bottom:5px}
+.cw-ref-row{display:flex;gap:6px;margin-bottom:5px;align-items:center}
+.cw-ref-row input{padding:5px 8px;border:1px solid #c0c0e0;border-radius:6px;font-size:12px;outline:none;font-family:inherit}
+.cw-ref-row input:focus{border-color:#667eea}
+.cw-ref-row .inp-tema{flex:2}
+.cw-ref-row .inp-pag{flex:1}
+.add-ref-btn{background:#667eea;color:#fff;border:none;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:inherit}
+.add-ref-btn:hover{background:#5560cc}
+.del-ref-btn{background:#ffeaea;color:#e74c3c;border:1px solid #e74c3c;border-radius:4px;padding:3px 8px;font-size:11px;cursor:pointer;font-family:inherit}
 .page-number{display:none;text-align:right;font-size:10px;color:#999;margin-top:8px;font-family:'Times New Roman',serif}
 @media print{
 #app-screen .topbar,.preview-actions,#setup-section,#archive-section,.main>*:not(#preview-section){display:none!important}
@@ -179,7 +196,21 @@ body{background:white}
 <div class="act-item" id="act-item-completar"><label><input type="checkbox" id="chk-completar"> &#x270F;&#xFE0F; Completar la Frase</label><div class="diff-row">Dificultad: <select id="diff-completar"><option value="facil">F&#xE1;cil</option><option value="medio" selected>Medio</option><option value="dificil">Dif&#xED;cil</option></select></div></div>
 <div class="act-item" id="act-item-unir"><label><input type="checkbox" id="chk-unir"> &#x1F517; Unir con Flechas</label><div class="diff-row">Dificultad: <select id="diff-unir"><option value="facil">F&#xE1;cil</option><option value="medio" selected>Medio</option><option value="dificil">Dif&#xED;cil</option></select></div></div>
 <div class="act-item" id="act-item-preguntas"><label><input type="checkbox" id="chk-preguntas"> &#x2753; Responder Consignas</label><div class="diff-row">Dificultad: <select id="diff-preguntas"><option value="facil">F&#xE1;cil</option><option value="medio" selected>Medio</option><option value="dificil">Dif&#xED;cil</option></select></div></div>
-<div class="act-item" id="act-item-crucigrama"><label><input type="checkbox" id="chk-crucigrama"> &#x1F532; Crucigrama</label><div class="diff-row">Dificultad: <select id="diff-crucigrama"><option value="facil">F&#xE1;cil</option><option value="medio" selected>Medio</option><option value="dificil">Dif&#xED;cil</option></select></div></div>
+<div class="act-item" id="act-item-crucigrama">
+<label><input type="checkbox" id="chk-crucigrama"> &#x1F532; Crucigrama</label>
+<div class="diff-row">Dificultad: <select id="diff-crucigrama"><option value="facil">F&#xE1;cil</option><option value="medio" selected>Medio</option><option value="dificil">Dif&#xED;cil</option></select></div>
+<div class="cw-refs-config" id="cw-refs-config">
+<label>&#x1F4DA; Temas y p&#xE1;ginas de la cartilla (opcional)</label>
+<div id="cw-refs-list">
+<div class="cw-ref-row" data-ref-row="0">
+<input type="text" class="inp-tema" placeholder="Ej: La c&#xE9;lula" title="Tema">
+<input type="text" class="inp-pag" placeholder="P&#xE1;g. Ej: 12-15" title="P&#xE1;ginas">
+<button type="button" class="del-ref-btn" onclick="this.closest('[data-ref-row]').remove()">&#x2715;</button>
+</div>
+</div>
+<button type="button" class="add-ref-btn" id="btn-add-ref">+ Agregar tema</button>
+</div>
+</div>
 </div>
 </div>
 <div class="card">
@@ -231,12 +262,12 @@ btnLogin.addEventListener('click',doLogin);
 inputPass.addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
 inputUser.addEventListener('keydown',function(e){if(e.key==='Enter')inputPass.focus();});
 toggleEye.addEventListener('click',function(){
-if(inputPass.type==='password'){inputPass.type='text';toggleEye.textContent='X';}
-else{inputPass.type='password';toggleEye.textContent='O';}
+if(inputPass.type==='password'){inputPass.type='text';toggleEye.textContent='\u{1F576}';}
+else{inputPass.type='password';toggleEye.textContent='\u{1F441}';}
 });
 btnLogout.addEventListener('click',function(){
 appScr.style.display='none';loginScr.style.display='flex';
-inputUser.value='';inputPass.value='';inputPass.type='password';toggleEye.textContent='O';
+inputUser.value='';inputPass.value='';inputPass.type='password';toggleEye.innerHTML='&#x1F441;';
 });
 
 var btnArchive=document.getElementById('btn-archive');
@@ -285,12 +316,42 @@ var chk=document.getElementById('chk-'+id);
 var item=document.getElementById('act-item-'+id);
 chk.addEventListener('change',function(){if(chk.checked)item.classList.add('selected');else item.classList.remove('selected');});
 item.addEventListener('click',function(e){
-if(e.target!==chk&&e.target.tagName!=='SELECT'&&e.target.tagName!=='OPTION'){
+if(e.target!==chk&&e.target.tagName!=='SELECT'&&e.target.tagName!=='OPTION'&&e.target.tagName!=='INPUT'&&e.target.tagName!=='BUTTON'&&!e.target.classList.contains('cw-refs-config')&&!e.target.closest('.cw-refs-config')){
 chk.checked=!chk.checked;
 if(chk.checked)item.classList.add('selected');else item.classList.remove('selected');
 }
 });
 });
+
+// Prevent click propagation from crucigrama refs config
+var cwRefsConfig=document.getElementById('cw-refs-config');
+if(cwRefsConfig){cwRefsConfig.addEventListener('click',function(e){e.stopPropagation();});}
+
+// Add ref row button
+var refRowCount=1;
+var btnAddRef=document.getElementById('btn-add-ref');
+if(btnAddRef){
+btnAddRef.addEventListener('click',function(e){
+e.stopPropagation();
+var list=document.getElementById('cw-refs-list');
+var row=document.createElement('div');
+row.className='cw-ref-row';
+row.setAttribute('data-ref-row',refRowCount++);
+row.innerHTML='<input type="text" class="inp-tema" placeholder="Ej: Ecosistemas" title="Tema"><input type="text" class="inp-pag" placeholder="P\u00e1g. Ej: 20-25" title="P\u00e1ginas"><button type="button" class="del-ref-btn" onclick="this.closest(\"[data-ref-row]\").remove()">\u2715</button>';
+list.appendChild(row);
+});
+}
+
+function getCwRefs(){
+var rows=document.querySelectorAll('#cw-refs-list [data-ref-row]');
+var refs=[];
+rows.forEach(function(row){
+var tema=row.querySelector('.inp-tema').value.trim();
+var pag=row.querySelector('.inp-pag').value.trim();
+if(tema||pag)refs.push({tema:tema,pag:pag});
+});
+return refs;
+}
 
 var fileInput=document.getElementById('file-input');
 var dropArea=document.getElementById('file-drop-area');
@@ -305,7 +366,7 @@ if(f.type==='text/plain'){var reader=new FileReader();reader.onload=function(e){
 });
 
 function extractWords(text){
-var words=text.match(/[a-záéíóúüA-ZÁÉÍÓÚÜñÑ]{4,}/g)||[];
+var words=text.match(/[a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fcA-Z\u00c1\u00c9\u00cd\u00d3\u00da\u00dc\u00f1\u00d1]{4,}/g)||[];
 var unique=[],seen={};
 words.forEach(function(w){var up=w.toUpperCase();if(!seen[up]){seen[up]=1;unique.push(up);}});
 return unique;
@@ -347,7 +408,7 @@ var words=sent.split(' ');
 var longWords=words.map(function(w,i){return{w:w,i:i};}).filter(function(o){return o.w.length>4;});
 var toBlank=pick(longWords,blanksCount);
 var modified=words.slice();
-toBlank.forEach(function(o){bank.push(o.w.replace(/[^a-záéíóúüA-ZÁÉÍÓÚÜñÑ]/g,''));modified[o.i]='<span class="fill-blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';});
+toBlank.forEach(function(o){bank.push(o.w.replace(/[^a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fcA-Z\u00c1\u00c9\u00cd\u00d3\u00da\u00dc\u00f1\u00d1]/g,''));modified[o.i]='<span class="fill-blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';});
 html+='<div class="fill-item">'+(idx+1)+'. '+modified.join(' ')+'</div>';
 });
 html+='<div class="word-bank"><strong>Banco de palabras:</strong> '+shuffle(bank).map(function(w){return'<span style="margin:0 6px;font-weight:600">'+w+'</span>';}).join(' / ')+'</div>';
@@ -360,7 +421,7 @@ var pairs=sentences.map(function(s){var mid=Math.floor(s.length*(0.4+Math.random
 var rights=shuffle(pairs.map(function(p){return p.right;}));
 var html='<div class="match-grid">';
 pairs.forEach(function(p,i){html+='<div class="match-left">'+(i+1)+'. '+p.left+'</div><div class="match-line"></div><div class="match-right">'+String.fromCharCode(65+i)+'. '+rights[i]+'</div>';});
-return html+'</div><p style="font-size:12px;color:#888;margin-top:8px">Anotá la letra que corresponde a cada número.</p>';
+return html+'</div><p style="font-size:12px;color:#888;margin-top:8px">Anot\u00e1 la letra que corresponde a cada n\u00famero.</p>';
 }
 function buildPreguntas(text,diff){
 var count=diff==='facil'?3:diff==='medio'?5:7;
@@ -375,7 +436,7 @@ html+='</div>';
 });
 return html||'<p>No se encontraron oraciones suficientes.</p>';
 }
-function buildCrucigrama(text,diff){
+function buildCrucigrama(text,diff,refs){
 var count=diff==='facil'?5:diff==='medio'?8:12;
 var rawWords=extractWords(text);
 var maxLen=diff==='facil'?8:diff==='medio'?10:12;
@@ -432,7 +493,21 @@ var minR=GS,maxR=0,minC=GS,maxC=0;
 for(var i=0;i<GS;i++)for(var j=0;j<GS;j++){if(!grid[i][j].blocked){if(i<minR)minR=i;if(i>maxR)maxR=i;if(j<minC)minC=j;if(j>maxC)maxC=j;}}
 minR=Math.max(0,minR-1);maxR=Math.min(GS-1,maxR+1);minC=Math.max(0,minC-1);maxC=Math.min(GS-1,maxC+1);
 var cols=maxC-minC+1;
-var html='<div class="crossword-container"><div class="crossword-grid" style="grid-template-columns:repeat('+cols+',30px)">';
+var howToHtml='<div class="cw-how-to"><strong>&#x1F4D6; \u00bfC\u00f3mo resolver el crucigrama?</strong><ol><li>Le\u00e9 cada pista numerada de las secciones <em>Horizontales</em> y <em>Verticales</em>.</li><li>Busc\u00e1 el n\u00famero correspondiente en la grilla. El casillero con ese n\u00famero es donde empieza la palabra.</li><li>Las palabras <em>Horizontales</em> se completan de izquierda a derecha; las <em>Verticales</em>, de arriba hacia abajo.</li><li>Cont\u00e1 la cantidad de casilleros vac\u00edos para saber cu\u00e1ntas letras tiene la palabra.</li><li>Us\u00e1 las pistas y el texto de referencia para encontrar cada respuesta.</li><li>Complet\u00e1 primero las palabras que ya sab\u00e9s: te ayudar\u00e1n a descubrir las dem\u00e1s por las letras compartidas.</li></ol></div>';
+var refsHtml='';
+if(refs&&refs.length>0){
+refsHtml='<div class="cw-ref-section"><div class="cw-ref-title">&#x1F4DA; Pod\u00e9s encontrar informaci\u00f3n para resolver este crucigrama en:</div>';
+refs.forEach(function(ref){
+var line='';
+if(ref.tema&&ref.pag)line='\u2022 <strong>'+escHtml(ref.tema)+'</strong> \u2014 P\u00e1ginas: '+escHtml(ref.pag);
+else if(ref.tema)line='\u2022 <strong>'+escHtml(ref.tema)+'</strong>';
+else if(ref.pag)line='\u2022 P\u00e1ginas: '+escHtml(ref.pag);
+if(line)refsHtml+='<div class="cw-ref-item">'+line+'</div>';
+});
+refsHtml+='</div>';
+}
+var html=howToHtml+refsHtml;
+html+='<div class="crossword-container"><div class="crossword-grid" style="grid-template-columns:repeat('+cols+',30px)">';
 for(var r=minR;r<=maxR;r++){for(var c=minC;c<=maxC;c++){var cell=grid[r][c];if(cell.blocked){html+='<div class="cw-cell blocked"></div>';}else{html+='<div class="cw-cell empty">'+(cell.num?'<span class="cw-number">'+cell.num+'</span>':'')+'</div>';}}}
 html+='</div><div class="cw-clues">';
 var horiz=placed.filter(function(p){return p.dir==='H';}).sort(function(a,b){return a.num-b.num;});
@@ -445,38 +520,39 @@ return html+'</div></div>';
 }
 function generateAndShow(){
 var text=document.getElementById('source-text').value.trim();
-if(!text||text.length<50){alert('Por favor ingresá un texto más largo (mínimo 50 caracteres).');return;}
+if(!text||text.length<50){alert('Por favor ingres\u00e1 un texto m\u00e1s largo (m\u00ednimo 50 caracteres).');return;}
 var selected=[];
 if(document.getElementById('chk-sopa').checked)selected.push('sopa');
 if(document.getElementById('chk-completar').checked)selected.push('completar');
 if(document.getElementById('chk-unir').checked)selected.push('unir');
 if(document.getElementById('chk-preguntas').checked)selected.push('preguntas');
 if(document.getElementById('chk-crucigrama').checked)selected.push('crucigrama');
-if(!selected.length){alert('Seleccióná al menos una actividad.');return;}
-var inst=document.getElementById('f-institucion').value||'Institución Educativa';
-var esc=document.getElementById('f-escuela').value||'—';
-var mat=document.getElementById('f-materia').value||'—';
+if(!selected.length){alert('Selecion\u00e1 al menos una actividad.');return;}
+var inst=document.getElementById('f-institucion').value||'Instituci\u00f3n Educativa';
+var esc=document.getElementById('f-escuela').value||'\u2014';
+var mat=document.getElementById('f-materia').value||'\u2014';
 var tit=document.getElementById('f-titulo').value||'Actividades';
+var cwRefs=getCwRefs();
 var actNames={
-sopa:{name:'Sopa de Letras',icon:'',instr:'Encontrá las palabras en la sopa de letras.'},
-completar:{name:'Completar la Frase',icon:'',instr:'Completá las frases con la palabra correcta del banco.'},
-unir:{name:'Unir con Flechas',icon:'',instr:'Uní cada comienzo de la columna izquierda con su continuación en la derecha.'},
-preguntas:{name:'Responder Consignas',icon:'',instr:'Respondé las siguientes consignas en el espacio dado.'},
-crucigrama:{name:'Crucigrama',icon:'',instr:'Completá el crucigrama con las palabras del tema. Usá las pistas para encontrar cada palabra.'}
+sopa:{name:'Sopa de Letras',icon:'',instr:'Encontr\u00e1 las palabras en la sopa de letras.'},
+completar:{name:'Completar la Frase',icon:'',instr:'Complet\u00e1 las frases con la palabra correcta del banco.'},
+unir:{name:'Unir con Flechas',icon:'',instr:'Un\u00ed cada comienzo de la columna izquierda con su continuaci\u00f3n en la derecha.'},
+preguntas:{name:'Responder Consignas',icon:'',instr:'Respond\u00e9 las siguientes consignas en el espacio dado.'},
+crucigrama:{name:'Crucigrama',icon:'',instr:'Complet\u00e1 el crucigrama con las palabras del tema. Us\u00e1 las pistas para encontrar cada palabra.'}
 };
-var headerHtml='<div class="doc-header-box"><div class="doc-school">'+escHtml(inst)+' — N° '+escHtml(esc)+'</div><div class="doc-info"><div>Apellido y Nombre: _________________________</div><div>Materia: '+escHtml(mat)+'</div><div>Curso y División: _____________</div><div>Fecha de Entrega: _____________</div></div></div><div class="doc-title">'+escHtml(tit)+'</div>';
+var headerHtml='<div class="doc-header-box"><div class="doc-school">'+escHtml(inst)+' \u2014 N\u00b0 '+escHtml(esc)+'</div><div class="doc-info"><div>Apellido y Nombre: _________________________</div><div>Materia: '+escHtml(mat)+'</div><div>Curso y Divisi\u00f3n: _____________</div><div>Fecha de Entrega: _____________</div></div></div><div class="doc-title">'+escHtml(tit)+'</div>';
 var activities=[];
 var actNum=1;
 selected.forEach(function(id){
 var diff=document.getElementById('diff-'+id).value;
 var meta=actNames[id];
-var diffLabel=diff==='facil'?'Fácil':diff==='medio'?'Medio':'Difícil';
+var diffLabel=diff==='facil'?'F\u00e1cil':diff==='medio'?'Medio':'Dif\u00edcil';
 if(id==='sopa'){
 var qty=parseInt(document.getElementById('qty-sopa').value)||1;
 for(var qi=0;qi<qty;qi++){
 var content=buildSopa(text,diff);
-var sopaLabel=qty>1?' N°'+(qi+1):'';
-activities.push({num:actNum,html:'<div class="activity-block"><div class="activity-title">Actividad '+actNum+': '+meta.name+sopaLabel+' — Nivel '+diffLabel+'</div><div class="activity-instructions">'+meta.instr+'</div>'+content+'</div>',isBig:true});
+var sopaLabel=qty>1?' N\u00b0'+(qi+1):'';
+activities.push({num:actNum,html:'<div class="activity-block"><div class="activity-title">Actividad '+actNum+': '+meta.name+sopaLabel+' \u2014 Nivel '+diffLabel+'</div><div class="activity-instructions">'+meta.instr+'</div>'+content+'</div>',isBig:true});
 actNum++;
 }
 }else{
@@ -484,8 +560,8 @@ var content='';
 if(id==='completar')content=buildCompletar(text,diff);
 else if(id==='unir')content=buildUnir(text,diff);
 else if(id==='preguntas')content=buildPreguntas(text,diff);
-else if(id==='crucigrama')content=buildCrucigrama(text,diff);
-activities.push({num:actNum,html:'<div class="activity-block"><div class="activity-title">Actividad '+actNum+': '+meta.name+' — Nivel '+diffLabel+'</div><div class="activity-instructions">'+meta.instr+'</div>'+content+'</div>',isBig:(id==='crucigrama')});
+else if(id==='crucigrama')content=buildCrucigrama(text,diff,cwRefs);
+activities.push({num:actNum,html:'<div class="activity-block"><div class="activity-title">Actividad '+actNum+': '+meta.name+' \u2014 Nivel '+diffLabel+'</div><div class="activity-instructions">'+meta.instr+'</div>'+content+'</div>',isBig:(id==='crucigrama')});
 actNum++;
 }
 });
@@ -502,11 +578,11 @@ pages.forEach(function(pageActs,pageIdx){
 fullHtml+='<div class="print-page">';
 if(pageIdx===0){
 fullHtml+=headerHtml+'<div style="text-align:center;font-size:16px;font-weight:bold;margin:16px 0 14px;font-family:Times New Roman,serif">Actividades</div>';
-} else {
-fullHtml+='<div class="doc-header-box" style="padding:8px 20px;"><div class="doc-school" style="font-size:12px">'+escHtml(inst)+' — '+escHtml(tit)+'</div><div style="font-size:12px;display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;margin-top:6px"><div style="border-bottom:1px solid #ccc;padding:2px 0">Apellido y Nombre: ___________________</div><div style="border-bottom:1px solid #ccc;padding:2px 0">Materia: '+escHtml(mat)+'</div></div></div>';
+}else{
+fullHtml+='<div class="doc-header-box" style="padding:8px 20px;"><div class="doc-school" style="font-size:12px">'+escHtml(inst)+' \u2014 '+escHtml(tit)+'</div><div style="font-size:12px;display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;margin-top:6px"><div style="border-bottom:1px solid #ccc;padding:2px 0">Apellido y Nombre: ___________________</div><div style="border-bottom:1px solid #ccc;padding:2px 0">Materia: '+escHtml(mat)+'</div></div></div>';
 }
 pageActs.forEach(function(act){fullHtml+=act.html;});
-fullHtml+='<div class="page-number">Página '+(pageIdx+1)+' de '+totalPages+'</div>';
+fullHtml+='<div class="page-number">P\u00e1gina '+(pageIdx+1)+' de '+totalPages+'</div>';
 fullHtml+='</div>';
 });
 fullHtml+='</div>';
@@ -523,7 +599,6 @@ document.getElementById('btn-print').addEventListener('click',function(){window.
 document.getElementById('btn-new').addEventListener('click',function(){
 previewSection.style.display='none';
 setupSection.style.display='block';
-// Reset all checkboxes and selections
 ['sopa','completar','unir','preguntas','crucigrama'].forEach(function(id){
 var chk=document.getElementById('chk-'+id);
 chk.checked=false;
@@ -535,6 +610,8 @@ document.getElementById('f-escuela').value='';
 document.getElementById('f-materia').value='';
 document.getElementById('f-titulo').value='';
 document.getElementById('qty-sopa').value='1';
+var refsList=document.getElementById('cw-refs-list');
+refsList.innerHTML='<div class="cw-ref-row" data-ref-row="0"><input type="text" class="inp-tema" placeholder="Ej: La c\u00e9lula" title="Tema"><input type="text" class="inp-pag" placeholder="P\u00e1g. Ej: 12-15" title="P\u00e1ginas"><button type="button" class="del-ref-btn" onclick="this.closest(\'[data-ref-row]\').remove()">\u2715</button></div>';
 });
 document.getElementById('btn-edit').addEventListener('click',function(){
 previewSection.style.display='none';
@@ -542,6 +619,6 @@ setupSection.style.display='block';
 window.scrollTo(0,0);
 });
 })();
-</script>
+<\/script>
 </body>
 </html>
