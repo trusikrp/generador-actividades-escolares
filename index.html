@@ -7,7 +7,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',Arial,sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh}
-#login-screen{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+#login-screen{display:flex;justify-content:cehhnter;align-items:center;min-height:100vh;padding:20px}
 .login-box{background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.35);width:100%;max-width:400px;padding:40px 36px;text-align:center}
 .login-box .ico{font-size:52px;margin-bottom:14px}
 .login-box h1{color:#5c35a0;margin-bottom:6px;font-size:23px}
@@ -234,7 +234,7 @@ body{background:white}
 </div>
 </div>
 </div><script>
-(function(){
+document.addEventListener('DOMContentLoaded', function(){
 var USERS={admin:'escuela2024',profesor:'clase2024',docente:'actividades123'};
 var ARCHIVE_KEY='gae_archive';
 function getArchive(){try{return JSON.parse(localStorage.getItem(ARCHIVE_KEY)||'[]');}catch(e){return[];}}
@@ -618,7 +618,7 @@ previewSection.style.display='none';
 setupSection.style.display='block';
 window.scrollTo(0,0);
 });
-})();
+});
 <\/script>
 </body>
 </html>
