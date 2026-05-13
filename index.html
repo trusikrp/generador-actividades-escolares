@@ -243,32 +243,29 @@ function addToArchive(item){var arr=getArchive();arr.unshift(item);if(arr.length
 function deleteFromArchive(id){saveArchive(getArchive().filter(function(x){return x.id!==id;}));}
 function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
-var btnLogin=document.getElementById('btn-login');
-var btnLogout=document.getElementById('btn-logout');
-var toggleEye=document.getElementById('toggle-eye');
 var inputUser=document.getElementById('input-user');
 var inputPass=document.getElementById('input-pass');
 var errorMsg=document.getElementById('error-msg');
 var loginScr=document.getElementById('login-screen');
 var appScr=document.getElementById('app-screen');
-
-function doLogin(){
+window._doLogin=function(){
 var u=inputUser.value.trim(),p=inputPass.value.trim();
 errorMsg.style.display='none';
 if(USERS[u]&&USERS[u]===p){loginScr.style.display='none';appScr.style.display='block';}
 else{errorMsg.style.display='block';inputPass.value='';inputPass.focus();}
-}
-btnLogin.addEventListener('click',doLogin);
-inputPass.addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
-inputUser.addEventListener('keydown',function(e){if(e.key==='Enter')inputPass.focus();});
-toggleEye.addEventListener('click',function(){
-if(inputPass.type==='password'){inputPass.type='text';toggleEye.textContent='\u{1F576}';}
-else{inputPass.type='password';toggleEye.textContent='\u{1F441}';}
-});
-btnLogout.addEventListener('click',function(){
+};
+window._doLogout=function(){
 appScr.style.display='none';loginScr.style.display='flex';
-inputUser.value='';inputPass.value='';inputPass.type='password';toggleEye.innerHTML='&#x1F441;';
-});
+inputUser.value='';inputPass.value='';inputPass.type='password';
+var te=document.getElementById('toggle-eye');if(te)te.innerHTML='&#x1F441;';
+};
+window._toggleEye=function(){
+var te=document.getElementById('toggle-eye');
+if(inputPass.type==='password'){inputPass.type='text';if(te)te.textContent='\u{1F576}';}
+else{inputPass.type='password';if(te)te.innerHTML='&#x1F441;';}
+};
+var btnLogout=document.getElementById('btn-logout');
+if(btnLogout)btnLogout.addEventListener('click',window._doLogout);
 
 var btnArchive=document.getElementById('btn-archive');
 var btnCloseArchive=document.getElementById('btn-close-archive');
@@ -620,5 +617,26 @@ window.scrollTo(0,0);
 });
 })();
 <\/script>
+
+<script>
+(function(){
+var MAX_RETRIES=20,retries=0;
+function attachLoginListeners(){
+var btn=document.getElementById('btn-login');
+var eye=document.getElementById('toggle-eye');
+var uInp=document.getElementById('input-user');
+var pInp=document.getElementById('input-pass');
+if(!btn||!eye||!uInp||!pInp){
+if(++retries<MAX_RETRIES)setTimeout(attachLoginListeners,100);
+return;
+}
+btn.addEventListener('click',function(){if(window._doLogin)window._doLogin();});
+eye.addEventListener('click',function(){if(window._toggleEye)window._toggleEye();});
+pInp.addEventListener('keydown',function(e){if(e.key==='Enter'&&window._doLogin)window._doLogin();});
+uInp.addEventListener('keydown',function(e){if(e.key==='Enter')pInp.focus();});
+}
+attachLoginListeners();
+})();
+</script>
 </body>
 </html>
