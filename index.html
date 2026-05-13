@@ -142,10 +142,10 @@ body{background:white}
 <div class="field"><input type="text" id="input-user" placeholder="Usuario" autocomplete="username"></div>
 <div class="field">
 <input type="password" id="input-pass" placeholder="Contrase&#xF1;a" autocomplete="current-password">
-<button type="button" class="toggle-pw" id="toggle-eye" title="Mostrar/ocultar contrase&#xF1;a">&#x1F441;</button>
+<button type="button" class="toggle-pw" id="toggle-eye" title="Mostrar/ocultar contrase&#xF1;a" onclick="if(window._toggleEye)window._toggleEye()">&#x1F441;</button>
 </div>
 <div class="error-msg" id="error-msg">Usuario o contrase&#xF1;a incorrectos</div>
-<button type="button" class="login-btn" id="btn-login">&#x1F680; Ingresar</button>
+<button type="button" class="login-btn" id="btn-login" onclick="if(window._doLogin)window._doLogin()">&#x1F680; Ingresar</button>
 <div class="hint">admin / escuela2024<br>profesor / clase2024<br>docente / actividades123</div>
 </div>
 </div>
@@ -636,6 +636,35 @@ pInp.addEventListener('keydown',function(e){if(e.key==='Enter'&&window._doLogin)
 uInp.addEventListener('keydown',function(e){if(e.key==='Enter')pInp.focus();});
 }
 attachLoginListeners();
+})();
+</script>
+<script>
+(function(){
+var _a=atob,U={admin:_a('ZXNjdWVsYTIwMjQ='),profesor:_a('Y2xhc2UyMDI0'),docente:_a('YWN0aXZpZGFkZXMxMjM=')};
+var iU,iP,eM,lS,aS;
+function init(){
+iU=document.getElementById('input-user');
+iP=document.getElementById('input-pass');
+eM=document.getElementById('error-msg');
+lS=document.getElementById('login-screen');
+aS=document.getElementById('app-screen');
+if(iP)iP.addEventListener('keydown',function(e){if(e.key==='Enter')window._doLogin&&window._doLogin();});
+if(iU)iU.addEventListener('keydown',function(e){if(e.key==='Enter')iP&&iP.focus();});
+}
+window._doLogin=function(){
+if(!iU)init();
+var u=iU.value.trim(),p=iP.value.trim();
+eM.style.display='none';
+if(U[u]&&U[u]===p){lS.style.display='none';aS.style.display='block';}
+else{eM.style.display='block';iP.value='';iP.focus();}
+};
+window._toggleEye=function(){
+if(!iP)init();
+var te=document.getElementById('toggle-eye');
+if(iP.type==='password'){iP.type='text';if(te)te.textContent='\u{1F576}';}
+else{iP.type='password';if(te)te.innerHTML='&#x1F441;';}
+};
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
 })();
 </script>
 </body>
