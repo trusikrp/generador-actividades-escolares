@@ -195,7 +195,7 @@ body{background:white}
 </div>
 <div class="act-item" id="act-item-completar"><label><input type="checkbox" id="chk-completar"> &#x270F;&#xFE0F; Completar la Frase</label><div class="diff-row">Dificultad: <select id="diff-completar"><option value="facil">F&#xE1;cil</option><option value="medio" selected>Medio</option><option value="dificil">Dif&#xED;cil</option></select></div></div>
 <div class="act-item" id="act-item-unir"><label><input type="checkbox" id="chk-unir"> &#x1F517; Unir con Flechas</label><div class="diff-row">Dificultad: <select id="diff-unir"><option value="facil">F&#xE1;cil</option><option value="medio" selected>Medio</option><option value="dificil">Dif&#xED;cil</option></select></div></div>
-<div class="act-item" id="act-item-preguntas"><label><input type="checkbox" id="chk-preguntas"> &#x2753; Responder Consignas</label><div class="diff-row">Dificultad: <select id="diff-preguntas"><option value="facil">F&#xE1;cil</option><option value="medio" selected>Medio</option><option value="dificil">Dif&#xED;cil</option></select></div></div>
+<div class="act-item" id="act-item-preguntas"><label><input type="checkbox" id="chk-preguntas"> &#x2753; Responder Consignas</label><div class="diff-row">Dificultad: <select id="diff-preguntas"><option value="facil">F&#xE1;cil</option><option value="medio" selected>Medio</option><option value="dificil">Dif&#xED;cil</option></select></div><div class="sopa-qty-row">Cantidad: <select id="qty-preguntas"><option value="1" selected>1 consigna</option><option value="2">2 consignas</option><option value="3">3 consignas</option><option value="4">4 consignas</option><option value="5">5 consignas</option></select></div></div>
 <div class="act-item" id="act-item-crucigrama">
 <label><input type="checkbox" id="chk-crucigrama"> &#x1F532; Crucigrama</label>
 <div class="diff-row">Dificultad: <select id="diff-crucigrama"><option value="facil">F&#xE1;cil</option><option value="medio" selected>Medio</option><option value="dificil">Dif&#xED;cil</option></select></div>
@@ -211,6 +211,7 @@ body{background:white}
 <button type="button" class="add-ref-btn" id="btn-add-ref">+ Agregar tema</button>
 </div>
 </div>
+<div class="act-item" id="act-item-vof"><label><input type="checkbox" id="chk-vof"> &#x2705; Verdadero o Falso</label><div class="sopa-qty-row">Cantidad: <select id="qty-vof"><option value="1" selected>1 pregunta</option><option value="2">2 preguntas</option><option value="3">3 preguntas</option><option value="4">4 preguntas</option><option value="5">5 preguntas</option></select></div></div>
 </div>
 </div>
 <div class="card">
@@ -308,7 +309,7 @@ document.getElementById('tab-text-panel').style.display='none';
 this.classList.add('active');document.getElementById('tab-text-btn').classList.remove('active');
 });
 
-['sopa','completar','unir','preguntas','crucigrama'].forEach(function(id){
+['sopa','completar','unir','preguntas','crucigrama','vof'].forEach(function(id){
 var chk=document.getElementById('chk-'+id);
 var item=document.getElementById('act-item-'+id);
 chk.addEventListener('change',function(){if(chk.checked)item.classList.add('selected');else item.classList.remove('selected');});
@@ -420,8 +421,8 @@ var html='<div class="match-grid">';
 pairs.forEach(function(p,i){html+='<div class="match-left">'+(i+1)+'. '+p.left+'</div><div class="match-line"></div><div class="match-right">'+String.fromCharCode(65+i)+'. '+rights[i]+'</div>';});
 return html+'</div><p style="font-size:12px;color:#888;margin-top:8px">Anot\u00e1 la letra que corresponde a cada n\u00famero.</p>';
 }
-function buildPreguntas(text,diff){
-var count=diff==='facil'?3:diff==='medio'?5:7;
+function buildPreguntas(text,diff,forcedCount){
+var count=forcedCount||(diff==='facil'?3:diff==='medio'?5:7);
 var sentences=extractSentences(text);
 var lines=diff==='facil'?2:diff==='medio'?3:4;
 var templates=['Cual es la idea principal de: "','Que relacion existe en: "','Explica con tus palabras: "','Por que es importante: "','Describe brevemente: "','Que consecuencias tiene: "','Analiza: "'];
@@ -515,6 +516,19 @@ if(horiz.length){html+='<h4>HORIZONTALES</h4>';horiz.forEach(function(p){html+='
 if(vert.length){html+='<h4 style="margin-top:10px">VERTICALES</h4>';vert.forEach(function(p){html+='<div class="cw-clue-item"><strong>'+p.num+'.</strong> '+getClue(p.word)+'</div>';});}
 return html+'</div></div>';
 }
+function buildVof(text,count){
+var sentences=pick(extractSentences(text),count*2);
+if(!sentences.length)sentences=['El conocimiento es importante para el desarrollo.','La educación transforma la sociedad.','El aprendizaje es un proceso continuo.','La ciencia explica el mundo natural.','La historia nos enseña sobre el pasado.'];
+var html2='';
+for(var i=0;i<count;i++){
+var sent=sentences[i%sentences.length];
+var stmt=sent.length>100?sent.substring(0,100)+'...':sent;
+html2+='<div class="question-item"><div class="question-text">'+(i+1)+'. '+stmt+'</div>';
+html2+='<div style="display:flex;gap:24px;margin-top:6px;font-size:14px"><label style="cursor:default"><span style="display:inline-block;width:18px;height:18px;border:2px solid #555;border-radius:2px;vertical-align:middle;margin-right:4px"></span> <strong>V</strong></label><label style="cursor:default"><span style="display:inline-block;width:18px;height:18px;border:2px solid #555;border-radius:2px;vertical-align:middle;margin-right:4px"></span> <strong>F</strong></label></div>';
+html2+='</div>';
+}
+return html2;
+}
 function generateAndShow(){
 var text=document.getElementById('source-text').value.trim();
 if(!text||text.length<50){alert('Por favor ingres\u00e1 un texto m\u00e1s largo (m\u00ednimo 50 caracteres).');return;}
@@ -524,6 +538,7 @@ if(document.getElementById('chk-completar').checked)selected.push('completar');
 if(document.getElementById('chk-unir').checked)selected.push('unir');
 if(document.getElementById('chk-preguntas').checked)selected.push('preguntas');
 if(document.getElementById('chk-crucigrama').checked)selected.push('crucigrama');
+if(document.getElementById('chk-vof').checked)selected.push('vof');
 if(!selected.length){alert('Selecion\u00e1 al menos una actividad.');return;}
 var inst=document.getElementById('f-institucion').value||'Instituci\u00f3n Educativa';
 var esc=document.getElementById('f-escuela').value||'\u2014';
@@ -549,16 +564,21 @@ var qty=parseInt(document.getElementById('qty-sopa').value)||1;
 for(var qi=0;qi<qty;qi++){
 var content=buildSopa(text,diff);
 var sopaLabel=qty>1?' N\u00b0'+(qi+1):'';
-activities.push({num:actNum,html:'<div class="activity-block"><div class="activity-title">Actividad '+actNum+': '+meta.name+sopaLabel+' \u2014 Nivel '+diffLabel+'</div><div class="activity-instructions">'+meta.instr+'</div>'+content+'</div>',isBig:true});
+activities.push({num:actNum,html:'<div class="activity-block"><div class="activity-title">Actividad '+actNum+': '+meta.name+sopaLabel+'</div><div class="activity-instructions">'+meta.instr+'</div>'+content+'</div>',isBig:true});
 actNum++;
 }
+}else if(id==='vof'){
+var qtyVof=parseInt(document.getElementById('qty-vof').value)||3;
+var content=buildVof(text,qtyVof);
+activities.push({num:actNum,html:'<div class="activity-block"><div class="activity-title">Actividad '+actNum+': Verdadero o Falso</div><div class="activity-instructions">Leé cada afirmación y marcá V si es Verdadera o F si es Falsa.</div>'+content+'</div>',isBig:false});
+actNum++;
 }else{
 var content='';
 if(id==='completar')content=buildCompletar(text,diff);
 else if(id==='unir')content=buildUnir(text,diff);
-else if(id==='preguntas')content=buildPreguntas(text,diff);
+else if(id==='preguntas'){var qtyP=parseInt(document.getElementById('qty-preguntas').value)||3;content=buildPreguntas(text,diff,qtyP);}
 else if(id==='crucigrama')content=buildCrucigrama(text,diff,cwRefs);
-activities.push({num:actNum,html:'<div class="activity-block"><div class="activity-title">Actividad '+actNum+': '+meta.name+' \u2014 Nivel '+diffLabel+'</div><div class="activity-instructions">'+meta.instr+'</div>'+content+'</div>',isBig:(id==='crucigrama')});
+activities.push({num:actNum,html:'<div class="activity-block"><div class="activity-title">Actividad '+actNum+': '+meta.name+'</div><div class="activity-instructions">'+meta.instr+'</div>'+content+'</div>',isBig:(id==='crucigrama'||id==='vof')});
 actNum++;
 }
 });
@@ -607,6 +627,8 @@ document.getElementById('f-escuela').value='';
 document.getElementById('f-materia').value='';
 document.getElementById('f-titulo').value='';
 document.getElementById('qty-sopa').value='1';
+document.getElementById('qty-preguntas').value='1';
+document.getElementById('qty-vof').value='1';
 var refsList=document.getElementById('cw-refs-list');
 refsList.innerHTML='<div class="cw-ref-row" data-ref-row="0"><input type="text" class="inp-tema" placeholder="Ej: La c\u00e9lula" title="Tema"><input type="text" class="inp-pag" placeholder="P\u00e1g. Ej: 12-15" title="P\u00e1ginas"><button type="button" class="del-ref-btn" onclick="this.closest(\'[data-ref-row]\').remove()">\u2715</button></div>';
 });
