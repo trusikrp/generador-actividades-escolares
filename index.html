@@ -556,7 +556,7 @@ var headerHtml='<div class="doc-header-box"><div class="doc-school">'+escHtml(in
 var activities=[];
 var actNum=1;
 selected.forEach(function(id){
-var diff=document.getElementById('diff-'+id).value;
+var diffEl=document.getElementById('diff-'+id);var diff=diffEl?diffEl.value:'medio';
 var meta=actNames[id];
 var diffLabel=diff==='facil'?'F\u00e1cil':diff==='medio'?'Medio':'Dif\u00edcil';
 if(id==='sopa'){
