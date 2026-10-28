@@ -116,7 +116,7 @@ textarea:focus{border-color:#667eea}
 .cw-refs-config{margin-top:10px;padding:10px 12px;background:#f0f0ff;border:1px solid #c0c0e0;border-radius:8px;font-size:12px}
 .cw-refs-config>label{font-weight:600;color:#5c35a0;display:block;margin-bottom:5px}
 .cw-ref-row{display:flex;gap:6px;margin-bottom:5px;align-items:center}
-.cw-ref-row input{padding:5px 8px;border:1px solid #c0c0e0;border-radius:6px;font-size:12px;outline:none;font-family:inherit}
+.cw-ref-row input{min-width:0;padding:5px 8px;border:1px solid #c0c0e0;border-radius:6px;font-size:12px;outline:none;font-family:inherit}
 .cw-ref-row input:focus{border-color:#667eea}
 .cw-ref-row .inp-tema{flex:2}
 .cw-ref-row .inp-pag{flex:1}
@@ -124,7 +124,24 @@ textarea:focus{border-color:#667eea}
 .add-ref-btn:hover{background:#5560cc}
 .del-ref-btn{background:#ffeaea;color:#e74c3c;border:1px solid #e74c3c;border-radius:4px;padding:3px 8px;font-size:11px;cursor:pointer;font-family:inherit}
 .page-number{display:none;text-align:right;font-size:10px;color:#999;margin-top:8px;font-family:'Times New Roman',serif}
+.word-cell.hit{background:#ffd54f;color:#000;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.key-pages{border-top:3px dashed #b71c1c;margin-top:34px;padding-top:22px}
+.key-banner{border:2px dashed #b71c1c;color:#b71c1c;text-align:center;font-weight:bold;font-size:13px;padding:6px;margin-bottom:12px;border-radius:4px;font-family:'Segoe UI',Arial,sans-serif}
+.key-block{margin-bottom:24px}
+.key-list{font-size:13px;line-height:1.6;margin-top:10px}
+.key-list>div{margin-bottom:4px;break-inside:avoid}
+.key-list.cols{columns:2;column-gap:24px}
+.key-note{font-size:12px;color:#555;font-style:italic;margin-top:8px;font-family:'Segoe UI',Arial,sans-serif}
+.key-ans{display:inline-block;background:#e8f5e9;border:1px solid #81c784;padding:0 6px;border-radius:4px;font-weight:bold;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.print-key-btn{background:#fff0f0;color:#b71c1c;border:2px solid #b71c1c}
+.key-opt{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#444;cursor:pointer}
+.key-opt input{width:18px;height:18px;accent-color:#667eea;cursor:pointer}
+.key-opt small{display:block;font-weight:400;color:#888;font-size:12px;margin-top:2px}
 @media print{
+body.print-act .key-pages{display:none!important}
+body.print-key .student-pages{display:none!important}
+.key-pages{page-break-before:always;border-top:0;margin-top:0;padding-top:0}
+body.print-key .key-pages{page-break-before:auto}
 #app-screen .topbar,.preview-actions,#setup-section,#archive-section,.main>*:not(#preview-section){display:none!important}
 #preview-section{display:block!important;box-shadow:none;padding:0}
 body{background:white}
@@ -215,6 +232,10 @@ body{background:white}
 </div>
 </div>
 <div class="card">
+<h2>&#x1F511; Hoja de Resoluci&#xF3;n</h2>
+<label class="key-opt"><input type="checkbox" id="chk-key" checked><span>Generar hoja(s) aparte con la resoluci&#xF3;n de las actividades<small>Respuestas para el docente: se imprimen por separado y no se entregan a los estudiantes.</small></span></label>
+</div>
+<div class="card">
 <h2>&#x1F3EB; Datos del Establecimiento</h2>
 <div class="fields-grid">
 <div class="field-group"><label>Nombre de la Instituci&#xF3;n</label><input type="text" id="f-institucion" placeholder="Ej: Escuela N&#xB0; 5"></div>
@@ -228,6 +249,7 @@ body{background:white}
 <div id="preview-section">
 <div class="preview-actions">
 <button type="button" class="print-btn" id="btn-print">&#x1F5A8; Imprimir / Guardar PDF</button>
+<button type="button" class="print-key-btn" id="btn-print-key" style="display:none">&#x1F511; Imprimir resoluci&#xF3;n (docente)</button>
 <button type="button" class="edit-btn" id="btn-edit">&#x270F;&#xFE0F; Editar Actividades</button>
 <button type="button" class="new-btn" id="btn-new">&#x1F504; Nueva Actividad</button>
 </div>
@@ -288,6 +310,7 @@ div.className='archive-item';
 div.innerHTML='<div class="archive-item-info"><div class="arc-title">'+escHtml(item.titulo)+'</div><div class="arc-meta">'+escHtml(item.materia)+' | '+escHtml(item.fecha)+'</div></div><div class="archive-item-btns"><button class="arc-view-btn">Ver</button><button class="arc-del-btn">Borrar</button></div>';
 div.querySelector('.arc-view-btn').addEventListener('click',function(){
 document.getElementById('doc-output').innerHTML=item.html;
+refreshKeyUi();
 archiveSection.style.display='none';
 previewSection.style.display='block';
 });
@@ -335,7 +358,7 @@ var list=document.getElementById('cw-refs-list');
 var row=document.createElement('div');
 row.className='cw-ref-row';
 row.setAttribute('data-ref-row',refRowCount++);
-row.innerHTML='<input type="text" class="inp-tema" placeholder="Ej: Ecosistemas" title="Tema"><input type="text" class="inp-pag" placeholder="P\u00e1g. Ej: 20-25" title="P\u00e1ginas"><button type="button" class="del-ref-btn" onclick="this.closest(\"[data-ref-row]\").remove()">\u2715</button>';
+row.innerHTML='<input type="text" class="inp-tema" placeholder="Ej: Ecosistemas" title="Tema"><input type="text" class="inp-pag" placeholder="P\u00e1g. Ej: 20-25" title="P\u00e1ginas"><button type="button" class="del-ref-btn" onclick="this.closest(\'[data-ref-row]\').remove()">\u2715</button>';
 list.appendChild(row);
 });
 }
@@ -374,6 +397,7 @@ return text.split(/[.!?]+/).map(function(s){return s.trim();}).filter(function(s
 }
 function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 function pick(arr,n){return shuffle(arr).slice(0,n);}
+var ARROWS={'0,1':'→','1,0':'↓','1,1':'↘','0,-1':'←','-1,0':'↑','-1,-1':'↖','1,-1':'↙','-1,1':'↗'};
 function buildSopa(text,diff){
 var words=pick(extractWords(text),diff==='facil'?6:diff==='medio'?10:14);
 if(!words.length)words=['ACTIVIDAD','ESCUELA','APRENDIZAJE','CONOCIMIENTO','CIENCIA'];
@@ -387,52 +411,68 @@ words.forEach(function(word){
 var tries=0,ok=false;
 while(tries<100&&!ok){tries++;var dir=usedDirs[Math.floor(Math.random()*usedDirs.length)];var r=Math.floor(Math.random()*size);var c=Math.floor(Math.random()*size);var fits=true;
 for(var k=0;k<word.length;k++){var nr=r+dir[0]*k,nc=c+dir[1]*k;if(nr<0||nr>=size||nc<0||nc>=size){fits=false;break;}if(grid[nr][nc]&&grid[nr][nc]!==word[k]){fits=false;break;}}
-if(fits){for(var k=0;k<word.length;k++)grid[r+dir[0]*k][c+dir[1]*k]=word[k];placed.push(word);ok=true;}
+if(fits){for(var k=0;k<word.length;k++)grid[r+dir[0]*k][c+dir[1]*k]=word[k];placed.push({word:word,r:r,c:c,dir:dir});ok=true;}
 }
 });
 for(i=0;i<size;i++)for(j=0;j<size;j++)if(!grid[i][j])grid[i][j]=LETTERS[Math.floor(Math.random()*26)];
+var hits={};
+placed.forEach(function(p){for(var k=0;k<p.word.length;k++)hits[(p.r+p.dir[0]*k)+','+(p.c+p.dir[1]*k)]=1;});
 var html='<div class="word-grid" style="grid-template-columns:repeat('+size+',28px)">';
-for(i=0;i<size;i++)for(j=0;j<size;j++)html+='<div class="word-cell">'+grid[i][j]+'</div>';
+var kh='<div class="word-grid" style="grid-template-columns:repeat('+size+',28px)">';
+for(i=0;i<size;i++)for(j=0;j<size;j++){html+='<div class="word-cell">'+grid[i][j]+'</div>';kh+='<div class="word-cell'+(hits[i+','+j]?' hit':'')+'">'+grid[i][j]+'</div>';}
 html+='</div><div class="wordlist">Palabras: ';
-placed.forEach(function(w){html+='<span>'+w+'</span>';});
-return html+'</div>';
+placed.forEach(function(p){html+='<span>'+p.word+'</span>';});
+kh+='</div><div class="key-list cols">';
+placed.forEach(function(p){kh+='<div><strong>'+p.word+'</strong> — fila '+(p.r+1)+', columna '+(p.c+1)+' '+ARROWS[p.dir[0]+','+p.dir[1]]+'</div>';});
+kh+='</div><div class="key-note">Las palabras están resaltadas en la grilla. La posición indica dónde empieza cada palabra (fila y columna, contando desde arriba a la izquierda) y la flecha, hacia dónde se lee.</div>';
+return{html:html+'</div>',key:kh};
 }
 function buildCompletar(text,diff){
 var sentences=pick(extractSentences(text),diff==='facil'?4:diff==='medio'?6:8);
-if(!sentences.length)return '<p>No se encontraron oraciones suficientes.</p>';
-var bank=[],html='',blanksCount=diff==='facil'?1:diff==='medio'?2:3;
+if(!sentences.length)return{html:'<p>No se encontraron oraciones suficientes.</p>',key:'<p>Sin respuestas: no se pudo generar esta actividad.</p>'};
+var bank=[],html='',kh='<div class="key-list">',blanksCount=diff==='facil'?1:diff==='medio'?2:3;
 sentences.forEach(function(sent,idx){
 var words=sent.split(' ');
 var longWords=words.map(function(w,i){return{w:w,i:i};}).filter(function(o){return o.w.length>4;});
 var toBlank=pick(longWords,blanksCount);
-var modified=words.slice();
-toBlank.forEach(function(o){bank.push(o.w.replace(/[^a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fcA-Z\u00c1\u00c9\u00cd\u00d3\u00da\u00dc\u00f1\u00d1]/g,''));modified[o.i]='<span class="fill-blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';});
+var modified=words.slice(),solved=words.slice();
+toBlank.forEach(function(o){bank.push(o.w.replace(/[^a-záéíóúüA-ZÁÉÍÓÚÜñÑ]/g,''));modified[o.i]='<span class="fill-blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';solved[o.i]='<span class="key-ans">'+o.w+'</span>';});
 html+='<div class="fill-item">'+(idx+1)+'. '+modified.join(' ')+'</div>';
+kh+='<div>'+(idx+1)+'. '+solved.join(' ')+'</div>';
 });
 html+='<div class="word-bank"><strong>Banco de palabras:</strong> '+shuffle(bank).map(function(w){return'<span style="margin:0 6px;font-weight:600">'+w+'</span>';}).join(' / ')+'</div>';
-return html;
+return{html:html,key:kh+'</div>'};
 }
 function buildUnir(text,diff){
 var sentences=pick(extractSentences(text),diff==='facil'?4:diff==='medio'?6:8);
-if(sentences.length<2)return '<p>No se encontraron suficientes oraciones.</p>';
+if(sentences.length<2)return{html:'<p>No se encontraron suficientes oraciones.</p>',key:'<p>Sin respuestas: no se pudo generar esta actividad.</p>'};
 var pairs=sentences.map(function(s){var mid=Math.floor(s.length*(0.4+Math.random()*0.2));return{left:s.substring(0,mid).trim()+'...',right:'...'+s.substring(mid).trim()};});
-var rights=shuffle(pairs.map(function(p){return p.right;}));
+var order=shuffle(pairs.map(function(p,i){return i;}));
+var letterFor=[];
+order.forEach(function(pi,j){letterFor[pi]=String.fromCharCode(65+j);});
 var html='<div class="match-grid">';
-pairs.forEach(function(p,i){html+='<div class="match-left">'+(i+1)+'. '+p.left+'</div><div class="match-line"></div><div class="match-right">'+String.fromCharCode(65+i)+'. '+rights[i]+'</div>';});
-return html+'</div><p style="font-size:12px;color:#888;margin-top:8px">Anot\u00e1 la letra que corresponde a cada n\u00famero.</p>';
+pairs.forEach(function(p,i){html+='<div class="match-left">'+(i+1)+'. '+p.left+'</div><div class="match-line"></div><div class="match-right">'+String.fromCharCode(65+i)+'. '+pairs[order[i]].right+'</div>';});
+html+='</div><p style="font-size:12px;color:#888;margin-top:8px">Anotá la letra que corresponde a cada número.</p>';
+var kh='<div class="key-list">';
+pairs.forEach(function(p,i){kh+='<div><span class="key-ans">'+(i+1)+' → '+letterFor[i]+'</span> &nbsp;'+sentences[i]+'</div>';});
+return{html:html,key:kh+'</div>'};
 }
 function buildPreguntas(text,diff,forcedCount){
 var count=forcedCount||(diff==='facil'?3:diff==='medio'?5:7);
 var sentences=extractSentences(text);
 var lines=diff==='facil'?2:diff==='medio'?3:4;
 var templates=['Cual es la idea principal de: "','Que relacion existe en: "','Explica con tus palabras: "','Por que es importante: "','Describe brevemente: "','Que consecuencias tiene: "','Analiza: "'];
-var html='';
+var html='',kh='';
 pick(sentences,count).forEach(function(sent,idx){
-html+='<div class="question-item"><div class="question-text">'+(idx+1)+'. '+templates[idx%templates.length]+sent.substring(0,80)+'..."</div>';
+var q=(idx+1)+'. '+templates[idx%templates.length]+sent.substring(0,80)+'..."';
+html+='<div class="question-item"><div class="question-text">'+q+'</div>';
 for(var l=0;l<lines;l++)html+='<div class="answer-line"></div>';
 html+='</div>';
+kh+='<div class="question-item"><div class="question-text">'+q+'</div><div><strong>Respuesta orientativa:</strong> la respuesta debe retomar la idea del pasaje del texto fuente: «'+sent+'»</div></div>';
 });
-return html||'<p>No se encontraron oraciones suficientes.</p>';
+if(!html)return{html:'<p>No se encontraron oraciones suficientes.</p>',key:'<p>Sin respuestas: no se pudo generar esta actividad.</p>'};
+kh+='<div class="key-note">Son consignas de respuesta abierta: se toma como referencia el pasaje del texto fuente y se aceptan respuestas que lo expliquen con palabras propias.</div>';
+return{html:html,key:kh};
 }
 function buildCrucigrama(text,diff,refs){
 var count=diff==='facil'?5:diff==='medio'?8:12;
@@ -514,24 +554,61 @@ var sentences=extractSentences(text);
 function getClue(word){var hint=sentences.find(function(s){return s.toUpperCase().indexOf(word)!==-1;});return hint?'Relacionado con: "'+hint.substring(0,55)+'..."':'('+word.length+' letras) Palabra clave del tema';}
 if(horiz.length){html+='<h4>HORIZONTALES</h4>';horiz.forEach(function(p){html+='<div class="cw-clue-item"><strong>'+p.num+'.</strong> '+getClue(p.word)+'</div>';});}
 if(vert.length){html+='<h4 style="margin-top:10px">VERTICALES</h4>';vert.forEach(function(p){html+='<div class="cw-clue-item"><strong>'+p.num+'.</strong> '+getClue(p.word)+'</div>';});}
-return html+'</div></div>';
+var kh='<div class="crossword-container"><div class="crossword-grid" style="grid-template-columns:repeat('+cols+',30px)">';
+for(var kr=minR;kr<=maxR;kr++){for(var kc=minC;kc<=maxC;kc++){var kcell=grid[kr][kc];if(kcell.blocked){kh+='<div class="cw-cell blocked"></div>';}else{kh+='<div class="cw-cell empty">'+(kcell.num?'<span class="cw-number">'+kcell.num+'</span>':'')+kcell.char+'</div>';}}}
+kh+='</div><div class="cw-clues">';
+if(horiz.length){kh+='<h4>HORIZONTALES</h4>';horiz.forEach(function(p){kh+='<div class="cw-clue-item"><strong>'+p.num+'.</strong> '+p.word+'</div>';});}
+if(vert.length){kh+='<h4 style="margin-top:10px">VERTICALES</h4>';vert.forEach(function(p){kh+='<div class="cw-clue-item"><strong>'+p.num+'.</strong> '+p.word+'</div>';});}
+return{html:html+'</div></div>',key:kh+'</div></div>'};
+}
+function falsify(sent,pool){
+var NONL=/[^a-záéíóúüA-ZÁÉÍÓÚÜñÑ]/g;
+var words=sent.split(' ');
+var cands=[];
+words.forEach(function(w,i){if(w.replace(NONL,'').length>=5)cands.push(i);});
+if(!cands.length)return null;
+var i=cands[Math.floor(Math.random()*cands.length)];
+var clean=words[i].replace(NONL,'');
+var alt=pool.filter(function(w){return w.length>=5&&w!==clean.toUpperCase();});
+if(!alt.length)return null;
+var rep=alt[Math.floor(Math.random()*alt.length)].toLowerCase();
+if(clean.charAt(0)===clean.charAt(0).toUpperCase())rep=rep.charAt(0).toUpperCase()+rep.slice(1);
+words[i]=words[i].replace(clean,rep);
+return words.join(' ');
 }
 function buildVof(text,count){
 var sentences=pick(extractSentences(text),count*2);
 if(!sentences.length)sentences=['El conocimiento es importante para el desarrollo.','La educación transforma la sociedad.','El aprendizaje es un proceso continuo.','La ciencia explica el mundo natural.','La historia nos enseña sobre el pasado.'];
-var html2='';
+var pool=extractWords(text);
+var flags=[];
+for(var f=0;f<count;f++)flags.push(f%2===1);
+flags=count>1?shuffle(flags):[Math.random()<0.5];
+var html2='',kh='<div class="key-list">';
 for(var i=0;i<count;i++){
 var sent=sentences[i%sentences.length];
 var stmt=sent.length>100?sent.substring(0,100)+'...':sent;
-html2+='<div class="question-item"><div class="question-text">'+(i+1)+'. '+stmt+'</div>';
+var shown=stmt,isFalse=flags[i];
+if(isFalse){var fs=falsify(stmt,pool);if(fs)shown=fs;else isFalse=false;}
+html2+='<div class="question-item"><div class="question-text">'+(i+1)+'. '+shown+'</div>';
 html2+='<div style="display:flex;gap:24px;margin-top:6px;font-size:14px"><label style="cursor:default"><span style="display:inline-block;width:18px;height:18px;border:2px solid #555;border-radius:2px;vertical-align:middle;margin-right:4px"></span> <strong>V</strong></label><label style="cursor:default"><span style="display:inline-block;width:18px;height:18px;border:2px solid #555;border-radius:2px;vertical-align:middle;margin-right:4px"></span> <strong>F</strong></label></div>';
 html2+='</div>';
+kh+=isFalse?'<div>'+(i+1)+'. <span class="key-ans">FALSO</span> &nbsp;Versión correcta (según el texto): '+stmt+'</div>':'<div>'+(i+1)+'. <span class="key-ans">VERDADERO</span></div>';
 }
-return html2;
+kh+='</div><div class="key-note">Las afirmaciones falsas se arman reemplazando una palabra clave de una oración del texto. Revisá que la redacción resulte coherente antes de entregar.</div>';
+return{html:html2,key:kh};
+}
+function paginate(list){
+var pages=[],i=0;
+while(i<list.length){
+if(list[i].isBig){pages.push([list[i]]);i++;}
+else if(i+1<list.length&&!list[i+1].isBig){pages.push([list[i],list[i+1]]);i+=2;}
+else{pages.push([list[i]]);i++;}
+}
+return pages;
 }
 function generateAndShow(){
 var text=document.getElementById('source-text').value.trim();
-if(!text||text.length<50){alert('Por favor ingres\u00e1 un texto m\u00e1s largo (m\u00ednimo 50 caracteres).');return;}
+if(!text||text.length<50){alert('Por favor ingresá un texto más largo (mínimo 50 caracteres).');return;}
 var selected=[];
 if(document.getElementById('chk-sopa').checked)selected.push('sopa');
 if(document.getElementById('chk-completar').checked)selected.push('completar');
@@ -539,71 +616,80 @@ if(document.getElementById('chk-unir').checked)selected.push('unir');
 if(document.getElementById('chk-preguntas').checked)selected.push('preguntas');
 if(document.getElementById('chk-crucigrama').checked)selected.push('crucigrama');
 if(document.getElementById('chk-vof').checked)selected.push('vof');
-if(!selected.length){alert('Selecion\u00e1 al menos una actividad.');return;}
-var inst=document.getElementById('f-institucion').value||'Instituci\u00f3n Educativa';
-var esc=document.getElementById('f-escuela').value||'\u2014';
-var mat=document.getElementById('f-materia').value||'\u2014';
+if(!selected.length){alert('Selecioná al menos una actividad.');return;}
+var withKey=document.getElementById('chk-key').checked;
+var inst=document.getElementById('f-institucion').value||'Institución Educativa';
+var esc=document.getElementById('f-escuela').value||'—';
+var mat=document.getElementById('f-materia').value||'—';
 var tit=document.getElementById('f-titulo').value||'Actividades';
 var cwRefs=getCwRefs();
 var actNames={
-sopa:{name:'Sopa de Letras',icon:'',instr:'Encontr\u00e1 las palabras en la sopa de letras.'},
-completar:{name:'Completar la Frase',icon:'',instr:'Complet\u00e1 las frases con la palabra correcta del banco.'},
-unir:{name:'Unir con Flechas',icon:'',instr:'Un\u00ed cada comienzo de la columna izquierda con su continuaci\u00f3n en la derecha.'},
-preguntas:{name:'Responder Consignas',icon:'',instr:'Respond\u00e9 las siguientes consignas en el espacio dado.'},
-crucigrama:{name:'Crucigrama',icon:'',instr:'Complet\u00e1 el crucigrama con las palabras del tema. Us\u00e1 las pistas para encontrar cada palabra.'}
+sopa:{name:'Sopa de Letras',icon:'',instr:'Encontrá las palabras en la sopa de letras.'},
+completar:{name:'Completar la Frase',icon:'',instr:'Completá las frases con la palabra correcta del banco.'},
+unir:{name:'Unir con Flechas',icon:'',instr:'Uní cada comienzo de la columna izquierda con su continuación en la derecha.'},
+preguntas:{name:'Responder Consignas',icon:'',instr:'Respondé las siguientes consignas en el espacio dado.'},
+crucigrama:{name:'Crucigrama',icon:'',instr:'Completá el crucigrama con las palabras del tema. Usá las pistas para encontrar cada palabra.'}
 };
-var headerHtml='<div class="doc-header-box"><div class="doc-school">'+escHtml(inst)+' \u2014 N\u00b0 '+escHtml(esc)+'</div><div class="doc-info"><div>Apellido y Nombre: _________________________</div><div>Materia: '+escHtml(mat)+'</div><div>Curso y Divisi\u00f3n: _____________</div><div>Fecha de Entrega: _____________</div></div></div><div class="doc-title">'+escHtml(tit)+'</div>';
+var headerHtml='<div class="doc-header-box"><div class="doc-school">'+escHtml(inst)+' — N° '+escHtml(esc)+'</div><div class="doc-info"><div>Apellido y Nombre: _________________________</div><div>Materia: '+escHtml(mat)+'</div><div>Curso y División: _____________</div><div>Fecha de Entrega: _____________</div></div></div><div class="doc-title">'+escHtml(tit)+'</div>';
 var activities=[];
 var actNum=1;
+function addAct(title,instr,res,isBig){
+activities.push({num:actNum,title:title,html:'<div class="activity-block"><div class="activity-title">'+title+'</div><div class="activity-instructions">'+instr+'</div>'+res.html+'</div>',key:res.key,isBig:isBig});
+actNum++;
+}
 selected.forEach(function(id){
 var diffEl=document.getElementById('diff-'+id);var diff=diffEl?diffEl.value:'medio';
 var meta=actNames[id];
-var diffLabel=diff==='facil'?'F\u00e1cil':diff==='medio'?'Medio':'Dif\u00edcil';
 if(id==='sopa'){
 var qty=parseInt(document.getElementById('qty-sopa').value)||1;
 for(var qi=0;qi<qty;qi++){
-var content=buildSopa(text,diff);
-var sopaLabel=qty>1?' N\u00b0'+(qi+1):'';
-activities.push({num:actNum,html:'<div class="activity-block"><div class="activity-title">Actividad '+actNum+': '+meta.name+sopaLabel+'</div><div class="activity-instructions">'+meta.instr+'</div>'+content+'</div>',isBig:true});
-actNum++;
+var sopaLabel=qty>1?' N°'+(qi+1):'';
+addAct('Actividad '+actNum+': '+meta.name+sopaLabel,meta.instr,buildSopa(text,diff),true);
 }
 }else if(id==='vof'){
 var qtyVof=parseInt(document.getElementById('qty-vof').value)||3;
-var content=buildVof(text,qtyVof);
-activities.push({num:actNum,html:'<div class="activity-block"><div class="activity-title">Actividad '+actNum+': Verdadero o Falso</div><div class="activity-instructions">Leé cada afirmación y marcá V si es Verdadera o F si es Falsa.</div>'+content+'</div>',isBig:false});
-actNum++;
+addAct('Actividad '+actNum+': Verdadero o Falso','Leé cada afirmación y marcá V si es Verdadera o F si es Falsa.',buildVof(text,qtyVof),false);
 }else{
-var content='';
-if(id==='completar')content=buildCompletar(text,diff);
-else if(id==='unir')content=buildUnir(text,diff);
-else if(id==='preguntas'){var qtyP=parseInt(document.getElementById('qty-preguntas').value)||3;content=buildPreguntas(text,diff,qtyP);}
-else if(id==='crucigrama')content=buildCrucigrama(text,diff,cwRefs);
-activities.push({num:actNum,html:'<div class="activity-block"><div class="activity-title">Actividad '+actNum+': '+meta.name+'</div><div class="activity-instructions">'+meta.instr+'</div>'+content+'</div>',isBig:(id==='crucigrama'||id==='vof')});
-actNum++;
+var res;
+if(id==='completar')res=buildCompletar(text,diff);
+else if(id==='unir')res=buildUnir(text,diff);
+else if(id==='preguntas'){var qtyP=parseInt(document.getElementById('qty-preguntas').value)||3;res=buildPreguntas(text,diff,qtyP);}
+else if(id==='crucigrama')res=buildCrucigrama(text,diff,cwRefs);
+addAct('Actividad '+actNum+': '+meta.name,meta.instr,res,(id==='crucigrama'));
 }
 });
-var pages=[];
-var i=0;
-while(i<activities.length){
-if(activities[i].isBig){pages.push([activities[i]]);i++;}
-else if(i+1<activities.length&&!activities[i+1].isBig){pages.push([activities[i],activities[i+1]]);i+=2;}
-else{pages.push([activities[i]]);i++;}
-}
+var pages=paginate(activities);
 var totalPages=pages.length;
-var fullHtml='<div class="doc-output">';
+var fullHtml='<div class="doc-output"><div class="student-pages">';
 pages.forEach(function(pageActs,pageIdx){
 fullHtml+='<div class="print-page">';
 if(pageIdx===0){
 fullHtml+=headerHtml+'<div style="text-align:center;font-size:16px;font-weight:bold;margin:16px 0 14px;font-family:Times New Roman,serif">Actividades</div>';
 }else{
-fullHtml+='<div class="doc-header-box" style="padding:8px 20px;"><div class="doc-school" style="font-size:12px">'+escHtml(inst)+' \u2014 '+escHtml(tit)+'</div><div style="font-size:12px;display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;margin-top:6px"><div style="border-bottom:1px solid #ccc;padding:2px 0">Apellido y Nombre: ___________________</div><div style="border-bottom:1px solid #ccc;padding:2px 0">Materia: '+escHtml(mat)+'</div></div></div>';
+fullHtml+='<div class="doc-header-box" style="padding:8px 20px;"><div class="doc-school" style="font-size:12px">'+escHtml(inst)+' — '+escHtml(tit)+'</div><div style="font-size:12px;display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;margin-top:6px"><div style="border-bottom:1px solid #ccc;padding:2px 0">Apellido y Nombre: ___________________</div><div style="border-bottom:1px solid #ccc;padding:2px 0">Materia: '+escHtml(mat)+'</div></div></div>';
 }
 pageActs.forEach(function(act){fullHtml+=act.html;});
-fullHtml+='<div class="page-number">P\u00e1gina '+(pageIdx+1)+' de '+totalPages+'</div>';
+fullHtml+='<div class="page-number">Página '+(pageIdx+1)+' de '+totalPages+'</div>';
 fullHtml+='</div>';
 });
 fullHtml+='</div>';
+if(withKey){
+fullHtml+='<div class="key-pages">';
+pages.forEach(function(pageActs,pageIdx){
+fullHtml+='<div class="print-page"><div class="key-banner">RESOLUCIÓN — HOJA DEL DOCENTE (no entregar a los estudiantes)</div>';
+if(pageIdx===0){
+fullHtml+='<div class="doc-header-box"><div class="doc-school">'+escHtml(inst)+' — N° '+escHtml(esc)+'</div><div class="doc-info"><div>Materia: '+escHtml(mat)+'</div><div>Actividad: '+escHtml(tit)+'</div></div></div><div class="doc-title">Resolución de las actividades</div>';
+}else{
+fullHtml+='<div class="doc-header-box" style="padding:8px 20px;"><div class="doc-school" style="font-size:12px">'+escHtml(inst)+' — '+escHtml(tit)+' — Resolución</div></div>';
+}
+pageActs.forEach(function(act){fullHtml+='<div class="key-block"><div class="activity-title">'+act.title+' — Resolución</div>'+act.key+'</div>';});
+fullHtml+='<div class="page-number">Resolución — Página '+(pageIdx+1)+' de '+totalPages+'</div></div>';
+});
+fullHtml+='</div>';
+}
+fullHtml+='</div>';
 document.getElementById('doc-output').innerHTML=fullHtml;
+refreshKeyUi();
 setupSection.style.display='none';
 previewSection.style.display='block';
 window.scrollTo(0,0);
@@ -612,11 +698,23 @@ addToArchive({id:Date.now().toString(),titulo:tit,materia:mat,fecha:now.toLocale
 }
 
 document.getElementById('btn-generate').addEventListener('click',generateAndShow);
-document.getElementById('btn-print').addEventListener('click',function(){window.print();});
+function refreshKeyUi(){
+var has=!!document.querySelector('#doc-output .key-pages');
+document.getElementById('btn-print-key').style.display=has?'':'none';
+}
+function printMode(cls){
+document.body.classList.add(cls);
+var done=function(){document.body.classList.remove('print-act','print-key');window.removeEventListener('afterprint',done);};
+window.addEventListener('afterprint',done);
+window.print();
+setTimeout(done,1500);
+}
+document.getElementById('btn-print').addEventListener('click',function(){printMode('print-act');});
+document.getElementById('btn-print-key').addEventListener('click',function(){printMode('print-key');});
 document.getElementById('btn-new').addEventListener('click',function(){
 previewSection.style.display='none';
 setupSection.style.display='block';
-['sopa','completar','unir','preguntas','crucigrama'].forEach(function(id){
+['sopa','completar','unir','preguntas','crucigrama','vof'].forEach(function(id){
 var chk=document.getElementById('chk-'+id);
 chk.checked=false;
 document.getElementById('act-item-'+id).classList.remove('selected');
@@ -629,6 +727,7 @@ document.getElementById('f-titulo').value='';
 document.getElementById('qty-sopa').value='1';
 document.getElementById('qty-preguntas').value='1';
 document.getElementById('qty-vof').value='1';
+document.getElementById('chk-key').checked=true;
 var refsList=document.getElementById('cw-refs-list');
 refsList.innerHTML='<div class="cw-ref-row" data-ref-row="0"><input type="text" class="inp-tema" placeholder="Ej: La c\u00e9lula" title="Tema"><input type="text" class="inp-pag" placeholder="P\u00e1g. Ej: 12-15" title="P\u00e1ginas"><button type="button" class="del-ref-btn" onclick="this.closest(\'[data-ref-row]\').remove()">\u2715</button></div>';
 });
