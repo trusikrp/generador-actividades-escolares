@@ -399,21 +399,46 @@ function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math
 function pick(arr,n){return shuffle(arr).slice(0,n);}
 var ARROWS={'0,1':'→','1,0':'↓','1,1':'↘','0,-1':'←','-1,0':'↑','-1,-1':'↖','1,-1':'↙','-1,1':'↗'};
 function buildSopa(text,diff){
-var words=pick(extractWords(text),diff==='facil'?6:diff==='medio'?10:14);
-if(!words.length)words=['ACTIVIDAD','ESCUELA','APRENDIZAJE','CONOCIMIENTO','CIENCIA'];
+var target=diff==='facil'?6:diff==='medio'?10:14;
 var size=diff==='facil'?10:diff==='medio'?14:18;
-var grid=[],i,j;
-for(i=0;i<size;i++){grid[i]=[];for(j=0;j<size;j++)grid[i][j]='';}
-var placed=[],LETTERS='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var LETTERS='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var dirs=[[0,1],[1,0],[1,1],[0,-1],[-1,0],[-1,-1],[1,-1],[-1,1]];
-var usedDirs=dirs;
-words.forEach(function(word){
-var tries=0,ok=false;
-while(tries<100&&!ok){tries++;var dir=usedDirs[Math.floor(Math.random()*usedDirs.length)];var r=Math.floor(Math.random()*size);var c=Math.floor(Math.random()*size);var fits=true;
-for(var k=0;k<word.length;k++){var nr=r+dir[0]*k,nc=c+dir[1]*k;if(nr<0||nr>=size||nc<0||nc>=size){fits=false;break;}if(grid[nr][nc]&&grid[nr][nc]!==word[k]){fits=false;break;}}
-if(fits){for(var k=0;k<word.length;k++)grid[r+dir[0]*k][c+dir[1]*k]=word[k];placed.push({word:word,r:r,c:c,dir:dir});ok=true;}
+function fitting(list){return list.filter(function(w){return w.length>=4&&w.length<=size;});}
+var pool=fitting(extractWords(text));
+if(pool.length<target){
+['ACTIVIDAD','ESCUELA','CIENCIA','SABER','CLASE','LIBRO','TEMA','LECTURA','ESTUDIO','TRABAJO','GRUPO','TEXTO','IDEA','PALABRA'].forEach(function(w){if(pool.length<target&&pool.indexOf(w)<0)pool.push(w);});
 }
-});
+var goal=Math.min(target,pool.length);
+var best=null;
+for(var attempt=0;attempt<40;attempt++){
+var grid=[],placed=[],i,j;
+for(i=0;i<size;i++){grid[i]=[];for(j=0;j<size;j++)grid[i][j]='';}
+var cand=shuffle(pool);
+var queue=cand.slice(0,goal).sort(function(a,b){return b.length-a.length;});
+var extras=cand.slice(goal);
+while(queue.length&&placed.length<goal){
+var word=queue.shift();
+var clash=placed.some(function(p){return p.word.indexOf(word)>=0||word.indexOf(p.word)>=0;});
+var ok=false;
+if(!clash){
+for(var tries=0;tries<300&&!ok;tries++){
+var dir=dirs[Math.floor(Math.random()*dirs.length)];
+var r=Math.floor(Math.random()*size),c=Math.floor(Math.random()*size);
+var er=r+dir[0]*(word.length-1),ec=c+dir[1]*(word.length-1);
+if(er<0||er>=size||ec<0||ec>=size)continue;
+var fits=true;
+for(var k=0;k<word.length;k++){var cur=grid[r+dir[0]*k][c+dir[1]*k];if(cur&&cur!==word[k]){fits=false;break;}}
+if(!fits)continue;
+for(var k2=0;k2<word.length;k2++)grid[r+dir[0]*k2][c+dir[1]*k2]=word[k2];
+placed.push({word:word,r:r,c:c,dir:dir});ok=true;
+}
+}
+if(!ok&&extras.length)queue.push(extras.shift());
+}
+if(!best||placed.length>best.placed.length)best={grid:grid,placed:placed};
+if(placed.length>=goal)break;
+}
+var grid=best.grid,placed=best.placed,i,j;
 for(i=0;i<size;i++)for(j=0;j<size;j++)if(!grid[i][j])grid[i][j]=LETTERS[Math.floor(Math.random()*26)];
 var hits={};
 placed.forEach(function(p){for(var k=0;k<p.word.length;k++)hits[(p.r+p.dir[0]*k)+','+(p.c+p.dir[1]*k)]=1;});
