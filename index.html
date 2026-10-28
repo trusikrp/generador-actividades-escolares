@@ -406,7 +406,7 @@ var grid=[],i,j;
 for(i=0;i<size;i++){grid[i]=[];for(j=0;j<size;j++)grid[i][j]='';}
 var placed=[],LETTERS='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var dirs=[[0,1],[1,0],[1,1],[0,-1],[-1,0],[-1,-1],[1,-1],[-1,1]];
-var usedDirs=diff==='facil'?[[0,1],[1,0]]:diff==='medio'?[[0,1],[1,0],[1,1],[0,-1]]:dirs;
+var usedDirs=dirs;
 words.forEach(function(word){
 var tries=0,ok=false;
 while(tries<100&&!ok){tries++;var dir=usedDirs[Math.floor(Math.random()*usedDirs.length)];var r=Math.floor(Math.random()*size);var c=Math.floor(Math.random()*size);var fits=true;
